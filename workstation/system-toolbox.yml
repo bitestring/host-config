@@ -1,0 +1,47 @@
+# This playbook is supposed to be played inside a Toolbox or Distrobox container
+
+- hosts: localhost
+  become: no
+
+  collections:
+    - community.general
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      debug:
+        msg: Playing system-toolbox.yml as user {{ username }}
+
+    - name: Install RPMFusion repository
+      become: yes
+      shell: dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+
+    - name: Enable AppStream metadata for RPMFusion
+      become: yes
+      command: dnf groupupdate core -y
+
+    - name: Install essential packages
+      become: yes
+      dnf:
+        name:
+          - fish
+          - gnome-tweaks
+          - clamav
+          - ffmpeg
+          - ImageMagick
+        state: present
+
+    - name: Install multimedia codecs
+      become: yes
+      dnf:
+        name: "@Multimedia"
+        state: present
+
+    # youtube-dl project seems to be dead. hence installing the popular fork.
+    - name: Install yt-dlp
+      pip:
+        name: yt-dlp
+        executable: pip3
+        extra_args: --user

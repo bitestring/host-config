@@ -1,0 +1,33 @@
+- hosts: localhost
+  become: no
+
+  collections:
+    - community.general
+    - ansible.posix
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      debug:
+        msg: Playing system-ostree-post.yml as user {{ username }}
+
+    - name: Install Homebrew
+      shell: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    - name: Add Homebrew to bash_profile
+      ansible.builtin.lineinfile:
+        path: ~/.bash_profile
+        line: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+    - name: Start systemd services
+      become: true
+      systemd:
+        name: "{{ item }}"
+        enabled: yes
+        state: started
+      with_items:
+        - cockpit.socket
+        - docker.socket
+        - syncthing@{{ ansible_user_id }}

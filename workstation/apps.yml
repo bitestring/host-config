@@ -1,0 +1,82 @@
+- hosts: localhost
+  become: no
+
+  collections:
+    - community.general
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      debug:
+        msg: "Playing apps.yml as user {{ username }}"
+
+    - name: Add the flathub flatpak repository remote to the user installation
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+        method: user
+
+    # This is only required on Silverblue to update in-built flatpaks. But this won't hurt in Workstation either.
+    - name: Update existing Flatpaks
+      command: flatpak update --noninteractive
+
+    - name: Create autostart directory if not exists
+      file:
+        path: ~/.config/autostart
+        state: directory
+
+    - name: Install essential flatpak runtimes
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+        method: user
+        remote: flathub
+      with_items:
+        - org.freedesktop.Platform.ffmpeg-full//21.08
+        - org.freedesktop.Platform.ffmpeg-full//22.08
+
+    - name: Install user applications
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+        method: user
+        remote: flathub
+      with_items:
+        - org.mozilla.firefox
+        - io.gitlab.librewolf-community
+        - org.gnome.Epiphany
+        - com.brave.Browser
+        - com.github.micahflee.torbrowser-launcher
+        - org.mozilla.Thunderbird
+        - ch.protonmail.protonmail-bridge
+        - org.keepassxc.KeePassXC
+        - im.riot.Riot
+        - org.signal.Signal
+        - org.videolan.VLC
+        - org.kde.kasts
+        - org.qbittorrent.qBittorrent
+        - org.libreoffice.LibreOffice
+        - org.onlyoffice.desktopeditors
+        - com.calibre_ebook.calibre
+        - org.gnucash.GnuCash
+        - com.github.xournalpp.xournalpp
+        - org.kde.okular
+        - info.mumble.Mumble
+        - org.kde.kdenlive
+        - com.obsproject.Studio
+        - org.gnome.Cheese
+        - org.kde.gwenview
+        - org.kde.digikam
+        - org.gimp.GIMP
+        - org.inkscape.Inkscape
+        - org.fedoraproject.MediaWriter
+        - org.gnu.emacs
+        - org.remmina.Remmina
+        - org.kde.ark
+        - org.gnome.seahorse.Application
+        - com.github.tchx84.Flatseal
+        - com.usebottles.bottles
+        - io.podman_desktop.PodmanDesktop

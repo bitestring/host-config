@@ -1,0 +1,83 @@
+# This playbook is supposed to be played inside a Toolbox or Distrobox container
+
+- hosts: localhost
+  become: no
+
+  collections:
+    - community.general
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      debug:
+        msg: Playing gnunet-toolbox.yml as user {{ username }}
+
+    - name: Install system dependencies
+      become: yes
+      dnf:
+        name:
+          - fish
+          - htop
+          - gcc
+          - clang
+          - autoconf
+          - automake
+          - recutils
+          - gettext
+          - gettext-devel
+          - openssl
+          - gnutls
+          - make
+          - libtool
+          - libtool-ltdl
+          - libtool-ltdl-devel
+          - libgcrypt
+          - libidn2
+          - libidn2-devel
+          - libmicrohttpd
+          - libmicrohttpd-devel
+          - libunistring
+          - libunistring-devel
+          - jansson
+          - jansson-devel
+          - libjose
+          - gmp
+          - libcurl
+          - libcurl-devel
+          - texinfo
+          - texlive
+          - texinfo
+          - pkgconf
+          - zlib
+          - sqlite
+          - sqlite-devel
+          - miniupnpc
+          - miniupnpc-devel
+          - libogg
+          - libogg-devel
+          - gstreamer1
+          - gstreamer1-devel
+          - gstreamer1-plugins-base
+          - gstreamer1-plugins-good
+          - gstreamer1-plugins-good-extras
+          - gstreamer1-plugins-bad-free
+          - gstreamer1-plugins-bad-free-extras
+          - libextractor
+          - libextractor-devel
+          - perl
+          - nss
+          - libgcrypt
+          - libgcrypt-devel
+          - libsodium
+          - libsodium-devel
+        state: present
+
+    - name: Install PIP packages
+      pip:
+        name:
+          - sphinx
+          - sphinx_rtd_theme
+        executable: pip3
+        extra_args: --user

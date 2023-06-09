@@ -1,0 +1,50 @@
+- hosts: localhost
+  become: no
+
+  collections:
+    - community.general
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      debug:
+        msg: Playing system-ostree.yml as user {{ username }}
+
+    - name: Add Docker CE repository
+      become: yes
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/fedora/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+
+    - name: Overlay core packages
+      community.general.rpm_ostree_pkg:
+        name:
+          - adobe-source-sans-pro-fonts
+          - fira-code-fonts
+          - cockpit
+          - cockpit-system
+          - cockpit-ostree
+          - cockpit-podman
+          - cockpit-machines
+          - cockpit-selinux
+          - cockpit-networkmanager
+          - cockpit-storaged
+          - cockpit-sosreport
+          - fish
+          - syncthing
+          - firewall-config
+          - tor
+          - openssl
+          - git
+          - gcc
+          - make
+          - distrobox
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+          - kubernetes
+        state: present
