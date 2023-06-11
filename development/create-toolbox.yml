@@ -15,3 +15,28 @@
 
     - name: Create gnunet development container with Distrobox
       ansible.builtin.shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-gnunet-dev
+
+    - name: Create podman-host executable to interact with Podman from inside Flatpak apps
+      ansible.builtin.copy:
+        dest: ~/.local/bin/podman-host
+        content: |
+          #!/bin/bash
+          set -x
+          if [ "$1" == "exec" ]; then
+           # Remove 'exec' from $@
+           shift
+           script='
+               result_command="podman exec"
+                  for i in $(printenv | grep "=" | grep -Ev " |\"" |
+                      grep -Ev "^(HOST|HOSTNAME|HOME|PATH|SHELL|USER|_)"); do
+
+                      result_command=$result_command --env="$i"
+               done
+
+                  exec ${result_command} "$@"
+              '
+           exec flatpak-spawn --host sh -c "$script" - "$@"
+          else
+           exec flatpak-spawn --host podman "$@"
+          fi
+        mode: u=rx,g=r,o=r
