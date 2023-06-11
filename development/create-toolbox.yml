@@ -15,7 +15,7 @@
         msg: Playing create-toolbox.yml as user {{ username }}
 
     - name: Create general development container with Distrobox
-      shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38  --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-dev
+      shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-dev
 
     - name: Create gnunet development container with Distrobox
-      shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38  --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-gnunet-dev
+      shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-gnunet-dev
