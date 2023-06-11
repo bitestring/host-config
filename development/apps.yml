@@ -1,0 +1,53 @@
+- hosts: localhost
+  become: no
+
+  collections:
+    - community.general
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      debug:
+        msg: "Playing apps.yml as user {{ username }}"
+
+    - name: Add the flathub flatpak repository remote to the user installation
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+        method: user
+
+    # This is only required on Silverblue to update in-built flatpaks. But this won't hurt in Workstation either.
+    - name: Update existing Flatpaks
+      command: flatpak update --noninteractive
+
+    - name: Install essential flatpak runtimes
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+        method: user
+        remote: flathub
+      with_items:
+        - org.freedesktop.Platform.ffmpeg-full//21.08
+        - org.freedesktop.Platform.ffmpeg-full//22.08
+
+    - name: Install user applications
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+        method: user
+        remote: flathub
+      with_items:
+        - org.mozilla.firefox
+        - com.brave.Browser
+        - org.videolan.VLC
+        - org.libreoffice.LibreOffice
+        - org.kde.gwenview
+        - org.gnu.emacs
+        - org.gnome.seahorse.Application
+        - com.github.tchx84.Flatseal
+        - com.usebottles.bottles
+        - io.podman_desktop.PodmanDesktop
+        - com.visualstudio.code
