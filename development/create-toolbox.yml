@@ -11,10 +11,10 @@
         msg: Playing create-toolbox.yml as user {{ username }}
 
     - name: Create general development container with Distrobox
-      ansible.builtin.shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-dev
+      ansible.builtin.shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd fish python pip" --init --name fedora-dev
 
     - name: Create gnunet development container with Distrobox
-      ansible.builtin.shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-gnunet-dev
+      ansible.builtin.shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd fish python pip" --init --name fedora-gnunet-dev
 
     - name: Create podman-host executable to interact with Podman from inside Flatpak apps
       ansible.builtin.copy:

@@ -15,8 +15,6 @@
       become: true
       ansible.builtin.dnf:
         name:
-          - fish
-          - htop
           - gcc
           - clang
           - autoconf
