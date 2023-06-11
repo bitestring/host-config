@@ -1,22 +1,19 @@
 # This playbook is supposed to be played inside a Toolbox or Distrobox container
-
-- hosts: localhost
-  become: no
-
-  collections:
-    - community.general
+- name: Play for installing generic development tools
+  hosts: localhost
+  become: false
 
   vars:
     username: "{{ ansible_user_id }}"
 
   tasks:
     - name: Echo init message
-      debug:
+      ansible.builtin.debug:
         msg: Playing gnunet-toolbox.yml as user {{ username }}
 
     - name: Install system dependencies
-      become: yes
-      dnf:
+      become: true
+      ansible.builtin.dnf:
         name:
           - fish
           - htop
@@ -34,14 +31,18 @@
         state: present
 
     - name: Install PIP packages
-      pip:
+      ansible.builtin.pip:
         name:
           - ansible-lint
         executable: pip3
         extra_args: --user
 
     - name: Install Haskell
-      shell: curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | BOOTSTRAP_HASKELL_NONINTERACTIVE=1 BOOTSTRAP_HASKELL_GHC_VERSION=latest BOOTSTRAP_HASKELL_CABAL_VERSION=latest BOOTSTRAP_HASKELL_INSTALL_STACK=1 BOOTSTRAP_HASKELL_INSTALL_HLS=1 BOOTSTRAP_HASKELL_ADJUST_BASHRC=P sh
+      ansible.builtin.shell: |
+        set -o pipefail
+        curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | BOOTSTRAP_HASKELL_NONINTERACTIVE=1 BOOTSTRAP_HASKELL_GHC_VERSION=latest BOOTSTRAP_HASKELL_CABAL_VERSION=latest BOOTSTRAP_HASKELL_INSTALL_STACK=1 BOOTSTRAP_HASKELL_INSTALL_HLS=1 BOOTSTRAP_HASKELL_ADJUST_BASHRC=P sh
 
     - name: Install Rust
-      shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      ansible.builtin.shell: |
+        set -o pipefail
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y

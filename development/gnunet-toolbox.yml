@@ -1,22 +1,19 @@
 # This playbook is supposed to be played inside a Toolbox or Distrobox container
-
-- hosts: localhost
-  become: no
-
-  collections:
-    - community.general
+- name: Play for installing dependencies for GNUnet development
+  hosts: localhost
+  become: false
 
   vars:
     username: "{{ ansible_user_id }}"
 
   tasks:
     - name: Echo init message
-      debug:
+      ansible.builtin.debug:
         msg: Playing gnunet-toolbox.yml as user {{ username }}
 
-    - name: Install system dependencies
-      become: yes
-      dnf:
+    - name: Install GNUnet dependencies
+      become: true
+      ansible.builtin.dnf:
         name:
           - fish
           - htop
@@ -75,7 +72,7 @@
         state: present
 
     - name: Install PIP packages
-      pip:
+      ansible.builtin.pip:
         name:
           - sphinx
           - sphinx_rtd_theme

@@ -1,20 +1,17 @@
-- hosts: localhost
-  become: no
-
-  collections:
-    - community.general
-    - ansible.posix
+- name: Play for configuring the host once basic packages are installed
+  hosts: localhost
+  become: false
 
   vars:
     username: "{{ ansible_user_id }}"
 
   tasks:
     - name: Echo init message
-      debug:
+      ansible.builtin.debug:
         msg: Playing system-ostree-post.yml as user {{ username }}
 
     - name: Install Homebrew
-      shell: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      ansible.builtin.shell: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     - name: Add Homebrew to bash_profile
       ansible.builtin.lineinfile:
@@ -23,9 +20,9 @@
 
     - name: Start systemd services
       become: true
-      systemd:
+      ansible.builtin.systemd:
         name: "{{ item }}"
-        enabled: yes
+        enabled: true
         state: started
       with_items:
         - cockpit.socket

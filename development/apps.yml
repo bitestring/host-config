@@ -1,15 +1,13 @@
-- hosts: localhost
-  become: no
-
-  collections:
-    - community.general
+- name: Play for installing developer tools
+  hosts: localhost
+  become: false
 
   vars:
     username: "{{ ansible_user_id }}"
 
   tasks:
     - name: Echo init message
-      debug:
+      ansible.builtin.debug:
         msg: "Playing apps.yml as user {{ username }}"
 
     - name: Add the flathub flatpak repository remote to the user installation
@@ -21,7 +19,7 @@
 
     # This is only required on Silverblue to update in-built flatpaks. But this won't hurt in Workstation either.
     - name: Update existing Flatpaks
-      command: flatpak update --noninteractive
+      ansible.builtin.command: flatpak update --noninteractive
 
     - name: Install essential flatpak runtimes
       community.general.flatpak:

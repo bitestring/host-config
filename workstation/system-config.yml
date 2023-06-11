@@ -1,42 +1,43 @@
-- hosts: localhost
-  become: no
-
-  collections:
-    - community.general
-    - ansible.posix
+- name: Play for configuring the host once basic packages are installed
+  hosts: localhost
+  become: false
 
   vars:
     username: "{{ ansible_user_id }}"
 
   tasks:
     - name: Echo init message
-      debug:
+      ansible.builtin.debug:
         msg: Playing system-config.yml as user {{ username }}
 
     - name: Copy Nvidia configuration for customization
-      become: yes
-      copy:
+      become: true
+      ansible.builtin.copy:
         src: /usr/share/X11/xorg.conf.d/nvidia.conf
         dest: /etc/X11/xorg.conf.d/nvidia.conf
+        mode: u=rw,g=r,o=r
+        owner: root
 
     # Enable Nvidia DynamicPowerManagement
     # http://download.nvidia.com/XFree86/Linux-x86_64/440.31/README/dynamicpowermanagement.html
     - name: Enable Nvidia Dynamic Power Managment
-      become: yes
-      copy:
+      become: true
+      ansible.builtin.copy:
         dest: "/etc/modprobe.d/nvidia.conf"
         content: "options nvidia NVreg_DynamicPowerManagement=0x02\n"
+        mode: u=rw,g=r,o=r
+        owner: root
 
     - name: Create directory for Virtual Machines with CoW disabled
-      file:
+      ansible.builtin.file:
         path: ~/Virtual_Machines
         state: directory
         attributes: +C
-        recurse: yes
+        recurse: true
 
     - name: Add polkit rule to allow Virt-Manager to manage virtual machines
-      become: yes
-      copy:
+      become: true
+      ansible.builtin.copy:
         dest: /etc/polkit-1/rules.d/80-libvirt-manage.rules
         content: |
           polkit.addRule(function(action, subject) {
@@ -44,6 +45,8 @@
                 return polkit.Result.YES;
             }
           });
+        mode: u=r,g=r,o=r
+        owner: root
 
     - name: Configure firewall
       block:
@@ -51,29 +54,29 @@
           ansible.posix.firewalld:
             zone: public
             service: ssh
-            permanent: yes
-            immediate: yes
+            permanent: true
+            immediate: true
             state: disabled
         - name: Configure firewall - Enable Syncthing
           ansible.posix.firewalld:
             zone: home
             service: syncthing
-            permanent: yes
-            immediate: yes
+            permanent: true
+            immediate: true
             state: enabled
         - name: Configure firewall - Enable KDEConnect
           ansible.posix.firewalld:
             zone: home
             service: kdeconnect
-            permanent: yes
-            immediate: yes
+            permanent: true
+            immediate: true
             state: enabled
 
     - name: Start systemd services
-      become: yes
-      systemd:
+      become: true
+      ansible.builtin.systemd:
         name: "{{ item }}"
-        enabled: yes
+        enabled: true
         state: started
       with_items:
         - cockpit.socket

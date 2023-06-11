@@ -1,22 +1,22 @@
-- hosts: localhost
-  become: no
-
-  collections:
-    - community.general
+- name: Play for layering basic system packages
+  hosts: localhost
+  become: false
 
   vars:
     username: "{{ ansible_user_id }}"
 
   tasks:
     - name: Echo init message
-      debug:
+      ansible.builtin.debug:
         msg: Playing system-ostree.yml as user {{ username }}
 
     - name: Add Docker CE repository
-      become: yes
+      become: true
       ansible.builtin.get_url:
         url: https://download.docker.com/linux/fedora/docker-ce.repo
         dest: /etc/yum.repos.d/docker-ce.repo
+        mode: u=r,g=r,o=r
+        owner: root
 
     - name: Overlay core packages
       community.general.rpm_ostree_pkg:

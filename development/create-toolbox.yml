@@ -1,21 +1,17 @@
-# This playbook is supposed to be played inside a Toolbox or Distrobox container
-
-- hosts: localhost
-  become: no
-
-  collections:
-    - community.general
+- name: Play for creating container toolboxes using Distrobox or Toolbox
+  hosts: localhost
+  become: false
 
   vars:
     username: "{{ ansible_user_id }}"
 
   tasks:
     - name: Echo init message
-      debug:
+      ansible.builtin.debug:
         msg: Playing create-toolbox.yml as user {{ username }}
 
     - name: Create general development container with Distrobox
-      shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-dev
+      ansible.builtin.shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-dev
 
     - name: Create gnunet development container with Distrobox
-      shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-gnunet-dev
+      ansible.builtin.shell: distrobox create -i registry.fedoraproject.org/fedora-toolbox:38 --yes --pre-init-hooks "dnf -y install systemd python pip" --init --name fedora-gnunet-dev
