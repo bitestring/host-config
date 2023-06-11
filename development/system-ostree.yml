@@ -21,8 +21,11 @@
     - name: Overlay core packages
       community.general.rpm_ostree_pkg:
         name:
+          # fonts
           - adobe-source-sans-pro-fonts
           - fira-code-fonts
+
+          # cockpit
           - cockpit
           - cockpit-system
           - cockpit-ostree
@@ -32,6 +35,8 @@
           - cockpit-networkmanager
           - cockpit-storaged
           - cockpit-sosreport
+
+          # essentials
           - fish
           - syncthing
           - firewall-config
@@ -40,6 +45,12 @@
           - git
           - gcc
           - make
+
+          # deps for Pano clipboard manager for GNOME
+          - libgda
+          - libgda-sqlite
+
+          # container tools
           - distrobox
           - docker-ce
           - docker-ce-cli
