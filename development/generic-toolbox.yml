@@ -44,3 +44,9 @@
       ansible.builtin.shell: |
         set -o pipefail
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+    - name: Change user shell to fish
+      become: true
+      ansible.builtin.user:
+        name: "{{ username }}"
+        shell: /usr/bin/fish

@@ -18,6 +18,12 @@
         path: ~/.bash_profile
         line: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+    - name: Change user shell to fish
+      become: true
+      ansible.builtin.user:
+        name: "{{ username }}"
+        shell: /usr/bin/fish
+
     - name: Start systemd services
       become: true
       ansible.builtin.systemd:
