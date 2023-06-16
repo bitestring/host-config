@@ -176,6 +176,9 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = true;
 
+  # Auto system update
+  system.autoUpgrade.enable = true;
+
   # Optimise Nix storage
   nix.settings.auto-optimise-store = true;
 
