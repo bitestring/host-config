@@ -138,7 +138,29 @@
      fish
      curl
      gnome.gnome-tweaks
+     docker-compose
   ];
+
+  virtualisation = {
+    # https://nixos.wiki/wiki/Docker
+    docker = {
+      enable = true;
+      storageDriver = "btrfs";
+      enableOnBoot = true;
+    };
+    # https://nixos.wiki/wiki/Podman
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = false;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings = {
+        dns_enabled = true;
+      };
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
