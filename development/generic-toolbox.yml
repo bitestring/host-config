@@ -26,6 +26,7 @@
           - ncurses-compat-libs
           - xz
           - perl
+          - zlib-devel
         state: present
 
     - name: Install PIP packages
