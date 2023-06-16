@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
     ];
 
   # Bootloader.
@@ -88,16 +89,29 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  programs.fish.enable = true;
+  environment.shells = with pkgs; [ fish ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bitestring = {
     isNormalUser = true;
     description = "bitestring";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
     packages = with pkgs; [
     #  firefox
     #  thunderbird
     ];
   };
+
+  # Use home-manager to manage user configuration
+  home-manager.users.bitestring = { pkgs, ... }: {
+    home.stateVersion = "23.11";
+    home.packages = [
+      
+    ];
+  };
+
 
   # Enable automatic login for the user.
   services.xserver.displayManager.autoLogin.enable = true;
