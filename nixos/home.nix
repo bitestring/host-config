@@ -21,6 +21,6 @@
 
   # User packages
   home.packages = with pkgs; [
-    vscode
+    # vscode
   ];
 }
