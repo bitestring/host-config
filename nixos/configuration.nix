@@ -6,9 +6,9 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
     ];
 
   # Enable Nix experimental features
@@ -23,7 +23,7 @@
   fileSystems = {
     "/".options = [ "compress=zstd" "relatime" ];
   };
-  
+
   # Swap
   zramSwap.enable = true;
 
@@ -99,46 +99,24 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bitestring = {
     isNormalUser = true;
-    description = "bitestring";
+    description = "ƛ bitestring";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
-    packages = with pkgs; [
-    #  firefox
-    #  thunderbird
-    ];
   };
 
-  # Use home-manager to manage user configuration
-  home-manager.users.bitestring = { pkgs, ... }: {
-    home.stateVersion = "23.11";
-    home.packages = [
-      
-    ];
-  };
-
-
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "bitestring";
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-     spice-vdagent
-     wget
-     fish
-     curl
-     gnome.gnome-tweaks
-     docker-compose
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+    spice-vdagent
+    gnome.gnome-tweaks
+    wget
+    fish
+    curl
+    git
+    docker-compose
   ];
 
   virtualisation = {
@@ -185,7 +163,7 @@
   # Enable GNOME Keyring
   security.pam.services.gdm.enableGnomeKeyring = true;
   services.gnome.gnome-keyring.enable = true;
-  
+
   # Enable Syncthing
   services.syncthing.enable = true;
 
@@ -199,7 +177,7 @@
   networking.firewall.enable = true;
 
   # Auto system update
-  system.autoUpgrade.enable = true;
+  # system.autoUpgrade.enable = true;
 
   # Optimise Nix storage
   nix.settings.auto-optimise-store = true;
