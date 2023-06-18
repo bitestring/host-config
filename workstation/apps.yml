@@ -54,6 +54,7 @@
         - org.libreoffice.LibreOffice
         - org.onlyoffice.desktopeditors
         - com.calibre_ebook.calibre
+        - org.kiwix.desktop
         - org.gnucash.GnuCash
         - com.github.xournalpp.xournalpp
         - org.kde.okular
