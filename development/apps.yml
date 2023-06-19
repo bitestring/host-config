@@ -10,9 +10,16 @@
       ansible.builtin.debug:
         msg: "Playing apps.yml as user {{ username }}"
 
-    - name: Add the flathub flatpak repository remote to the user installation
+    - name: Add Flathub flatpak repository remote to the user installation
       community.general.flatpak_remote:
         name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+        method: user
+
+    - name: Add Flathub-Beta flatpak repository remote to the user installation
+      community.general.flatpak_remote:
+        name: flathub-beta
         state: present
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
         method: user
@@ -26,7 +33,7 @@
         name: "{{ item }}"
         state: present
         method: user
-        remote: flathub
+        remote: flathub-beta
       with_items:
         - org.freedesktop.Platform.ffmpeg-full//21.08
         - org.freedesktop.Platform.ffmpeg-full//22.08
@@ -36,7 +43,7 @@
         name: "{{ item }}"
         state: present
         method: user
-        remote: flathub
+        remote: flathub-beta
       with_items:
         - org.mozilla.firefox
         - com.brave.Browser

@@ -10,7 +10,7 @@
       ansible.builtin.debug:
         msg: "Playing apps.yml as user {{ username }}"
 
-    - name: Add the flathub flatpak repository remote to the user installation
+    - name: Add Flathub flatpak repository remote to the user installation
       community.general.flatpak_remote:
         name: flathub
         state: present
