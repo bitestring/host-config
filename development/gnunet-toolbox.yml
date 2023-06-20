@@ -67,6 +67,14 @@
           - libgcrypt-devel
           - libsodium
           - libsodium-devel
+          - gtk3
+          - gtk3-devel
+          - glade
+          - glade-devel
+          - gtk4
+          - gtk4-devel
+          - libadwaita
+          - libadwaita-devel
         state: present
 
     - name: Install PIP packages
