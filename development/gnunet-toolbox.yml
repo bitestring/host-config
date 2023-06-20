@@ -77,6 +77,11 @@
         executable: pip3
         extra_args: --user
 
+    - name: Install Rust
+      ansible.builtin.shell: |
+        set -o pipefail
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
     - name: Change user shell to fish
       become: true
       ansible.builtin.user:
