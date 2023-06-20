@@ -90,6 +90,13 @@
         set -o pipefail
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
+    - name: Add GNUnet local libraries to ldconfig
+      ansible.builtin.copy:
+        dest: /etc/ld.so.conf.d/gnunet.conf
+        content: /usr/local/lib
+        mode: u=r,g=r,o=r
+        owner: root
+
     - name: Change user shell to fish
       become: true
       ansible.builtin.user:
