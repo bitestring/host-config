@@ -21,7 +21,7 @@
       community.general.flatpak_remote:
         name: flathub-beta
         state: present
-        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+        flatpakrepo_url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
         method: user
 
     # This is only required on Silverblue to update in-built flatpaks. But this won't hurt in Workstation either.
@@ -33,7 +33,7 @@
         name: "{{ item }}"
         state: present
         method: user
-        remote: flathub-beta
+        remote: flathub
       with_items:
         - org.freedesktop.Platform.ffmpeg-full//21.08
         - org.freedesktop.Platform.ffmpeg-full//22.08
@@ -43,7 +43,7 @@
         name: "{{ item }}"
         state: present
         method: user
-        remote: flathub-beta
+        remote: flathub
       with_items:
         - org.mozilla.firefox
         - com.brave.Browser
