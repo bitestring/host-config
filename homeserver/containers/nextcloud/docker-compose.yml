@@ -4,13 +4,12 @@ volumes:
   nextcloud:
   nextcloud-postgres-db:
 
-
 services:
   db:
     image: postgres:15
     restart: always    
     volumes:
-      - nextcloud-postgres-db:/var/lib/postgresql/data
+      - nextcloud-postgres-db:/var/lib/postgresql/data:Z
     environment:
       - POSTGRES_DB=nextcloud_db
       - POSTGRES_USER=postgres
@@ -20,7 +19,7 @@ services:
     image: nextcloud:latest
     restart: always
     volumes:
-      - nextcloud:/var/www/html
+      - nextcloud:/var/www/html:z
     environment:
       - POSTGRES_HOST=nextcloud-db-1
       - POSTGRES_DB=nextcloud_db
@@ -29,6 +28,16 @@ services:
       - OVERWRITEPROTOCOL=https
       - OVERWRITEHOST=sweethome-server.local # REPLACE HOST
       - db
+
+  cron:
+    image: nextcloud:latest
+    restart: always
+    volumes:
+      - nextcloud:/var/www/html:z
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - nextcloud
 
   proxy:
     image: nginx:latest
