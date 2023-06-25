@@ -23,6 +23,7 @@
           - gettext
           - gettext-devel
           - openssl
+          - openssl-devel
           - gnutls
           - make
           - libtool

@@ -27,6 +27,8 @@
           - xz
           - perl
           - zlib-devel
+          - openssl
+          - openssl-devel
         state: present
 
     - name: Install PIP packages
