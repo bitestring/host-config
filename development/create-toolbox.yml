@@ -11,10 +11,10 @@
         msg: Playing create-toolbox.yml as user {{ username }}
 
     - name: Create general development container with Distrobox
-      ansible.builtin.shell: distrobox assemble create --file ./distrobox-manifests/generic.ini
+      ansible.builtin.shell: distrobox assemble create --file ./toolbox/fedora-toolbox-generic/fedora-toolbox-generic.ini
 
     - name: Create gnunet development container with Distrobox
-      ansible.builtin.shell: distrobox assemble create --file ./distrobox-manifests/gnunet.ini
+      ansible.builtin.shell: distrobox assemble create --file ./toolbox/fedora-toolbox-gnunet/fedora-toolbox-gnunet.ini
 
     - name: Create podman-host executable to interact with Podman from inside Flatpak apps
       ansible.builtin.copy:
