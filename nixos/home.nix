@@ -19,8 +19,18 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # Fonts
+  fonts.fontconfig.enable = true;
+
   # User packages
   home.packages = with pkgs; [
-    # vscode
+    gnome-extension-manager
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.pano
+    gnomeExtensions.vitals
+
+    tilix
+    vscode
   ];
 }

@@ -20,9 +20,26 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # Filesystem
-  fileSystems = {
-    "/".options = [ "compress=zstd" "relatime" ];
-  };
+  fileSystems =
+    let
+      mkRoSymBind = path: {
+        device = path;
+        fsType = "fuse.bindfs";
+        options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
+      };
+      aggregatedFonts = pkgs.buildEnv {
+        name = "system-fonts";
+        paths = config.fonts.fonts;
+        pathsToLink = [ "/share/fonts" ];
+      };
+    in
+    {
+      "/".options = [ "compress=zstd" "relatime" ];
+
+      # Create an FHS mount to support flatpak host icons/fonts
+      "/usr/share/icons" = mkRoSymBind (config.system.path + "/share/icons");
+      "/usr/share/fonts" = mkRoSymBind (aggregatedFonts + "/share/fonts");
+    };
 
   # Swap
   zramSwap.enable = true;
@@ -48,13 +65,16 @@
   ];
 
   # Fonts
-  fonts.fonts = with pkgs; [
-    fira-code
-    fira-code-symbols
-    hasklig
-    source-code-pro
-    cantarell-fonts
-  ];
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      fira-code
+      fira-code-symbols
+      hasklig
+      source-code-pro
+      cantarell-fonts
+    ];
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -117,6 +137,8 @@
     curl
     git
     docker-compose
+    distrobox
+    bindfs
   ];
 
   virtualisation = {
@@ -148,32 +170,37 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
-
-  # Enable fstrim service
-  services.fstrim.enable = true;
-
-  # Enable VM guest tools
-  services.qemuGuest.enable = true;
-  services.spice-vdagentd.enable = true;
-
-  # Enable flatpak
-  services.flatpak.enable = true;
+  # Enable AppArmor
+  security.apparmor.enable = true;
+  security.apparmor.killUnconfinedConfinables = true;
 
   # Enable GNOME Keyring
   security.pam.services.gdm.enableGnomeKeyring = true;
-  services.gnome.gnome-keyring.enable = true;
 
-  # Enable Syncthing
-  services.syncthing.enable = true;
+  # List services that you want to enable:
+  services = {
+    fstrim.enable = true;
+    qemuGuest.enable = true;
+    spice-vdagentd.enable = true;
+    flatpak.enable = true;
+    gnome.gnome-keyring.enable = true;
+    tor = {
+      enable = true;
+      client.enable = true;
+    };
+    syncthing = {
+      enable = true;
+      user = "bitestring";
+      dataDir = "/home/bitestring/Syncthing-Shared";
+    };
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
+  networking.firewall.allowedTCPPorts = [ 8384 22000 ];
+  networking.firewall.allowedUDPPorts = [ 22000 21027 ];
   networking.firewall.enable = true;
 
   # Auto system update
