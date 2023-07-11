@@ -45,6 +45,7 @@
         method: user
         remote: flathub
       with_items:
+        - com.mattjakeman.ExtensionManager
         - org.mozilla.firefox
         - com.brave.Browser
         - im.riot.Riot
