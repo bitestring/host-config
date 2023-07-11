@@ -47,6 +47,7 @@
       with_items:
         - org.mozilla.firefox
         - com.brave.Browser
+        - im.riot.Riot
         - org.videolan.VLC
         - org.libreoffice.LibreOffice
         - org.kde.gwenview
