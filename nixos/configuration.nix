@@ -67,7 +67,7 @@
   # Fonts
   fonts = {
     fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       fira-code
       fira-code-symbols
       hasklig
