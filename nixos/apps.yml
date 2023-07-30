@@ -33,5 +33,6 @@
       with_items:
         - com.github.tchx84.Flatseal
         - org.mozilla.firefox
-        - io.podman_desktop.PodmanDesktop
         - im.riot.Riot
+        - io.podman_desktop.PodmanDesktop
+        - com.visualstudio.code

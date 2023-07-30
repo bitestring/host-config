@@ -31,6 +31,6 @@
     gnomeExtensions.vitals
 
     tilix
-    vscode
+    # vscode
   ];
 }
