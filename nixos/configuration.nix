@@ -19,6 +19,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # Filesystem
   fileSystems =
     let
