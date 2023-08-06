@@ -196,6 +196,10 @@
       user = "bitestring";
       dataDir = "/home/bitestring/Syncthing-Shared";
     };
+    cockpit = {
+      enable = true;
+      port = 9090;
+    };
   };
 
   # Enable the OpenSSH daemon.
