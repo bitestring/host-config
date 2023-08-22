@@ -16,11 +16,16 @@
   # changes in each release.
   home.stateVersion = "23.11";
 
+  # Fonts
+  fonts.fontconfig.enable = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # Fonts
-  fonts.fontconfig.enable = true;
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs-gtk;  # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+  };
 
   # User packages
   home.packages = with pkgs; [
