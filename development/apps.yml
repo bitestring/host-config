@@ -10,19 +10,25 @@
       ansible.builtin.debug:
         msg: "Playing apps.yml as user {{ username }}"
 
-    - name: Add Flathub flatpak repository remote to the user installation
+    - name: Add Flathub flatpak repository remote to the system
       community.general.flatpak_remote:
         name: flathub
         state: present
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-        method: user
+        method: "{{ item }}"
+      with_items:
+        - system
+        - user
 
-    - name: Add Flathub-Beta flatpak repository remote to the user installation
+    - name: Add Flathub-Beta flatpak repository remote to the user
       community.general.flatpak_remote:
         name: flathub-beta
         state: present
         flatpakrepo_url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-        method: user
+        method: "{{ item }}"
+      with_items:
+        - system
+        - user
 
     # This is only required on Silverblue to update in-built flatpaks. But this won't hurt in Workstation either.
     - name: Update existing Flatpaks
@@ -32,29 +38,38 @@
       community.general.flatpak:
         name: "{{ item }}"
         state: present
-        method: user
+        method: system
         remote: flathub
       with_items:
-        - org.freedesktop.Platform.ffmpeg-full//21.08
-        - org.freedesktop.Platform.ffmpeg-full//22.08
+        - org.freedesktop.Platform.ffmpeg-full/x86_64/23.08
 
-    - name: Install user applications
+    - name: Install system level applications
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+        method: system
+        remote: flathub
+      with_items:
+        - com.mattjakeman.ExtensionManager
+        - org.mozilla.firefox
+        - io.gitlab.librewolf-community
+        - com.brave.Browser
+        - org.videolan.VLC
+        - org.libreoffice.LibreOffice
+        - org.kde.gwenview
+        - com.github.tchx84.Flatseal
+
+    - name: Install user level applications
       community.general.flatpak:
         name: "{{ item }}"
         state: present
         method: user
         remote: flathub
       with_items:
-        - com.mattjakeman.ExtensionManager
-        - org.mozilla.firefox
-        - com.brave.Browser
+        - com.github.micahflee.torbrowser-launcher
         - im.riot.Riot
-        - org.videolan.VLC
-        - org.libreoffice.LibreOffice
-        - org.kde.gwenview
         - org.gnu.emacs
         - org.gnome.seahorse.Application
-        - com.github.tchx84.Flatseal
         - com.usebottles.bottles
         - io.podman_desktop.PodmanDesktop
         - com.visualstudio.code

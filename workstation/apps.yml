@@ -25,11 +25,10 @@
       community.general.flatpak:
         name: "{{ item }}"
         state: present
-        method: user
+        method: system
         remote: flathub
       with_items:
-        - org.freedesktop.Platform.ffmpeg-full//21.08
-        - org.freedesktop.Platform.ffmpeg-full//22.08
+        - org.freedesktop.Platform.ffmpeg-full/x86_64/23.08
 
     - name: Install user applications
       community.general.flatpak:
