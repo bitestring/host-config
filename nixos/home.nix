@@ -19,12 +19,17 @@
   # Fonts
   fonts.fontconfig.enable = true;
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs-gtk;  # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+  programs = {
+    home-manager.enable = true;
+    direnv = {
+      enable = true;
+      enableFishIntegration = true;
+      nix-direnv.enable = true;
+    };
+    emacs = {
+      enable = true;
+      package = pkgs.emacs-gtk; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+    };
   };
 
   # User packages
