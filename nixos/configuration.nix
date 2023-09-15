@@ -15,9 +15,11 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    efi.efiSysMountPoint = "/boot/efi";
+  };
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -79,16 +81,16 @@
     ];
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.displayManager.autoLogin.user = "bitestring";
-
-  # Configure keymap in X11
   services.xserver = {
+    # Enable the X11 windowing system.
+    enable = true;
+
+    # Enable the GNOME Desktop Environment.
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+    # displayManager.autoLogin.user = "bitestring";
+
+    # Configure keymap in X11
     layout = "us";
     xkbVariant = "";
   };
@@ -173,12 +175,14 @@
   #   enableSSHSupport = true;
   # };
 
-  # Enable AppArmor
-  security.apparmor.enable = true;
-  security.apparmor.killUnconfinedConfinables = true;
+  security = {
+    # Enable AppArmor
+    apparmor.enable = true;
+    apparmor.killUnconfinedConfinables = true;
 
-  # Enable GNOME Keyring
-  security.pam.services.gdm.enableGnomeKeyring = true;
+    # Enable GNOME Keyring
+    pam.services.gdm.enableGnomeKeyring = true;
+  };
 
   # List services that you want to enable:
   services = {
@@ -206,9 +210,11 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 8384 22000 ];
-  networking.firewall.allowedUDPPorts = [ 22000 21027 ];
-  networking.firewall.enable = true;
+  networking.firewall = {
+    allowedTCPPorts = [ 8384 22000 ];
+    allowedUDPPorts = [ 22000 21027 ];
+    enable = true;
+  };
 
   # Auto system update
   # system.autoUpgrade.enable = true;
