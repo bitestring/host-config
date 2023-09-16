@@ -1,0 +1,41 @@
+# This playbook is supposed to be played inside a Toolbox or Distrobox container
+- name: Playbook for installing generic development tools
+  hosts: localhost
+  become: false
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      ansible.builtin.debug:
+        msg: Playing playbook.yml as user {{ username }}
+
+    - name: Install system dependencies
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - git
+
+          # C/C++
+          - gcc
+          - gcc-c++
+          - clang
+          - make
+          - gmp
+          - gmp-devel
+          - ncurses
+          - ncurses-compat-libs
+          - xz
+          - perl
+          - zlib-devel
+          - openssl
+          - openssl-devel
+
+          # Haskell
+          - stack
+
+          # Rust
+          - rust
+          - cargo
+        state: present
