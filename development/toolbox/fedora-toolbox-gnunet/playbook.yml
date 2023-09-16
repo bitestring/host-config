@@ -76,8 +76,11 @@
           - gtk4-devel
           - libadwaita
           - libadwaita-devel
+
+          # Rust
           - rust
           - cargo
+	  - rust-analyzer
         state: present
 
     - name: Install PIP packages

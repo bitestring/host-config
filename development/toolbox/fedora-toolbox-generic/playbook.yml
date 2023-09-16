@@ -38,4 +38,5 @@
           # Rust
           - rust
           - cargo
+	  - rust-analyzer
         state: present
