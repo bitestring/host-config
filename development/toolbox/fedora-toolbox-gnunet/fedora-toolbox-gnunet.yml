@@ -76,31 +76,14 @@
           - gtk4-devel
           - libadwaita
           - libadwaita-devel
+          - rust
+          - cargo
         state: present
 
     - name: Install PIP packages
+      become: true
       ansible.builtin.pip:
         name:
           - sphinx
           - sphinx_rtd_theme
         executable: pip3
-        extra_args: --user
-
-    - name: Install Rust
-      ansible.builtin.shell: |
-        set -o pipefail
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
-    - name: Add GNUnet local libraries to ldconfig
-      become: true
-      ansible.builtin.copy:
-        dest: /etc/ld.so.conf.d/gnunet.conf
-        content: /usr/local/lib
-        mode: u=r,g=r,o=r
-        owner: root
-
-    - name: Change user shell to fish
-      become: true
-      ansible.builtin.user:
-        name: "{{ username }}"
-        shell: /usr/bin/fish
