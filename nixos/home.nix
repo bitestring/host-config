@@ -26,6 +26,11 @@
       enableFishIntegration = true;
       nix-direnv.enable = true;
     };
+    git = {
+      enable = true;
+      userName = "bitestring";
+      userEmail = "81476430+bitestring@users.noreply.github.com";
+    };
     emacs = {
       enable = true;
       package = pkgs.emacs-gtk; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
