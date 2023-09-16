@@ -87,3 +87,11 @@
           - sphinx
           - sphinx_rtd_theme
         executable: pip3
+
+    - name: Add GNUnet libraries to ldconfig
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/ld.so.conf.d/usr_local_lib.conf
+        content: /usr/local/lib
+        mode: u=r,g=r,o=r
+        owner: root
