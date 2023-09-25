@@ -10,7 +10,7 @@
       ansible.builtin.debug:
         msg: "Playing apps.yml as user {{ username }}"
 
-    - name: Add Flathub flatpak repository remote to the system
+    - name: Add Flathub flatpak repository remote
       community.general.flatpak_remote:
         name: flathub
         state: present
@@ -20,7 +20,7 @@
         - system
         - user
 
-    - name: Add Flathub-Beta flatpak repository remote to the user
+    - name: Add Flathub-Beta flatpak repository remote
       community.general.flatpak_remote:
         name: flathub-beta
         state: present
@@ -54,6 +54,8 @@
         - org.mozilla.firefox
         - io.gitlab.librewolf-community
         - com.brave.Browser
+        - org.gnome.Snapshot
+        - org.gnome.Loupe
         - org.videolan.VLC
         - org.libreoffice.LibreOffice
         - org.kde.gwenview

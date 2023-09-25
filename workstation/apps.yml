@@ -10,12 +10,15 @@
       ansible.builtin.debug:
         msg: "Playing apps.yml as user {{ username }}"
 
-    - name: Add Flathub flatpak repository remote to the user installation
+    - name: Add Flathub flatpak repository remote
       community.general.flatpak_remote:
         name: flathub
         state: present
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-        method: user
+        method: "{{ item }}"
+      with_items:
+        - system
+        - user
 
     # This is only required on Silverblue to update in-built flatpaks. But this won't hurt in Workstation either.
     - name: Update existing Flatpaks
@@ -30,6 +33,20 @@
       with_items:
         - org.freedesktop.Platform.ffmpeg-full/x86_64/23.08
 
+    - name: Install system level applications
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+        method: system
+        remote: flathub
+      with_items:
+        - org.mozilla.firefox
+        - org.gnome.Snapshot
+        - org.gnome.Loupe
+        - org.videolan.VLC
+        - org.libreoffice.LibreOffice
+        - com.github.tchx84.Flatseal
+
     - name: Install user applications
       community.general.flatpak:
         name: "{{ item }}"
@@ -37,7 +54,6 @@
         method: user
         remote: flathub
       with_items:
-        - org.mozilla.firefox
         - io.gitlab.librewolf-community
         - org.gnome.Epiphany
         - com.brave.Browser
@@ -47,10 +63,7 @@
         - org.keepassxc.KeePassXC
         - im.riot.Riot
         - org.signal.Signal
-        - org.videolan.VLC
-        - org.kde.kasts
         - org.qbittorrent.qBittorrent
-        - org.libreoffice.LibreOffice
         - org.onlyoffice.desktopeditors
         - com.calibre_ebook.calibre
         - org.kiwix.desktop
@@ -60,7 +73,6 @@
         - info.mumble.Mumble
         - org.kde.kdenlive
         - com.obsproject.Studio
-        - org.gnome.Cheese
         - org.kde.gwenview
         - org.kde.digikam
         - org.gimp.GIMP
@@ -70,6 +82,5 @@
         - org.remmina.Remmina
         - org.kde.ark
         - org.gnome.seahorse.Application
-        - com.github.tchx84.Flatseal
         - com.usebottles.bottles
         - io.podman_desktop.PodmanDesktop

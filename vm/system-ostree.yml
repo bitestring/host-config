@@ -43,6 +43,7 @@
           - tor
           - openssl
           - git
+          - direnv
           - gcc
           - make
 
