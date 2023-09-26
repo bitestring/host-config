@@ -24,7 +24,6 @@
       ansible.builtin.dnf:
         name:
           - fish
-          - gnome-tweaks
           - clamav
           - ffmpeg
           - ImageMagick
