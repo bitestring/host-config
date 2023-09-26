@@ -10,36 +10,14 @@
       ansible.builtin.debug:
         msg: Playing system-ostree-post.yml as user {{ username }}
 
-    - name: Install Homebrew
-      ansible.builtin.shell: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-    - name: Add Homebrew to bash_profile
-      ansible.builtin.blockinfile:
-        path: ~/.bash_profile
-        backup: true
-        block: |
-          # Add Homebrew
-          if [ -f /var/home/linuxbrew/.linuxbrew/bin/brew ]; then
-            eval "$(/var/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-          fi
-
-    - name: Add Homebrew to fish
-      ansible.builtin.blockinfile:
-        path: ~/.config/fish/config.fish
-        create: true
-        mode: u=rw,g=r,o=r
-        backup: true
-        block: |
-          # Add Homebrew
-          if test -f /home/linuxbrew/.linuxbrew/bin/brew
-            eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-          end
-
     - name: Change user shell to fish
       become: true
       ansible.builtin.user:
         name: "{{ username }}"
         shell: /usr/bin/fish
+
+    - name: Install Nix
+      ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
     - name: Start systemd services
       become: true
@@ -51,3 +29,4 @@
         - cockpit.socket
         - docker.socket
         - syncthing@{{ ansible_user_id }}
+
