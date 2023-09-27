@@ -11,7 +11,7 @@
         msg: Playing system-ostree-post.yml as user {{ username }}
 
     - name: Install Nix
-      ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+      ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
 
     - name: Start systemd services
       become: true
