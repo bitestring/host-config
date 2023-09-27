@@ -13,6 +13,13 @@
     - name: Install Nix
       ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
 
+    - name: Add user to required groups
+      ansible.builtin.user:
+        name: "{{ username }}"
+        groups:
+          - nixbld
+        append: true
+
     - name: Start systemd services
       become: true
       ansible.builtin.systemd:
@@ -29,4 +36,3 @@
       ansible.builtin.user:
         name: "{{ username }}"
         shell: /usr/bin/fish
-
