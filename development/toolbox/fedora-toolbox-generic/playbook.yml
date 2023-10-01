@@ -39,4 +39,5 @@
           - rust
           - cargo
 	  - rust-analyzer
+	  - rustfmt
         state: present
