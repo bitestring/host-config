@@ -20,6 +20,16 @@
         - system
         - user
 
+    - name: Add Flathub-Beta flatpak repository remote
+      community.general.flatpak_remote:
+        name: flathub-beta
+        state: present
+        flatpakrepo_url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+        method: "{{ item }}"
+      with_items:
+        - system
+        - user
+
     # This is only required on Silverblue to update in-built flatpaks. But this won't hurt in Workstation either.
     - name: Update existing Flatpaks
       ansible.builtin.command: flatpak update --noninteractive
