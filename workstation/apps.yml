@@ -83,6 +83,7 @@
         - info.mumble.Mumble
         - org.kde.kdenlive
         - com.obsproject.Studio
+        - fr.handbrake.ghb
         - org.kde.gwenview
         - org.kde.digikam
         - org.gimp.GIMP
