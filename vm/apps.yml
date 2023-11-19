@@ -70,8 +70,6 @@
       with_items:
         - com.github.micahflee.torbrowser-launcher
         - im.riot.Riot
-        - org.gnu.emacs
         - org.gnome.seahorse.Application
         - com.usebottles.bottles
         - io.podman_desktop.PodmanDesktop
-        - com.visualstudio.code

@@ -18,6 +18,35 @@
         mode: u=r,g=r,o=r
         owner: root
 
+    - name: Add VSCode repository
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/yum.repos.d/vscode.repo
+        content: |
+          [code]
+          name=Visual Studio Code
+          baseurl=https://packages.microsoft.com/yumrepos/vscode
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+        mode: u=r,g=r,o=r
+        owner: root
+
+    - name: Add Tor Project repository
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/yum.repos.d/Tor.repo
+        content: |
+          [tor]
+          name=Tor for Fedora $releasever - $basearch
+          baseurl=https://rpm.torproject.org/fedora/$releasever/$basearch
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://rpm.torproject.org/fedora/public_gpg.key
+          cost=100
+        mode: u=r,g=r,o=r
+        owner: root
+
     - name: Overlay core packages
       community.general.rpm_ostree_pkg:
         name:
@@ -59,4 +88,8 @@
           - docker-buildx-plugin
           - docker-compose-plugin
           - kubernetes
+
+          # IDEs
+          - code
+          - emacs
         state: present
