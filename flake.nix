@@ -11,6 +11,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
       dependencies = with pkgs; [
         # system deps
+        glibcLocales
 
         # Python deps
         ansible
