@@ -38,6 +38,6 @@
           # Rust
           - rust
           - cargo
-	  - rust-analyzer
-	  - rustfmt
+          - rust-analyzer
+          - rustfmt
         state: present
