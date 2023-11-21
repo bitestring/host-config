@@ -37,7 +37,7 @@
 
     # youtube-dl project seems to be dead. hence installing the popular fork.
     - name: Install yt-dlp
+      become: true
       ansible.builtin.pip:
         name: yt-dlp
         executable: pip3
-        extra_args: --user
