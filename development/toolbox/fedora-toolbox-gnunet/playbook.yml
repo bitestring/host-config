@@ -90,6 +90,7 @@
         name:
           - sphinx
           - sphinx_rtd_theme
+          - sphinx_book_theme
         executable: pip3
 
     - name: Add GNUnet libraries to ldconfig
