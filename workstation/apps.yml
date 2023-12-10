@@ -76,7 +76,6 @@
         - org.qbittorrent.qBittorrent
         - org.onlyoffice.desktopeditors
         - com.calibre_ebook.calibre
-        - org.kiwix.desktop
         - org.gnucash.GnuCash
         - com.github.xournalpp.xournalpp
         - org.kde.okular
@@ -86,6 +85,7 @@
         - fr.handbrake.ghb
         - org.kde.gwenview
         - org.kde.digikam
+        - org.gpodder.gpodder
         - org.gimp.GIMP
         - org.inkscape.Inkscape
         - org.fedoraproject.MediaWriter
