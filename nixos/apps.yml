@@ -36,3 +36,5 @@
         - com.brave.Browser
         - im.riot.Riot
         - io.podman_desktop.PodmanDesktop
+        - org.libreoffice.LibreOffice
+        - org.videolan.VLC
