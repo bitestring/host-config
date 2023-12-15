@@ -67,7 +67,6 @@
         - io.gitlab.librewolf-community
         - org.gnome.Epiphany
         - com.brave.Browser
-        - com.github.micahflee.torbrowser-launcher
         - org.mozilla.Thunderbird
         - ch.protonmail.protonmail-bridge
         - org.keepassxc.KeePassXC

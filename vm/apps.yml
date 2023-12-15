@@ -52,7 +52,6 @@
       with_items:
         - com.mattjakeman.ExtensionManager
         - org.mozilla.firefox
-        - io.gitlab.librewolf-community
         - com.brave.Browser
         - org.gnome.Snapshot
         - org.gnome.Loupe
@@ -68,7 +67,6 @@
         method: user
         remote: flathub
       with_items:
-        - com.github.micahflee.torbrowser-launcher
         - im.riot.Riot
         - org.gnome.seahorse.Application
         - com.usebottles.bottles
