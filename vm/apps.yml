@@ -43,23 +43,6 @@
       with_items:
         - org.freedesktop.Platform.ffmpeg-full/x86_64/23.08
 
-    - name: Install system level applications
-      community.general.flatpak:
-        name: "{{ item }}"
-        state: present
-        method: system
-        remote: flathub
-      with_items:
-        - com.mattjakeman.ExtensionManager
-        - org.mozilla.firefox
-        - com.brave.Browser
-        - org.gnome.Snapshot
-        - org.gnome.Loupe
-        - org.videolan.VLC
-        - org.libreoffice.LibreOffice
-        - org.kde.gwenview
-        - com.github.tchx84.Flatseal
-
     - name: Install user level applications
       community.general.flatpak:
         name: "{{ item }}"
@@ -71,3 +54,13 @@
         - org.gnome.seahorse.Application
         - com.usebottles.bottles
         - io.podman_desktop.PodmanDesktop
+        - com.brave.Browser
+        - org.gnome.Epiphany
+        - com.mattjakeman.ExtensionManager
+        - com.github.tchx84.Flatseal
+        - org.mozilla.firefox
+        - org.gnome.Snapshot
+        - org.gnome.Loupe
+        - org.videolan.VLC
+        - org.libreoffice.LibreOffice
+        - org.kde.gwenview
