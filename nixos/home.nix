@@ -1,10 +1,13 @@
 { config, pkgs, ... }:
-
+let
+  userName = "bitestring";
+  userEmail = "81476430+bitestring@users.noreply.github.com";
+in
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "bitestring";
-  home.homeDirectory = "/home/bitestring";
+  home.username = userName;
+  home.homeDirectory = "/home/${userName}";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -28,8 +31,8 @@
     };
     git = {
       enable = true;
-      userName = "bitestring";
-      userEmail = "81476430+bitestring@users.noreply.github.com";
+      userName = userName;
+      userEmail = userEmail;
     };
     emacs = {
       enable = true;

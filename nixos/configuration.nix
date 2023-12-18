@@ -3,7 +3,10 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  userName = "bitestring";
+  userDesc = "ƛ bitestring";
+in
 {
   imports =
     [
@@ -88,7 +91,7 @@
     # Enable the GNOME Desktop Environment.
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
-    # displayManager.autoLogin.user = "bitestring";
+    # displayManager.autoLogin.user = userName;
 
     # Configure keymap in X11
     layout = "us";
@@ -122,9 +125,9 @@
   environment.shells = with pkgs; [ fish ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.bitestring = {
+  users.users.${userName} = {
     isNormalUser = true;
-    description = "ƛ bitestring";
+    description = userDesc;
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
@@ -197,8 +200,9 @@
     };
     syncthing = {
       enable = true;
-      user = "bitestring";
-      dataDir = "/home/bitestring/Syncthing-Shared";
+      user = userName;
+      dataDir = "/home/${userName}/Syncthing-Shared";
+      configDir = "/home/${userName}/.config/syncthing";
     };
     cockpit = {
       enable = true;
