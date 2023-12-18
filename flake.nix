@@ -17,9 +17,13 @@
         ansible
         ansible-lint
         ansible-language-server
+
+        # Nix deps
+        nixpkgs-fmt
       ];
 
-    in {
+    in
+    {
       # packages.${system}.default = pkgs.hello;
 
       devShells.${system}.default = pkgs.mkShell {
