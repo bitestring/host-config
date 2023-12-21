@@ -21,7 +21,6 @@ in
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-    efi.efiSysMountPoint = "/boot/efi";
   };
 
   # Kernel
@@ -66,11 +65,24 @@ in
   time.timeZone = "Asia/Kolkata";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_IN.UTF-8";
   i18n.supportedLocales = [
     "en_US.UTF-8/UTF-8"
     "en_IN/UTF-8"
   ];
+  i18n.defaultLocale = "en_IN.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ALL = "en_IN.UTF-8";
+    LC_ADDRESS = "en_IN.UTF-8";
+    LC_IDENTIFICATION = "en_IN.UTF-8";
+    LC_MEASUREMENT = "en_IN.UTF-8";
+    LC_MONETARY = "en_IN.UTF-8";
+    LC_NAME = "en_IN.UTF-8";
+    LC_NUMERIC = "en_IN.UTF-8";
+    LC_PAPER = "en_IN.UTF-8";
+    LC_TELEPHONE = "en_IN.UTF-8";
+    LC_TIME = "en_IN.UTF-8";
+  };
+
 
   # Fonts
   fonts = {
@@ -131,7 +143,6 @@ in
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -239,5 +250,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
