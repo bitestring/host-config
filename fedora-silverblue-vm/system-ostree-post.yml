@@ -36,20 +36,3 @@
       ansible.builtin.user:
         name: "{{ username }}"
         shell: /usr/bin/fish
-
-    - name: Copy fish shell config
-      become: true
-      ansible.builtin.copy:
-        dest: ~/.config/fish/config.fish
-        content: |
-          # Load Nix
-          test -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish ; and source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
-
-          # Hook direnv
-          direnv hook fish | source
-
-          if status is-interactive
-              # Commands to run in interactive sessions can go here
-          end
-        mode: u=rw,g=r,o=r
-        owner: "{{ username }}"
