@@ -1,6 +1,18 @@
 {
   description = "My Home Manager Flake";
 
+  nixConfig = {
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = [
+      "https://cache.nixos.org/"
+    ];
+
+    extra-substituters = [
+      # nix community's cache server
+      "https://nix-community.cachix.org"
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager = {
@@ -12,17 +24,21 @@
   outputs = { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
     {
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+
       # For `nix run .` later
       defaultPackage.${system} = home-manager.defaultPackage.${system};
 
       homeConfigurations = {
         "bitestring" = home-manager.lib.homeManagerConfiguration {
-          # Note: I am sure this could be done better with flake-utils or something
-          pkgs = import nixpkgs { system = system; };
-
-          modules = [ ./home.nix ]; # Defined later
+          inherit pkgs;
+          modules = [ ./home.nix ];
         };
       };
     };
