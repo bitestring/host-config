@@ -53,6 +53,8 @@ in
     fira-code
     fira-code-symbols
     hasklig
+    source-code-pro
+    cantarell-fonts
 
     # apps
     tilix
