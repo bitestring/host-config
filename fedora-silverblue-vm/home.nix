@@ -19,14 +19,26 @@ in
   # changes in each release.
   home.stateVersion = "24.05";
 
+  # Ease home-manager integration on non-NixOS systems
+  targets.genericLinux.enable = true;
+  xdg = {
+    enable = true;
+    mime.enable = true;
+  };
+
   # Fonts
   fonts.fontconfig.enable = true;
 
   programs = {
     home-manager.enable = true;
+    fish = {
+      enable = true;
+      shellInit = ''
+        source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+      '';
+    };
     direnv = {
       enable = true;
-      enableFishIntegration = true;
       nix-direnv.enable = true;
     };
     git = {
@@ -58,6 +70,7 @@ in
 
     # apps
     tilix
+    distrobox
     vscode
   ];
 }

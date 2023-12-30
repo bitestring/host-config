@@ -150,13 +150,11 @@ in
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     spice-vdagent
-    gnome.gnome-tweaks
     wget
     fish
     curl
     git
     docker-compose
-    distrobox
     bindfs
   ];
 

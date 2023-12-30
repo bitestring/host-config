@@ -58,6 +58,7 @@ in
 
     # apps
     tilix
+    distrobox
     vscode
   ];
 }

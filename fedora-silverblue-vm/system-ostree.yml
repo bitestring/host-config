@@ -45,7 +45,6 @@
           - libgda-sqlite
 
           # container tools
-          - distrobox
           - docker-ce
           - docker-ce-cli
           - containerd.io
