@@ -133,6 +133,7 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # Shell
   programs.fish.enable = true;
   environment.shells = with pkgs; [ fish ];
 
@@ -151,7 +152,6 @@ in
     #  wget
     spice-vdagent
     wget
-    fish
     curl
     git
     docker-compose
