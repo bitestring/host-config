@@ -26,7 +26,6 @@ in
     home-manager.enable = true;
     direnv = {
       enable = true;
-      enableFishIntegration = true;
       nix-direnv.enable = true;
     };
     git = {
