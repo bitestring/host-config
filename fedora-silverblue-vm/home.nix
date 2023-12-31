@@ -21,10 +21,6 @@ in
 
   # Ease home-manager integration on non-NixOS systems
   targets.genericLinux.enable = true;
-  xdg = {
-    enable = true;
-    mime.enable = true;
-  };
 
   # Fonts
   fonts.fontconfig.enable = true;
