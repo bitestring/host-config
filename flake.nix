@@ -1,5 +1,5 @@
 {
-  description = "bitestring.github.io";
+  description = "Nix Flakes and Ansible Playbooks for provisioning my personal machines and VMs";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
