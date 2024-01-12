@@ -42,7 +42,6 @@ in
   # User packages
   home.packages = with pkgs; [
     # gnome extensions
-    gnome-extension-manager
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
     gnomeExtensions.pano
