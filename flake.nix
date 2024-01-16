@@ -1,5 +1,5 @@
 {
-  description = "Nix Flakes and Ansible Playbooks for provisioning my personal machines and VMs";
+  description = "Ansible playbooks, Nix Flakes and other scripts to provision my personal workstation and servers with apps and custom configuration.";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
