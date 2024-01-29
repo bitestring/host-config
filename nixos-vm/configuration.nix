@@ -231,7 +231,7 @@ in
 
   # Auto system update
   system.autoUpgrade = {
-    enable = true;
+    # enable = true;
     flake = inputs.self.outPath;
     flags = [
       "--update-input"
