@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 let
   userName = "bitestring";
   userEmail = "81476430+bitestring@users.noreply.github.com";
