@@ -35,7 +35,7 @@
         "nixos-vm" = nixpkgs.lib.nixosSystem {
           inherit system;
           inherit pkgs;
-          specialArgs = inputs;
+          specialArgs = { inherit inputs; };
           modules = [
             ./configuration.nix
 

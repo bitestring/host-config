@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 let
   userName = "bitestring";
   userDesc = "ƛ bitestring";
@@ -230,9 +230,20 @@ in
   };
 
   # Auto system update
-  # system.autoUpgrade.enable = true;
+  system.autoUpgrade = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "--commit-lock-file"
+      "-L" # print build logs
+    ];
+    dates = "daily";
+    operation = "boot";
+  };
 
-  # Optimise Nix storage
+  # Auto optimize Nix store during rebuild
   nix.settings.auto-optimise-store = true;
 
   # Automatic Garbage Collection
