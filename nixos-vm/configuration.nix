@@ -156,6 +156,7 @@ in
     git
     docker-compose
     bindfs
+    sysprof
   ];
 
   virtualisation = {
@@ -201,6 +202,7 @@ in
     spice-vdagentd.enable = true;
     flatpak.enable = true;
     gnome.gnome-keyring.enable = true;
+    sysprof.enable = true;
     tor = {
       enable = true;
       client.enable = true;
