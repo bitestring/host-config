@@ -19,6 +19,7 @@
         ansible-language-server
 
         # Nix deps
+        nixd
         nixpkgs-fmt
       ];
 
