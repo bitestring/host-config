@@ -37,7 +37,8 @@ in
     source-code-pro
     cantarell-fonts
 
-    # other dependencies
+    # essential libraries and tools
+    nixd # Nix language server
     lemminx # XML language server - Required by RedHat XML extension for VSCode
 
     # apps
