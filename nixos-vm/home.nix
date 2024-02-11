@@ -61,56 +61,56 @@ in
       enable = true;
       package = pkgs.emacs-gtk; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
     };
-    vscode = {
-      enable = true;
-      package = pkgs.vscodium;
-      extensions = with pkgs.vscode-extensions; [
-        vscode-icons-team.vscode-icons
-        editorconfig.editorconfig
-        redhat.vscode-xml
-        redhat.vscode-yaml
-        esbenp.prettier-vscode
-        eamodio.gitlens
-        mkhl.direnv
-        jnoortheen.nix-ide
-        ms-vscode.makefile-tools
-        haskell.haskell
-        justusadam.language-haskell
-        rust-lang.rust-analyzer
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "ansible";
-          publisher = "redhat";
-          version = "2.10.130";
-          sha256 = "sha256-Ddjc70ZgJs+qKb6qwVrde4VJJ15/mwHu+9TTCJ4E+bY=";
-        }
-      ];
-      userSettings = {
-        "extensions.autoUpdate" = false;
-        "telemetry.telemetryLevel" = "off";
-        "redhat.telemetry.enabled" = false;
-        "workbench.enableExperiments" = false;
-        "workbench.settings.enableNaturalLanguageSearch" = false;
-        "workbench.colorTheme" = "Default Light Modern";
-        "workbench.iconTheme" = "vscode-icons";
-        "editor.fontSize" = 18;
-        "editor.fontFamily" = "Fira Code";
-        "editor.fontLigatures" = true;
-        "terminal.integrated.fontSize" = 18;
-        "window.titleBarStyle" = "custom";
-        "window.autoDetectColorScheme" = true;
-        "vsicons.dontShowNewVersionMessage" = true;
-        "diffEditor.experimental.showMoves" = true;
-        "xml.codeLens.enabled" = true;
-        "xml.server.preferBinary" = true;
-        "xml.server.binary.path" = "${pkgs.lemminx.outPath}/bin/lemminx";
-        "xml.server.binary.trustedHashes" = [
-          (builtins.hashFile "sha256" "${pkgs.lemminx.outPath}/bin/lemminx")
+    vscode =
+      let
+        system = "x86_64-linux";
+        vsx = inputs.nix-vscode-extensions.extensions.${system};
+      in
+      {
+        enable = true;
+        package = pkgs.vscodium;
+        extensions = [
+          vsx.open-vsx.ms-vscode.makefile-tools
+          vsx.open-vsx.ms-python.python
+          vsx.open-vsx.redhat.vscode-xml
+          vsx.open-vsx.redhat.vscode-yaml
+          vsx.open-vsx.redhat.ansible
+          vsx.open-vsx.vscode-icons-team.vscode-icons
+          vsx.open-vsx.editorconfig.editorconfig
+          vsx.open-vsx.esbenp.prettier-vscode
+          vsx.open-vsx.eamodio.gitlens
+          vsx.open-vsx.mkhl.direnv
+          vsx.open-vsx.jnoortheen.nix-ide
+          vsx.open-vsx.haskell.haskell
+          vsx.open-vsx.justusadam.language-haskell
+          vsx.open-vsx.rust-lang.rust-analyzer
         ];
-        "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "nixd";
-        "haskell.manageHLS" = "PATH";
+        userSettings = {
+          "extensions.autoUpdate" = false;
+          "telemetry.telemetryLevel" = "off";
+          "redhat.telemetry.enabled" = false;
+          "workbench.enableExperiments" = false;
+          "workbench.settings.enableNaturalLanguageSearch" = false;
+          "workbench.colorTheme" = "Default Light Modern";
+          "workbench.iconTheme" = "vscode-icons";
+          "editor.fontSize" = 18;
+          "editor.fontFamily" = "Fira Code";
+          "editor.fontLigatures" = true;
+          "terminal.integrated.fontSize" = 18;
+          "window.titleBarStyle" = "custom";
+          "window.autoDetectColorScheme" = true;
+          "vsicons.dontShowNewVersionMessage" = true;
+          "diffEditor.experimental.showMoves" = true;
+          "xml.codeLens.enabled" = true;
+          "xml.server.preferBinary" = true;
+          "xml.server.binary.path" = "${pkgs.lemminx.outPath}/bin/lemminx";
+          "xml.server.binary.trustedHashes" = [
+            (builtins.hashFile "sha256" "${pkgs.lemminx.outPath}/bin/lemminx")
+          ];
+          "nix.enableLanguageServer" = true;
+          "nix.serverPath" = "nixd";
+          "haskell.manageHLS" = "PATH";
+        };
       };
-    };
   };
 }
