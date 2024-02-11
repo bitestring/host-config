@@ -24,19 +24,31 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
-      system = "x86_64-linux";
+      host = {
+        name = "nixos-vm";
+        system = "x86_64-linux";
+      };
+      user = {
+        name = "bitestring";
+        description = "ƛ bitestring";
+        email = "81476430+bitestring@users.noreply.github.com";
+      };
       pkgs = import nixpkgs {
-        inherit system;
+        system = host.system;
         config.allowUnfree = true;
       };
     in
     {
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      formatter.${pkgs.system} = nixpkgs.legacyPackages.${pkgs.system}.nixpkgs-fmt;
       nixosConfigurations = {
-        "nixos-vm" = nixpkgs.lib.nixosSystem {
-          inherit system;
+        ${host.name} = nixpkgs.lib.nixosSystem {
           inherit pkgs;
-          specialArgs = { inherit inputs; };
+          system = pkgs.system;
+          specialArgs = {
+            inherit inputs;
+            inherit host;
+            inherit user;
+          };
           modules = [
             ./configuration.nix
 
@@ -46,8 +58,12 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.bitestring = import ./home.nix;
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.users.${user.name} = import ./home.nix;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                inherit host;
+                inherit user;
+              };
             }
           ];
         };

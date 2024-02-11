@@ -1,13 +1,9 @@
-{ inputs, config, pkgs, ... }:
-let
-  userName = "bitestring";
-  userEmail = "81476430+bitestring@users.noreply.github.com";
-in
+{ config, pkgs, inputs, host, user, ... }:
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = userName;
-  home.homeDirectory = "/home/${userName}";
+  home.username = user.name;
+  home.homeDirectory = "/home/${user.name}";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -54,8 +50,8 @@ in
     };
     git = {
       enable = true;
-      userName = userName;
-      userEmail = userEmail;
+      userName = user.name;
+      userEmail = user.email;
     };
     emacs = {
       enable = true;
@@ -63,8 +59,7 @@ in
     };
     vscode =
       let
-        system = "x86_64-linux";
-        vsx = inputs.nix-vscode-extensions.extensions.${system};
+        vsx = inputs.nix-vscode-extensions.extensions.${pkgs.system};
       in
       {
         enable = true;

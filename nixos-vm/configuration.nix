@@ -2,11 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
-let
-  userName = "bitestring";
-  userDesc = "ƛ bitestring";
-in
+{ config, pkgs, inputs, host, user, ... }:
 {
   imports =
     [
@@ -51,7 +47,7 @@ in
   # Swap
   zramSwap.enable = true;
 
-  networking.hostName = "nixos-vm"; # Define your hostname.
+  networking.hostName = host.name; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -138,9 +134,9 @@ in
   environment.shells = with pkgs; [ fish ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${userName} = {
+  users.users.${user.name} = {
     isNormalUser = true;
-    description = userDesc;
+    description = user.description;
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
@@ -209,9 +205,9 @@ in
     };
     syncthing = {
       enable = true;
-      user = userName;
-      dataDir = "/home/${userName}/Syncthing-Shared";
-      configDir = "/home/${userName}/.config/syncthing";
+      user = user.name;
+      dataDir = "/home/${user.name}/Syncthing-Shared";
+      configDir = "/home/${user.name}/.config/syncthing";
     };
     cockpit = {
       enable = true;
