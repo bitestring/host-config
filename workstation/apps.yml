@@ -90,7 +90,6 @@
         - org.gimp.GIMP
         - org.inkscape.Inkscape
         - org.fedoraproject.MediaWriter
-        - org.gnu.emacs
         - org.remmina.Remmina
         - org.kde.ark
         - org.gnome.seahorse.Application
