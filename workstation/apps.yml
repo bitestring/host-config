@@ -68,6 +68,7 @@
         - org.gnome.Epiphany
         - com.brave.Browser
         - org.torproject.torbrowser-launcher
+        - org.onionshare.OnionShare
         - org.mozilla.Thunderbird
         - ch.protonmail.protonmail-bridge
         - org.keepassxc.KeePassXC
