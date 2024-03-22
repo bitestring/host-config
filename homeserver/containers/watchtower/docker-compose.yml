@@ -8,4 +8,4 @@ services:
     environment:
        WATCHTOWER_CLEANUP: true
        WATCHTOWER_INCLUDE_STOPPED: true
-       WATCHTOWER_SCHEDULE: "00 00 04 * * *" # Run at 04:00:00 AM everyday
+       WATCHTOWER_SCHEDULE: "00 00 02 * * *" # Run at 02:00:00 AM everyday
