@@ -102,8 +102,10 @@
     # displayManager.autoLogin.user = userName;
 
     # Configure keymap in X11
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   # Enable CUPS to print documents.
