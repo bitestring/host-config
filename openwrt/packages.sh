@@ -1,1 +1,1 @@
-opkg update; opkg install tcpdump curl https-dns-proxy luci-app-https-dns-proxy adblock luci-app-adblock;
+opkg update; opkg install tcpdump curl bind-dig dnscrypt-proxy2 adblock luci-app-adblock;
