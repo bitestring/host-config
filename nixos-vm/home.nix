@@ -65,7 +65,8 @@
         enable = true;
         package = pkgs.vscodium;
         extensions = [
-          vsx.open-vsx.ms-vscode.makefile-tools
+          (vsx.open-vsx.ms-vscode.makefile-tools.overrideAttrs (_: { sourceRoot = "extension"; }))
+          # vsx.open-vsx.ms-vscode.makefile-tools
           vsx.open-vsx.ms-python.python
           vsx.open-vsx.redhat.vscode-xml
           vsx.open-vsx.redhat.vscode-yaml
