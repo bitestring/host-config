@@ -223,9 +223,11 @@
   # Firewall config
   networking.nftables.enable = true;
   networking.firewall = {
-    allowedTCPPorts = [ 8384 22000 ];
-    allowedUDPPorts = [ 22000 21027 ];
     enable = true;
+    interfaces."enp1s0" = {
+      allowedTCPPorts = [ 8384 22000 ];
+      allowedUDPPorts = [ 22000 21027 ];
+    };
   };
 
   # Auto system upgrade
