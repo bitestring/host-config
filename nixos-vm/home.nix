@@ -97,6 +97,7 @@
           "window.autoDetectColorScheme" = true;
           "vsicons.dontShowNewVersionMessage" = true;
           "diffEditor.experimental.showMoves" = true;
+          "diffEditor.ignoreTrimWhitespace" = false;
           "xml.codeLens.enabled" = true;
           "xml.server.preferBinary" = true;
           "xml.server.binary.path" = "${pkgs.lemminx.outPath}/bin/lemminx";
