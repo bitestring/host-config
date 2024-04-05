@@ -33,7 +33,6 @@
           - nss-mdns
           - avahi
           - avahi-tools
-          - dnscrypt-proxy
           - fail2ban
 
           # cockpit
@@ -58,7 +57,6 @@
       with_items:
         - docker
         - fail2ban
-        - dnscrypt-proxy
         - tuned
         - powertop
         - upower
@@ -78,14 +76,6 @@
           ansible.posix.firewalld:
             zone: home
             service: syncthing
-            permanent: true
-            immediate: true
-            state: enabled
-
-        - name: Configure firewall - Enable DNS for Pi-Hole
-          ansible.posix.firewalld:
-            zone: home
-            service: dns
             permanent: true
             immediate: true
             state: enabled
