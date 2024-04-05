@@ -1,4 +1,4 @@
-version: "3"
+# https://containrrr.dev/watchtower/#quick_start
 services:
   watchtower:
     image: containrrr/watchtower

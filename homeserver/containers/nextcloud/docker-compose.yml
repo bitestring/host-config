@@ -1,20 +1,19 @@
-version: '3.1'
-
+# https://github.com/nextcloud/docker/tree/master/.examples/docker-compose/with-nginx-proxy/postgres/apache
 volumes:
   nextcloud:
   nextcloud-postgres-db:
 
 services:
   db:
-    image: postgres:15
-    restart: always    
+    image: postgres:16
+    restart: always
     volumes:
       - nextcloud-postgres-db:/var/lib/postgresql/data:Z
     environment:
       - POSTGRES_DB=nextcloud_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres # REPLACE Password
-    
+
   nextcloud:
     image: nextcloud:latest
     restart: always
@@ -27,6 +26,7 @@ services:
       - POSTGRES_PASSWORD=postgres # REPLACE Password
       - OVERWRITEPROTOCOL=https
       - OVERWRITEHOST=sweethome-server.local # REPLACE HOST
+    depends_on:
       - db
 
   cron:
