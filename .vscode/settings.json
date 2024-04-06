@@ -4,6 +4,5 @@
     },
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
-    // "ansible.python.interpreterPath": "/nix/store/5k91mg4qjylxbfvrv748smfh51ppjq0g-python3-3.11.6/bin/python"
+    }
 }
