@@ -7,7 +7,6 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Asia/Kolkata
     volumes:
       - ./syncthing-data:/var/syncthing
     network_mode: host
