@@ -54,7 +54,7 @@
           - virt-viewer
           - virt-manager
 
-           # essentials
+            # essentials
           - fish
           - lm_sensors
           - smartmontools
