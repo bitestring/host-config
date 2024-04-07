@@ -40,6 +40,8 @@
           - avahi
           - avahi-tools
           - fail2ban
+          - samba
+          - syncthing
 
           # cockpit
           - pcp
@@ -67,9 +69,27 @@
         - powertop
         - upower
         - avahi
+        - samba
+        - syncthing@{{ ansible_user_id }}
 
     - name: Configure firewall
       block:
+        - name: Configure firewall - Enable mdns
+          ansible.posix.firewalld:
+            zone: home
+            service: mdns
+            permanent: true
+            immediate: true
+            state: enabled
+
+        - name: Configure firewall - Enable Cockpit
+          ansible.posix.firewalld:
+            zone: home
+            service: cockpit
+            permanent: true
+            immediate: true
+            state: enabled
+
         - name: Configure firewall - Disable SSH on public zone
           ansible.posix.firewalld:
             zone: public
@@ -77,6 +97,22 @@
             permanent: true
             immediate: true
             state: disabled
+
+        - name: Configure firewall - Enable SSH on home zone
+          ansible.posix.firewalld:
+            zone: public
+            service: ssh
+            permanent: true
+            immediate: true
+            state: enabled
+
+        - name: Configure firewall - Enable Samba
+          ansible.posix.firewalld:
+            zone: home
+            service: samba
+            permanent: true
+            immediate: true
+            state: enabled
 
         - name: Configure firewall - Enable Syncthing
           ansible.posix.firewalld:
@@ -86,18 +122,10 @@
             immediate: true
             state: enabled
 
-        - name: Configure mdns
+        - name: Configure firewall - Enable Syncthing-GUI
           ansible.posix.firewalld:
             zone: home
-            service: mdns
-            permanent: true
-            immediate: true
-            state: enabled
-
-        - name: Configure firewall - Enable HTTPS for Nextcloud
-          ansible.posix.firewalld:
-            zone: home
-            service: https
+            service: syncthing-gui
             permanent: true
             immediate: true
             state: enabled
