@@ -25,7 +25,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres # REPLACE Password
       - OVERWRITEPROTOCOL=https
-      - OVERWRITEHOST=sweethome-server.local # REPLACE HOST
+      - OVERWRITEHOST=sweethome-server.lan # REPLACE HOST
     depends_on:
       - db
 
@@ -44,8 +44,8 @@ services:
     restart: always
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:z
-      - ./nginx/sweethome-server.local.crt:/etc/nginx/sweethome-server.local.crt:z
-      - ./nginx/sweethome-server.local.key:/etc/nginx/sweethome-server.local.key:z
+      - ./nginx/sweethome-server.lan.crt:/etc/nginx/sweethome-server.lan.crt:z
+      - ./nginx/sweethome-server.lan.key:/etc/nginx/sweethome-server.lan.key:z
     ports:
       - 443:443
     depends_on:
