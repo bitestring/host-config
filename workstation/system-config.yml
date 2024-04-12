@@ -10,31 +10,6 @@
       ansible.builtin.debug:
         msg: Playing system-config.yml as user {{ username }}
 
-    - name: Copy Nvidia configuration for customization
-      become: true
-      ansible.builtin.copy:
-        src: /usr/share/X11/xorg.conf.d/nvidia.conf
-        dest: /etc/X11/xorg.conf.d/nvidia.conf
-        mode: u=rw,g=r,o=r
-        owner: root
-
-    # Enable Nvidia DynamicPowerManagement
-    # http://download.nvidia.com/XFree86/Linux-x86_64/440.31/README/dynamicpowermanagement.html
-    - name: Enable Nvidia Dynamic Power Managment
-      become: true
-      ansible.builtin.copy:
-        dest: "/etc/modprobe.d/nvidia.conf"
-        content: "options nvidia NVreg_DynamicPowerManagement=0x02\n"
-        mode: u=rw,g=r,o=r
-        owner: root
-
-    - name: Create directory for Virtual Machines with CoW disabled
-      ansible.builtin.file:
-        path: ~/Virtual_Machines
-        state: directory
-        attributes: +C
-        recurse: true
-
     - name: Add polkit rule to allow Virt-Manager to manage virtual machines
       become: true
       ansible.builtin.copy:
@@ -99,6 +74,9 @@
 
     - name: Configure firewall
       block:
+        - name: Set default zone to public
+          become: true
+          ansible.builtin.command: firewall-cmd --set-default-zone=public
         - name: Configure firewall - Disable SSH on public zone
           ansible.posix.firewalld:
             zone: public
@@ -106,17 +84,17 @@
             permanent: true
             immediate: true
             state: disabled
-        - name: Configure firewall - Enable Syncthing
+        - name: Configure firewall - Enable Syncthing on home zone
           ansible.posix.firewalld:
             zone: home
             service: syncthing
             permanent: true
             immediate: true
             state: enabled
-        - name: Configure firewall - Enable KDEConnect
+        - name: Configure firewall - Enable Syncthing on libvirt zone
           ansible.posix.firewalld:
-            zone: home
-            service: kdeconnect
+            zone: libvirt
+            service: syncthing
             permanent: true
             immediate: true
             state: enabled
@@ -129,6 +107,7 @@
         state: started
       with_items:
         - cockpit.socket
+        - libvirtd
         - libvirt-guests
         - fail2ban
         - syncthing@{{ ansible_user_id }}

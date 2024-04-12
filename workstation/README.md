@@ -28,7 +28,7 @@ Navigate to the directory where you've cloned this repository and execute follow
 
 Execute the `system-ostree-pre.yml` playbook to remove locally pinned repos and install unpinned rpm-fusion
 
-    $ ansible-playbook --ask-become-pass system-ostree-pre.yml
+    $ ansible-playbook system-ostree-pre.yml
 
 and reboot.
 
@@ -36,7 +36,7 @@ and reboot.
 
 Execute the `system-*.yml` playbook to install core system tools like drivers, shells, virt-manager etc.
 
-    $ ansible-playbook --ask-become-pass system-ostree.yml
+    $ ansible-playbook system-ostree.yml
 
 and reboot.
 

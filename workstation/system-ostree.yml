@@ -14,16 +14,7 @@
       community.general.rpm_ostree_pkg:
         name:
           # drivers
-          - kmodtool
-          - akmods
           - intel-media-driver
-          - akmod-nvidia
-          - xorg-x11-drv-nvidia
-          - xorg-x11-drv-nvidia-cuda
-          - xorg-x11-drv-nvidia-cuda-libs
-          - xorg-x11-drv-nvidia-power
-          - vdpauinfo
-          - libva-vdpau-driver
           - libva-utils
 
           # cockpit
@@ -38,9 +29,6 @@
           - cockpit-networkmanager
           - cockpit-storaged
           - cockpit-sosreport
-
-          # containers
-          - distrobox
 
           # vitualization
           - qemu
@@ -60,7 +48,6 @@
           - smartmontools
           - firewall-config
           - syncthing
-          - nextcloud-client
           - fail2ban
           - fail2ban-firewalld
           - tor
@@ -69,10 +56,6 @@
           - tilix
           - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.7/veracrypt-1.26.7-CentOS-8-x86_64.rpm
         state: present
-
-    # This might not be needed at some point when Silverblue will support the standard way to specify this.
-    - name: Disable Nouveau drivers
-      ansible.builtin.command: rpm-ostree kargs --append=rd.driver.blacklist=nouveau --append=modprobe.blacklist=nouveau --append=nvidia-drm.modeset=1
 
     # Silverblue does not issue TRIM to SSDs automatically if LVM + LUKS is used. Bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539.
     - name: Enable TRIM on LVM + LUKS - Workaround for bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539
