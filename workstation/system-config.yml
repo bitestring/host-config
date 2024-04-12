@@ -106,6 +106,7 @@
         enabled: true
         state: started
       with_items:
+        - powertop
         - cockpit.socket
         - libvirtd
         - libvirt-guests

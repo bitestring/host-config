@@ -45,6 +45,7 @@
             # essentials
           - fish
           - lm_sensors
+          - powertop
           - smartmontools
           - firewall-config
           - syncthing
