@@ -72,6 +72,16 @@
         mode: u=r,g=r,o=r
         owner: root
 
+    - name: Add fail2ban config to jail sshd
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/fail2ban/jail.d/sshd.local
+        content: |
+          [sshd]
+          enabled = true
+        mode: u=r,g=r,o=r
+        owner: root
+
     - name: Configure firewall
       block:
         - name: Set default zone to public
