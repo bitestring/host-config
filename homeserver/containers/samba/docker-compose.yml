@@ -1,0 +1,16 @@
+services:
+  samba:
+    build: .
+    container_name: samba
+    read_only: true
+    network_mode: host
+    environment:
+      - SAMBA_USERNAME=${SAMBA_USERNAME}
+      - SAMBA_PASSWORD=${SAMBA_PASSWORD}
+    tmpfs:
+      - /tmp
+    volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
+      - ./volumes/config:/etc/samba:ro
+      # - <HOST_DIR_TO_SHARE>:<MOUNT_POINT>
