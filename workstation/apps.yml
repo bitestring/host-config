@@ -80,6 +80,7 @@
         - org.gimp.GIMP
         - org.inkscape.Inkscape
         - org.fedoraproject.MediaWriter
+        - org.raspberrypi.rpi-imager
         - org.remmina.Remmina
         - org.kde.ark
         - org.gnome.seahorse.Application
