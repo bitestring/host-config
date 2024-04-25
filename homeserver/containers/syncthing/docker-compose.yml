@@ -8,6 +8,6 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - ./data:/var/syncthing
+      - ${HOST_DIR}:/var/syncthing
     network_mode: host
     restart: unless-stopped
