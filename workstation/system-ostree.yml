@@ -58,6 +58,6 @@
           - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.7/veracrypt-1.26.7-CentOS-8-x86_64.rpm
         state: present
 
-    # Silverblue does not issue TRIM to SSDs automatically if LVM + LUKS is used. Bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539.
+    # Fedora Atomic variants does not issue TRIM to SSDs automatically if LVM + LUKS is used. Bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539.
     - name: Enable TRIM on LVM + LUKS - Workaround for bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539
       ansible.builtin.command: rpm-ostree kargs --append-if-missing=rd.luks.options=discard
