@@ -1,6 +1,6 @@
 # Personal workstation setup - Fedora Silverblue
 
-Personal scripts and Ansible playbooks for configuring a fresh Fedora Silverblue installation
+Ansible playbooks for configuring a fresh Fedora Silverblue installation
 
 ## Step 1 - Update operating system:
 
