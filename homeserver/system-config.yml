@@ -1,0 +1,95 @@
+- name: Play for configuring the host once basic packages are installed
+  hosts: localhost
+  become: false
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      ansible.builtin.debug:
+        msg: Playing system-config.yml as user {{ username }}
+
+    - name: Add fail2ban config to jail sshd
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/fail2ban/jail.d/sshd.local
+        content: |
+          [sshd]
+          enabled = true
+        mode: u=r,g=r,o=r
+        owner: root
+
+    - name: Configure firewall
+      block:
+        - name: Changing default zone
+          become: true
+          shell: |
+            firewall-cmd --set-default-zone=public
+            firewall-cmd --runtime-to-permanent
+
+        - name: Configure firewall - Disable SSH on public zone
+          ansible.posix.firewalld:
+            zone: public
+            service: ssh
+            permanent: true
+            immediate: true
+            state: disabled
+
+        - name: Configure firewall - Enable mdns
+          ansible.posix.firewalld:
+            zone: home
+            service: mdns
+            permanent: true
+            immediate: true
+            state: enabled
+
+        - name: Configure firewall - Enable Cockpit
+          ansible.posix.firewalld:
+            zone: home
+            service: cockpit
+            permanent: true
+            immediate: true
+            state: enabled
+
+        - name: Configure firewall - Enable SSH on home zone
+          ansible.posix.firewalld:
+            zone: public
+            service: ssh
+            permanent: true
+            immediate: true
+            state: enabled
+
+        - name: Configure firewall - Enable Samba
+          ansible.posix.firewalld:
+            zone: home
+            service: samba
+            permanent: true
+            immediate: true
+            state: enabled
+
+        - name: Configure firewall - Enable Syncthing
+          ansible.posix.firewalld:
+            zone: home
+            service: syncthing
+            permanent: true
+            immediate: true
+            state: enabled
+
+        - name: Configure firewall - Enable Syncthing-GUI
+          ansible.posix.firewalld:
+            zone: home
+            service: syncthing-gui
+            permanent: true
+            immediate: true
+            state: enabled
+
+    - name: Start systemd services
+      become: true
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        enabled: true
+        state: started
+      with_items:
+        - cockpit.socket
+        - fail2ban

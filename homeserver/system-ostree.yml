@@ -1,0 +1,55 @@
+- name: Play for layering basic system packages
+  hosts: localhost
+  become: false
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      ansible.builtin.debug:
+        msg: Playing system-ostree.yml as user {{ username }}
+
+    - name: Add Docker CE repository
+      become: true
+      ansible.builtin.get_url:
+        url: https://download.docker.com/linux/fedora/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+        mode: u=r,g=r,o=r
+        owner: root
+
+    - name: Overlay core packages
+      community.general.rpm_ostree_pkg:
+        name:
+          # cockpit
+          - pcp
+          - cockpit
+          - cockpit-system
+          - cockpit-ostree
+          - cockpit-podman
+          - cockpit-machines
+          - cockpit-selinux
+          - cockpit-pcp
+          - cockpit-networkmanager
+          - cockpit-storaged
+          - cockpit-sosreport
+
+          # essentials
+          - fish
+          - lm_sensors
+          - smartmontools
+          - fail2ban
+          - fail2ban-firewalld
+          - pass
+
+          # containers
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    # Fedora Atomic variants does not issue TRIM to SSDs automatically if LVM + LUKS is used. Bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539.
+    - name: Enable TRIM on LVM + LUKS - Workaround for bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539
+      ansible.builtin.command: rpm-ostree kargs --append-if-missing=rd.luks.options=discard
