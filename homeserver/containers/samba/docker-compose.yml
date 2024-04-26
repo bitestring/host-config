@@ -3,6 +3,7 @@ services:
     build: .
     container_name: samba
     read_only: true
+    restart: unless-stopped
     network_mode: host
     environment:
       - SAMBA_USERNAME=${SAMBA_USERNAME}
