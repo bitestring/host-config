@@ -5,6 +5,7 @@ services:
     read_only: true
     restart: unless-stopped
     network_mode: host
+    hostname: ${hostname}
     environment:
       - SAMBA_USERNAME=${SAMBA_USERNAME}
       - SAMBA_PASSWORD=${SAMBA_PASSWORD}
