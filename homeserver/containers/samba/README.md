@@ -60,6 +60,7 @@ nano ./volumes/config/smb.conf
     server min protocol = SMB3
     server signing = mandatory
     server smb encrypt = required
+    socket options = IPTOS_LOWDELAY TCP_NODELAY
 
 [share-name]
     comment = share-name
