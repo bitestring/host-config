@@ -11,4 +11,4 @@ services:
       - PGID=1000
     volumes:
       - ./volumes/config:/var/syncthing/config
-      - ${HOST_DIR}:/var/syncthing
+      - ${HOST_DIR}:${MOUNT_POINT}

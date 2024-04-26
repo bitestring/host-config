@@ -14,4 +14,4 @@ services:
       - /etc/passwd:/etc/passwd:ro
       - /etc/shadow:/etc/shadow:ro
       - ./volumes/config:/etc/samba:ro
-      # - <HOST_DIR_TO_SHARE>:<MOUNT_POINT>
+      - ${HOST_DIR}:${MOUNT_POINT}
