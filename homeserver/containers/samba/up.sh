@@ -1,3 +1,3 @@
-usr=$(secret-tool lookup username SAMBA_CREDS)
-pswd=$(secret-tool lookup password SAMBA_CREDS)
+usr=$(pass show SAMBA_USERNAME)
+pswd=$(pass show SAMBA_PASSWORD)
 SAMBA_USERNAME=$usr SAMBA_PASSWORD=$pswd sudo -E docker compose up --build --detach
