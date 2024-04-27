@@ -69,7 +69,7 @@ nano ./volumes/config/smb.conf
     browseable = yes
     create mask = 0640
     directory mask = 0755
-    write list = user
+    write list = <USERNAME>
 ```
 
 ## Step 3: Launch Samba
