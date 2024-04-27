@@ -48,6 +48,7 @@
           - powertop
           - smartmontools
           - firewall-config
+          - fuse-sshfs
           - syncthing
           - fail2ban
           - fail2ban-firewalld
