@@ -67,7 +67,7 @@ nano ./volumes/config/smb.conf
     path = /mnt/<EXAMPLE>/
     writeable = yes
     browseable = yes
-    create mask = 0644
+    create mask = 0640
     directory mask = 0755
     write list = user
 ```
