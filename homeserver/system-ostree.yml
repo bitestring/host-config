@@ -43,6 +43,7 @@
           - pass
 
           # containers
+          # Docker - https://docs.docker.com/engine/install/fedora/
           - docker-ce
           - docker-ce-cli
           - containerd.io
