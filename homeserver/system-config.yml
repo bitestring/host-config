@@ -60,14 +60,6 @@
             immediate: true
             state: enabled
 
-        - name: Configure firewall - Enable Samba
-          ansible.posix.firewalld:
-            zone: home
-            service: samba
-            permanent: true
-            immediate: true
-            state: enabled
-
         - name: Configure firewall - Enable Syncthing
           ansible.posix.firewalld:
             zone: home
