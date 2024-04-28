@@ -40,4 +40,8 @@ This playbook applies custom configurations, enables systemd services and other 
 
     $ ansible-playbook --ask-become-pass system-config.yml
 
+## Step 7 - Apply custom config.txt settings:
+
+Refer `RPi-custom-config.txt` to tweak certain settings.
+
 Now enjoy Fedora!
