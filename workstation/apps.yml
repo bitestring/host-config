@@ -54,21 +54,33 @@
         method: user
         remote: flathub
       with_items:
+        # Essentials
+        - org.keepassxc.KeePassXC
+        - org.fedoraproject.MediaWriter
+        - org.raspberrypi.rpi-imager
+        - org.gnome.seahorse.Application
+
+        # Internet
         - io.gitlab.librewolf-community
         - org.gnome.Epiphany
         - com.brave.Browser
         - org.torproject.torbrowser-launcher
         - org.onionshare.OnionShare
+        - org.qbittorrent.qBittorrent
+        - org.remmina.Remmina
+
+        # Mail & Messaging
         - org.mozilla.Thunderbird
         - ch.protonmail.protonmail-bridge
-        - org.keepassxc.KeePassXC
         - im.riot.Riot
         - org.signal.Signal
-        - org.qbittorrent.qBittorrent
+
+        # Knowledge
         - com.calibre_ebook.calibre
-        - org.gnucash.GnuCash
-        - com.github.xournalpp.xournalpp
-        - org.kde.okular
+        - org.kiwix.desktop
+        - org.zotero.Zotero
+
+        # Multimedia
         - info.mumble.Mumble
         - org.kde.kdenlive
         - org.tenacityaudio.Tenacity
@@ -79,10 +91,13 @@
         - org.gpodder.gpodder
         - org.gimp.GIMP
         - org.inkscape.Inkscape
-        - org.fedoraproject.MediaWriter
-        - org.raspberrypi.rpi-imager
-        - org.remmina.Remmina
+
+        # Office
+        - com.github.xournalpp.xournalpp
+        - org.kde.okular
+        - org.gnucash.GnuCash
+
+        # Other
         - org.kde.ark
-        - org.gnome.seahorse.Application
         - com.usebottles.bottles
         - io.podman_desktop.PodmanDesktop
