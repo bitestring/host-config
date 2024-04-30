@@ -1,7 +1,7 @@
-# Synthing
+# Syncthing
 
 
-## Step 1: Create a volume to store Synthing config files
+## Step 1: Create a volume to store Syncthing config files
 
 ```
 mkdir --parents ./volumes/config/
