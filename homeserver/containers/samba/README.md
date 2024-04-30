@@ -1,4 +1,4 @@
-# Synthing
+# Samba
 
 ## Step 1: Create secrets using `pass` to store Samba credentials
 
@@ -76,4 +76,38 @@ nano ./volumes/config/smb.conf
 
 ```
 ./up.sh
+```
+
+
+# Mounting Samba Share
+
+To auto-mount a Samba share on the local network, add the following entry to `/etc/fstab`
+
+
+```
+//<HOSTNAME>.lan/<SHARENAME> /mnt/samba/<SHARENAME> cifs nofail,_netdev,x-systemd.automount,uid=<USERNAME>,gid=<USERNAME>,credentials=/var/home/<USERNAME>/.smbcred 0 0
+```
+
+Be sure to create a Samba credential file in `/var/home/<USERNAME>/.smbcred`
+
+Example credential file
+
+```
+username=<USERNAME>
+password=<PASSWORD>
+domain=SAMBA
+```
+
+Make sure the file is readable only by `root`
+
+```
+sudo chown root:root ~/.smbcred
+sudo chmod u=rw,g=,o= ~/.smbcred
+```
+
+Now reload systemd daemon and mount
+
+```
+sudo systemctl daemon-reload
+sudo mount -a -t cifs
 ```
