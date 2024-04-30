@@ -28,53 +28,33 @@
             firewall-cmd --set-default-zone=public
             firewall-cmd --runtime-to-permanent
 
-        - name: Configure firewall - Disable SSH on public zone
+        - name: Configure firewall to disable services on zone "public"
+          become: true
           ansible.posix.firewalld:
             zone: public
-            service: ssh
+            service: "{{ item }}"
             permanent: true
             immediate: true
             state: disabled
+          with_items:
+            - ssh
+            - mdns
 
-        - name: Configure firewall - Enable mdns
+        - name: Configure firewall to allow common services on zone "home"
+          become: true
           ansible.posix.firewalld:
             zone: home
-            service: mdns
+            service: "{{ item }}"
             permanent: true
             immediate: true
             state: enabled
-
-        - name: Configure firewall - Enable Cockpit
-          ansible.posix.firewalld:
-            zone: home
-            service: cockpit
-            permanent: true
-            immediate: true
-            state: enabled
-
-        - name: Configure firewall - Enable SSH on home zone
-          ansible.posix.firewalld:
-            zone: public
-            service: ssh
-            permanent: true
-            immediate: true
-            state: enabled
-
-        - name: Configure firewall - Enable Syncthing
-          ansible.posix.firewalld:
-            zone: home
-            service: syncthing
-            permanent: true
-            immediate: true
-            state: enabled
-
-        - name: Configure firewall - Enable Syncthing-GUI
-          ansible.posix.firewalld:
-            zone: home
-            service: syncthing-gui
-            permanent: true
-            immediate: true
-            state: enabled
+          with_items:
+            - mdns
+            - cockpit
+            - ssh
+            - samba
+            - syncthing
+            - syncthing-gui
 
     - name: Start systemd services
       become: true
@@ -84,4 +64,5 @@
         state: started
       with_items:
         - cockpit.socket
+        - sshd.socket
         - fail2ban

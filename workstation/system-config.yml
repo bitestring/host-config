@@ -90,29 +90,41 @@
             firewall-cmd --set-default-zone=public
             firewall-cmd --runtime-to-permanent
 
-        - name: Configure firewall - Disable SSH on public zone
+        - name: Configure firewall to disable services on zone "public"
+          become: true
           ansible.posix.firewalld:
             zone: public
-            service: ssh
+            service: "{{ item }}"
             permanent: true
             immediate: true
             state: disabled
+          with_items:
+            - ssh
+            - mdns
 
-        - name: Configure firewall - Enable Syncthing on home zone
+        - name: Configure firewall to allow common services on zone "home"
+          become: true
           ansible.posix.firewalld:
             zone: home
-            service: syncthing
+            service: "{{ item }}"
             permanent: true
             immediate: true
             state: enabled
+          with_items:
+            - mdns
+            - ssh
+            - syncthing
 
-        - name: Configure firewall - Enable Syncthing on libvirt zone
+        - name: Configure firewall to allow common services on zone "libvirt"
+          become: true
           ansible.posix.firewalld:
             zone: libvirt
-            service: syncthing
+            service: "{{ item }}"
             permanent: true
             immediate: true
             state: enabled
+          with_items:
+            - syncthing
 
     - name: Start systemd services
       become: true
