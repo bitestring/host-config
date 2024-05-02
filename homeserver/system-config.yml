@@ -63,6 +63,7 @@
         enabled: true
         state: started
       with_items:
+        - tuned
         - powertop
         - cockpit.socket
         - sshd.socket

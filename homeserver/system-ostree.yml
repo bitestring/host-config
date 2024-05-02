@@ -37,6 +37,7 @@
           # essentials
           - fish
           - lm_sensors
+          - tuned
           - powertop
           - smartmontools
           - fail2ban
