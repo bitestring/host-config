@@ -37,6 +37,7 @@
           # essentials
           - fish
           - lm_sensors
+          - powertop
           - smartmontools
           - fail2ban
           - fail2ban-firewalld

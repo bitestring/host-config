@@ -63,6 +63,7 @@
         enabled: true
         state: started
       with_items:
+        - powertop
         - cockpit.socket
         - sshd.socket
         - fail2ban
