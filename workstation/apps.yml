@@ -91,6 +91,7 @@
         - org.gpodder.gpodder
         - org.gimp.GIMP
         - org.inkscape.Inkscape
+        - org.leocad.LeoCAD
 
         # Office
         - com.github.xournalpp.xournalpp
