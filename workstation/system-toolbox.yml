@@ -24,6 +24,7 @@
       ansible.builtin.dnf:
         name:
           - fish
+          - pip
           - clamav
           - ffmpeg
           - ImageMagick
@@ -35,7 +36,6 @@
         name: "@Multimedia"
         state: present
 
-    # youtube-dl project seems to be dead. hence installing the popular fork.
     - name: Install yt-dlp
       become: true
       ansible.builtin.pip:
