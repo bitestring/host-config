@@ -5,3 +5,8 @@ up:
 .PHONY: down
 down:
 	sudo docker compose down
+
+.PHONY: update
+update:
+	sudo docker compose pull
+	sudo docker compose up --detach

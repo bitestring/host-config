@@ -8,3 +8,10 @@ up:
 .PHONY: down
 down:
 	sudo docker compose down
+
+
+.PHONY: update
+update:
+	sudo docker compose down --rmi all
+	sudo docker compose build --pull --no-cache
+	sudo docker compose up --detach
