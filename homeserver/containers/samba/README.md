@@ -75,7 +75,7 @@ nano ./volumes/config/smb.conf
 ## Step 3: Launch Samba
 
 ```
-./up.sh
+make up
 ```
 
 

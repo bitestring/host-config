@@ -152,6 +152,7 @@
     wget
     curl
     git
+    gnumake
     docker-compose
     bindfs
     sysprof

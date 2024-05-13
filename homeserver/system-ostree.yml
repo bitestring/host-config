@@ -43,6 +43,7 @@
           - fail2ban
           - fail2ban-firewalld
           - pass
+          - make
 
           # containers
           # Docker - https://docs.docker.com/engine/install/fedora/

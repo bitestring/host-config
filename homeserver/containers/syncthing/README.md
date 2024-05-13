@@ -24,5 +24,5 @@ MOUNT_POINT=/mnt/<EXAMPLE>
 ## Step 3: Launch Syncthing
 
 ```
-./up.sh
+make up
 ```
