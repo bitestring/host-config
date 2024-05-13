@@ -13,4 +13,4 @@ down:
 update:
 	sudo docker compose down --rmi all
 	sudo docker compose build --pull --no-cache
-	sudo docker compose up --detach
+	SAMBA_USERNAME="$(USR)" SAMBA_PASSWORD="$(PSWD)" sudo -E docker compose up --detach
