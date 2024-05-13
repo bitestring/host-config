@@ -1,16 +1,17 @@
-USR := $(shell pass show SAMBA_USERNAME)
-PSWD := $(shell pass show SAMBA_PASSWORD)
+.EXPORT_ALL_VARIABLES:
+SAMBA_USERNAME := $(shell pass show SAMBA_USERNAME)
+SAMBA_PASSWORD := $(shell pass show SAMBA_PASSWORD)
 
 .PHONY: up
 up:
-	SAMBA_USERNAME="$(USR)" SAMBA_PASSWORD="$(PSWD)" sudo -E docker compose up --build --detach
+	sudo -E docker compose up --build --detach
 
 .PHONY: down
 down:
-	sudo docker compose down
+	sudo -E docker compose down
 
 .PHONY: update
 update:
-	sudo docker compose down --rmi all
-	sudo docker compose build --pull --no-cache
-	SAMBA_USERNAME="$(USR)" SAMBA_PASSWORD="$(PSWD)" sudo -E docker compose up --detach
+	sudo -E docker compose down --rmi all
+	sudo -E docker compose build --pull --no-cache
+	sudo -E docker compose up --detach
