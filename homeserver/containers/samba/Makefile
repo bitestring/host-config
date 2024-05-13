@@ -9,7 +9,6 @@ up:
 down:
 	sudo docker compose down
 
-
 .PHONY: update
 update:
 	sudo docker compose down --rmi all
