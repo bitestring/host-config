@@ -13,7 +13,7 @@
   # Enable Nix experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Bootloader.
+  # Bootloader
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
@@ -226,7 +226,7 @@
   networking.firewall = {
     enable = true;
     interfaces."enp1s0" = {
-      allowedTCPPorts = [ 8384 22000 ];
+      allowedTCPPorts = [ 22000 ];
       allowedUDPPorts = [ 22000 21027 ];
     };
   };
