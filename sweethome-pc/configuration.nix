@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, inputs, host, user, hardware, ... }:
+{ config, pkgs, lib, inputs, host, user, ... }:
 
 {
   imports =
@@ -13,19 +13,24 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Hardware
   hardware.enableAllFirmware = true;
 
-  # Bootloader.
+  # Bootloader
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Secureboot
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
   };
 
+  # Kernel
   #boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Filesystems
   fileSystems = {
     "/".options = [ "compress=zstd" "relatime" ];
     "/mnt/WD-SSD".options = [ "compress=zstd" "relatime" ];
@@ -88,6 +93,9 @@
     };
   };
 
+  # Fingerprint
+  services.fprintd.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -134,6 +142,37 @@
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    # Drivers
+    intel-media-driver
+
+    # Essentials
+    sbctl
+    cifs-utils
+    smartmontools
+    dig
+    wget
+    git
+    veracrypt
+    gnome.gnome-tweaks
+    gnome.gnome-software
+  ];
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+
+  # Virtualisation
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
+  # List services that you want to enable:
   services.fwupd.enable = true;
   services.fstrim.enable = true;
   services.btrfs.autoScrub = {
@@ -146,33 +185,6 @@
   services.flatpak.enable = true;
   services.cockpit.enable = true;
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    sbctl
-    cifs-utils
-    smartmontools
-    dig
-    git
-    veracrypt
-    gnome.gnome-software
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
   services.syncthing = {
     enable = true;
     user = user.name;
@@ -183,13 +195,19 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  # Network Configuration
   services.resolved = {
     enable = true;
     dnssec = "true";
     domains = [ "~." ];
   };
 
-  # Open ports in the firewall.
+  # WireGuard/VPN
+  networking.wg-quick.interfaces = {
+    "wg0".configFile = "/home/${user.name}/.wg0.conf";
+  };
+
+  # Firewall
   networking.nftables.enable = true;
   networking.firewall = {
     enable = true;
@@ -213,8 +231,13 @@
     };
   };
 
-  networking.wg-quick.interfaces = {
-    "wg0".configFile = "/home/${user.name}/.wg0.conf";
+  # Security
+  security = {
+    # Enable AppArmor
+    apparmor = {
+      enable = true;
+      killUnconfinedConfinables = true;
+    };
   };
 
   # Auto system upgrade

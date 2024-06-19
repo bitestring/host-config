@@ -24,7 +24,6 @@
     gnomeExtensions.dash-to-dock
 
     # apps
-    tilix
   ];
 
   programs = {
