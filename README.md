@@ -21,3 +21,15 @@ Ansible playbooks, Nix Flakes and other scripts to provision my personal worksta
     $ nix shell nixpkgs#pkg1
 
     $ nix shell nixpkgs#{pkg1,pkg2}
+
+
+# Ansible Guide
+
+## Install Ansible Collections:
+
+    $ ansible-galaxy collection install -r requirements.yml
+
+
+## Run Playbook
+
+    $ ansible-playbook <Playbook.yml>
