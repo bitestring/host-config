@@ -38,7 +38,6 @@
     lemminx # XML language server - Required by RedHat XML extension for VSCode
 
     # apps
-    tilix
     distrobox
   ];
 
