@@ -156,6 +156,8 @@
     docker-compose
     bindfs
     sysprof
+    gnome.gnome-tweaks
+    gnome.gnome-software
   ];
 
   virtualisation = {
