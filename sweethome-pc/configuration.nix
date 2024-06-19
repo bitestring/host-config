@@ -13,9 +13,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Hardware
-  hardware.enableAllFirmware = true;
-
   # Bootloader
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -48,6 +45,19 @@
 
   # Swap
   zramSwap.enable = true;
+
+  # Hardware & Drivers
+  hardware.enableAllFirmware = true;
+
+  # Video acceleration
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      libvdpau-va-gl
+    ];
+  };
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
 
   networking.hostName = host.name; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -145,10 +155,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # Drivers
-    intel-media-driver
-
-    # Essentials
     sbctl
     cifs-utils
     smartmontools
