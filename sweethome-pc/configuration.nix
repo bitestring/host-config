@@ -154,7 +154,8 @@
     };
   };
 
-  # Unlock Gnome Keyring upon login
+  # Enable GNOME Keyring
+  services.gnome.gnome-keyring.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229

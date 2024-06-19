@@ -142,8 +142,9 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
-  
-  # Unlock Gnome Keyring upon login
+
+  # Enable GNOME Keyring
+  services.gnome.gnome-keyring.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
 
   # List packages installed in system profile. To search, run:
@@ -202,7 +203,6 @@
     qemuGuest.enable = true;
     spice-vdagentd.enable = true;
     flatpak.enable = true;
-    gnome.gnome-keyring.enable = true;
     sysprof.enable = true;
     tor = {
       enable = true;
