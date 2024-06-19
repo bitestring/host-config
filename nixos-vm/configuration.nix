@@ -142,6 +142,9 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
   };
+  
+  # Unlock Gnome Keyring upon login
+  security.pam.services.gdm.enableGnomeKeyring = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -191,9 +194,6 @@
     # Enable AppArmor
     apparmor.enable = true;
     apparmor.killUnconfinedConfinables = true;
-
-    # Enable GNOME Keyring
-    pam.services.gdm.enableGnomeKeyring = true;
   };
 
   # List services that you want to enable:
