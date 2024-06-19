@@ -225,18 +225,24 @@
     interfaces = {
       "wlo1" = {
         allowedTCPPorts = [
-          22000
+          22000 # Syncthing
         ];
         allowedUDPPorts = [
-          22000
-          21027
+          22000 # Syncthing
+          21027 # Syncthing
         ];
       };
       "virbr0" = {
         allowedTCPPorts = [
-          22000
+          22000 # Syncthing
         ];
-        allowedUDPPorts = [ 53 67 547 22000 21027 ]; # DNS, DHCP Server, DHCPv6 Server, Syncthing
+        allowedUDPPorts = [
+          53 # DNS
+          67 # DHCP Server
+          547 # DHCPv6 Server
+          22000 # Syncthing
+          21027 # Syncthing
+        ];
       };
     };
   };
