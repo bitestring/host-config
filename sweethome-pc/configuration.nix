@@ -160,6 +160,7 @@
     sbctl
     cifs-utils
     smartmontools
+    lm_sensors
     dig
     gnumake
     wget
