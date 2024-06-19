@@ -204,16 +204,11 @@
     domains = [ "~." ];
   };
 
-  # WireGuard/VPN
-  networking.wg-quick.interfaces = {
-    "wg0".configFile = "/home/${user.name}/.wg0.conf";
-  };
-
   # Firewall
   networking.nftables.enable = true;
   networking.firewall = {
     enable = true;
-    checkReversePath = true;
+    checkReversePath = "loose";
     interfaces = {
       "wlo1" = {
         allowedTCPPorts = [
