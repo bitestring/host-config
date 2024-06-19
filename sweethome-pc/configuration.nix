@@ -153,7 +153,9 @@
     cifs-utils
     smartmontools
     dig
+    gnumake
     wget
+    curl
     git
     veracrypt
     gnome.gnome-tweaks
