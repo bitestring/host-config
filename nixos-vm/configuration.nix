@@ -99,7 +99,6 @@
     # Enable the GNOME Desktop Environment.
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
-    # displayManager.autoLogin.user = userName;
 
     # Configure keymap in X11
     xkb = {
@@ -141,6 +140,14 @@
     description = user.description;
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
+  };
+
+  # Enable automatic login for the user.
+  services.displayManager = {
+    autoLogin = {
+      # enable = true;
+      user = user.name;
+    };
   };
 
   # Enable GNOME Keyring
