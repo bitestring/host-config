@@ -36,4 +36,4 @@ Nix Flakes, Ansible Playbooks, and other scripts to provision my personal workst
 
 ## Run Playbook
 
-    $ ansible-playbook <Playbook.yml>
+    $ ansible-playbook --ask-become-pass <Playbook.yml>
