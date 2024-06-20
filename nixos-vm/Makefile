@@ -6,6 +6,10 @@ update:
 	git commit -m "NixOS Flakes update"
 	git push
 
+.PHONY: boot
+boot:
+	sudo nixos-rebuild boot --flake '.#'
+
 .PHONY: switch
 switch:
 	sudo nixos-rebuild switch --flake '.#'

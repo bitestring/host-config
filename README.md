@@ -6,6 +6,10 @@ Ansible playbooks, Nix Flakes and other scripts to provision my personal worksta
 
     $ make update
 
+## Build the new configuration for next boot
+
+    $ make boot
+
 ## Build and activate the new configuration
 
     $ make switch
