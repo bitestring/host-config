@@ -143,12 +143,7 @@
   };
 
   # Enable automatic login for the user.
-  services.displayManager = {
-    autoLogin = {
-      # enable = true;
-      user = user.name;
-    };
-  };
+  # services.displayManager.autoLogin.user = user.name;
 
   # Enable GNOME Keyring
   services.gnome.gnome-keyring.enable = true;
