@@ -174,6 +174,10 @@
     gnome.gnome-software
   ];
 
+  # Virtualisation
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -182,9 +186,8 @@
   #   enableSSHSupport = true;
   # };
 
-  # Virtualisation
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
 
   # List services that you want to enable:
   services.fwupd.enable = true;
@@ -198,16 +201,12 @@
   };
   services.flatpak.enable = true;
   services.cockpit.enable = true;
-
   services.syncthing = {
     enable = true;
     user = user.name;
     dataDir = "/home/${user.name}/"; # Default folder for new synced folders
     configDir = "/home/${user.name}/.config/syncthing"; # Folder for Syncthing's settings and keys
   };
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Network Configuration
   services.resolved = {

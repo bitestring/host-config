@@ -108,7 +108,7 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -154,7 +154,6 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
-    spice-vdagent
     wget
     curl
     git
@@ -185,6 +184,9 @@
     };
   };
 
+  services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -193,46 +195,52 @@
   #   enableSSHSupport = true;
   # };
 
-  security = {
-    # Enable AppArmor
-    apparmor.enable = true;
-    apparmor.killUnconfinedConfinables = true;
-  };
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
 
   # List services that you want to enable:
-  services = {
-    fstrim.enable = true;
-    qemuGuest.enable = true;
-    spice-vdagentd.enable = true;
-    flatpak.enable = true;
-    sysprof.enable = true;
-    tor = {
-      enable = true;
-      client.enable = true;
-    };
-    syncthing = {
-      enable = true;
-      user = user.name;
-      dataDir = "/home/${user.name}/Syncthing-Shared";
-      configDir = "/home/${user.name}/.config/syncthing";
-    };
-    cockpit = {
-      enable = true;
-      port = 9090;
-    };
+  services.fstrim.enable = true;
+  services.btrfs.autoScrub = {
+    enable = true;
+    fileSystems = [
+      "/"
+    ];
   };
+  services.flatpak.enable = true;
+  services.sysprof.enable = true;
+  services.tor = {
+    enable = true;
+    client.enable = true;
+  };
+  services.syncthing = {
+    enable = true;
+    user = user.name;
+    dataDir = "/home/${user.name}/Syncthing-Shared";
+    configDir = "/home/${user.name}/.config/syncthing";
+  };
+  services.cockpit.enable = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Firewall config
   networking.nftables.enable = true;
   networking.firewall = {
     enable = true;
     interfaces."enp1s0" = {
-      allowedTCPPorts = [ 22000 ];
-      allowedUDPPorts = [ 22000 21027 ];
+      allowedTCPPorts = [
+        22000 # Syncthing
+      ];
+      allowedUDPPorts = [
+        22000 # Syncthing
+        21027 # Syncthing
+      ];
     };
+  };
+
+  # Security
+  security = {
+    # Enable AppArmor
+    apparmor.enable = true;
+    apparmor.killUnconfinedConfinables = true;
   };
 
   # Auto system upgrade
