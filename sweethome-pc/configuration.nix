@@ -109,9 +109,6 @@
     };
   };
 
-  # Fingerprint
-  # services.fprintd.enable = true;
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -148,6 +145,9 @@
 
   # Enable automatic login for the user.
   # services.displayManager.autoLogin.user = user.name;
+
+  # Fingerprint
+  # services.fprintd.enable = true;
 
   # Enable GNOME Keyring
   services.gnome.gnome-keyring.enable = true;
