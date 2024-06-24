@@ -9,13 +9,13 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  boot.initrd.luks.devices."luks-5161d718-7b7b-43c2-b3dc-8489097c66cd" = {
-    device = "/dev/disk/by-uuid/5161d718-7b7b-43c2-b3dc-8489097c66cd";
+  boot.initrd.luks.devices."luks-c962db60-4a4c-4f25-b46a-4c4b68f7e59e" = {
+    device = "/dev/disk/by-uuid/c962db60-4a4c-4f25-b46a-4c4b68f7e59e";
     allowDiscards = true;
   };
 
@@ -24,19 +24,20 @@
     allowDiscards = true;
   };
 
+  fileSystems."/boot" =
+    {
+      device = "/dev/disk/by-uuid/F4AD-1112";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/3838f577-fc17-454e-a9f6-663c87053c7c";
+      device = "/dev/disk/by-uuid/0efbd7b6-ab51-4923-a03b-004fe273e405";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/6CD9-32D7";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
 
   fileSystems."/mnt/WD-SSD" =
     {
