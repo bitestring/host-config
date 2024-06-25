@@ -1,0 +1,43 @@
+# This playbook is supposed to be played inside a Toolbox or Distrobox container
+- name: Play for installing extra tools inside a Toolbox
+  hosts: localhost
+  become: false
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      ansible.builtin.debug:
+        msg: Playing system-toolbox.yml as user {{ username }}
+
+    - name: Install RPMFusion repository
+      become: true
+      ansible.builtin.shell: dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+
+    - name: Enable AppStream metadata for RPMFusion
+      become: true
+      ansible.builtin.command: dnf groupupdate core -y
+
+    - name: Install essential packages
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - fish
+          - pip
+          - clamav
+          - ffmpeg
+          - ImageMagick
+        state: present
+
+    - name: Install multimedia codecs
+      become: true
+      ansible.builtin.dnf:
+        name: "@Multimedia"
+        state: present
+
+    - name: Install yt-dlp
+      become: true
+      ansible.builtin.pip:
+        name: yt-dlp
+        executable: pip3

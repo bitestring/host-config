@@ -1,0 +1,64 @@
+- name: Play for layering basic system packages
+  hosts: localhost
+  become: false
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      ansible.builtin.debug:
+        msg: Playing system-ostree.yml as user {{ username }}
+
+    - name: Overlay core packages
+      community.general.rpm_ostree_pkg:
+        name:
+          # drivers
+          - intel-media-driver
+          - libva-utils
+
+          # cockpit
+          - pcp
+          - cockpit
+          - cockpit-system
+          - cockpit-ostree
+          - cockpit-podman
+          - cockpit-machines
+          - cockpit-selinux
+          - cockpit-pcp
+          - cockpit-networkmanager
+          - cockpit-storaged
+          - cockpit-sosreport
+
+          # vitualization
+          - qemu
+          - qemu-kvm
+          - libvirt-client
+          - libvirt-nss
+          - libvirt-daemon-kvm
+          - libvirt-daemon-config-network
+          - libvirt-dbus
+          - virt-install
+          - virt-viewer
+          - virt-manager
+
+            # essentials
+          - fish
+          - lm_sensors
+          - powertop
+          - smartmontools
+          - firewall-config
+          - fuse-sshfs
+          - syncthing
+          - fail2ban
+          - fail2ban-firewalld
+          - tor
+          - openssl
+          - wireshark
+          - tilix
+          - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.7/veracrypt-1.26.7-CentOS-8-x86_64.rpm
+        state: present
+
+    # Fedora Atomic variants does not issue TRIM to SSDs automatically if LVM + LUKS is used. Bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539.
+    - name: Enable TRIM on LVM + LUKS - Workaround for bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539
+      ansible.builtin.command: rpm-ostree kargs --append-if-missing=rd.luks.options=discard
