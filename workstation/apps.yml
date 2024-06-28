@@ -27,12 +27,13 @@
         remote: flathub
       with_items:
         # Essentials
-        - org.mozilla.firefox
-        - org.videolan.VLC
         - org.keepassxc.KeePassXC
-        - io.gitlab.librewolf-community
+        - org.videolan.VLC
 
         # Internet
+        - org.mozilla.firefox
+        - io.gitlab.librewolf-community
+        - org.gnome.Epiphany
         - com.brave.Browser
         - org.qbittorrent.qBittorrent
         - org.remmina.Remmina
