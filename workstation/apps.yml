@@ -68,5 +68,6 @@
 
         # Utilities
         - com.github.tchx84.Flatseal
+        - org.gnome.seahorse.Application
         - org.fedoraproject.MediaWriter
         - org.raspberrypi.rpi-imager
