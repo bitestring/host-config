@@ -33,8 +33,9 @@
         # Internet
         - org.mozilla.firefox
         - io.gitlab.librewolf-community
-        - org.gnome.Epiphany
+        - org.torproject.torbrowser-launcher
         - com.brave.Browser
+        - org.gnome.Epiphany
         - org.qbittorrent.qBittorrent
         - org.remmina.Remmina
 
