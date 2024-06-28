@@ -1,31 +1,4 @@
-Nix Flakes, Ansible Playbooks, and other scripts to provision my personal workstation and servers with apps and custom configuration.
-
-# NixOS Makefile Guide
-
-## Update Flakes and Rebuild
-
-    $ make update
-
-## Build the new configuration for next boot
-
-    $ make boot
-
-## Build and activate the new configuration
-
-    $ make switch
-
-## Run Garbage Collection
-
-    $ make gc
-
-# NixOS Ephemeral Shells
-
-**Examples**
-
-    $ nix shell nixpkgs#pkg1
-
-    $ nix shell nixpkgs#{pkg1,pkg2}
-
+Ansible Playbooks, Nix Flakes and other scripts to provision my personal workstation and servers with apps and custom configuration.
 
 # Ansible Guide
 
@@ -37,3 +10,6 @@ Nix Flakes, Ansible Playbooks, and other scripts to provision my personal workst
 ## Run Playbook
 
     $ ansible-playbook --ask-become-pass <Playbook.yml>
+
+
+
