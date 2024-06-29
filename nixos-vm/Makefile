@@ -1,11 +1,13 @@
 .PHONY: update
 update:
+    git stash
 	nix flake update
 	sudo nixos-rebuild boot --flake '.#'
 	git add flake.lock
 	git commit -m "NixOS Flakes update"
 	git pull --rebase
 	git push
+	git stash pop
 
 .PHONY: boot
 boot:
