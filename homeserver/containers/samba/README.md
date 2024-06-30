@@ -85,10 +85,10 @@ To auto-mount a Samba share on the local network, add the following entry to `/e
 
 
 ```
-//<HOSTNAME>.lan/<SHARENAME> /mnt/samba/<SHARENAME> cifs nofail,_netdev,x-systemd.automount,uid=<USERNAME>,gid=<USERNAME>,credentials=/var/home/<USERNAME>/.smbcred 0 0
+//<HOSTNAME>.lan/<SHARENAME> /mnt/samba/<SHARENAME> cifs nofail,_netdev,x-systemd.automount,uid=<USERNAME>,gid=<USERNAME>,credentials=/home/<USERNAME>/.smbcred 0 0
 ```
 
-Be sure to create a Samba credential file in `/var/home/<USERNAME>/.smbcred`
+Be sure to create a Samba credential file in `/home/<USERNAME>/.smbcred`
 
 Example credential file
 
