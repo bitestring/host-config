@@ -57,6 +57,8 @@
           - wireshark
           - gnome-console
           - gnome-tweaks
+          - gnome-shell-extension-system-monitor
+          - gnome-shell-extension-drive-menu
           - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.7/veracrypt-1.26.7-CentOS-8-x86_64.rpm
         state: present
 
