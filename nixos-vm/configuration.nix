@@ -161,7 +161,7 @@
     docker-compose
     bindfs
     sysprof
-    gnome.gnome-tweaks
+    gnome-tweaks
     gnome.gnome-software
   ];
 
