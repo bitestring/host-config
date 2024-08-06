@@ -25,3 +25,7 @@ gc:
 .PHONY: repair
 repair:
 	sudo nix-store --repair --verify --check-contents
+
+.PHONY: ls
+ls:
+	sudo nix-env --list-generations --profile /nix/var/nix/profiles/system

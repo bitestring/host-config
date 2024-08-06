@@ -24,6 +24,10 @@ NixOS configuration for development.
 
     $ make repair
 
+## List all system generations
+
+    $ make ls
+
 # NixOS Ephemeral Shells
 
 **Examples**
