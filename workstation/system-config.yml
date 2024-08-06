@@ -139,3 +139,4 @@
         - libvirt-guests
         - fail2ban
         - syncthing@{{ ansible_user_id }}
+        - tor
