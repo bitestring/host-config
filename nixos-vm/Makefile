@@ -21,3 +21,7 @@ switch:
 gc:
 	sudo nix-collect-garbage --delete-older-than 30d
 	nix-collect-garbage --delete-older-than 30d
+
+.PHONY: repair
+repair:
+	sudo nix-store --repair --verify --check-contents

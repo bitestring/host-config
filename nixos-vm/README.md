@@ -20,6 +20,10 @@ NixOS configuration for development.
 
     $ make gc
 
+## Repair Nix Store
+
+    $ make repair
+
 # NixOS Ephemeral Shells
 
 **Examples**
