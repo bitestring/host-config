@@ -64,8 +64,7 @@
         enable = true;
         package = pkgs.vscodium;
         extensions = [
-          (vsx.open-vsx.ms-vscode.makefile-tools.overrideAttrs (_: { sourceRoot = "extension"; }))
-          # vsx.open-vsx.ms-vscode.makefile-tools
+          vsx.open-vsx.ms-vscode.makefile-tools
           vsx.open-vsx.ms-python.python
           vsx.open-vsx.redhat.vscode-xml
           vsx.open-vsx.redhat.vscode-yaml
@@ -78,7 +77,7 @@
           vsx.open-vsx.jnoortheen.nix-ide
           vsx.open-vsx.haskell.haskell
           vsx.open-vsx.justusadam.language-haskell
-          vsx.open-vsx.rust-lang.rust-analyzer
+          vsx.open-vsx-release.rust-lang.rust-analyzer
         ];
         userSettings = {
           "extensions.autoUpdate" = false;
