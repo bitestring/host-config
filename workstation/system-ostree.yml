@@ -55,6 +55,7 @@
           - tor
           - openssl
           - wireshark
+          - android-tools
           - gnome-console
           - gnome-tweaks
           - gnome-shell-extension-system-monitor
