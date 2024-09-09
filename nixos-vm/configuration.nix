@@ -161,7 +161,7 @@
     bindfs
     sysprof
     gnome-tweaks
-    gnome.gnome-software
+    gnome-software
   ];
 
   virtualisation = {
@@ -169,7 +169,7 @@
     docker = {
       enable = true;
       storageDriver = "btrfs";
-      enableOnBoot = true;
+      enableOnBoot = false;
     };
     # https://nixos.wiki/wiki/Podman
     podman = {
