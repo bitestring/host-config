@@ -7,7 +7,7 @@ services:
       - ./volumes/data:/var/www/html:z
     environment:
       - OVERWRITEPROTOCOL=https
-      - OVERWRITEHOST=sweethome-server.lan # REPLACE HOST
+      - OVERWRITEHOST=sweethome-server # REPLACE HOST
 
   cron:
     image: nextcloud:latest
