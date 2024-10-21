@@ -1,20 +1,23 @@
 https://github.com/nextcloud/docker/tree/master/.examples/docker-compose/with-nginx-proxy/postgres/apache
 
+# Generate self-signed SSL certificate
+https://daurnimator.github.io/post/2015/04/06/howto-generate-a-self-signed-ssl-cert-in-one/
 
-# Postgres Upgrade
+    openssl req -newkey 2048 -keyout cert.key -nodes -x509 -out cert.pem -batch
 
-## Backup
-To perform major version upgrade, use `pg_dumpall` to dump the entire database cluster into a SQL file.
+The meaning of the options:
 
+    -newkey 2048: generate a new 2048 bit RSA private key instead of using an existing one
 
-    sudo docker exec -u postgres nextcloud-db-1 pg_dumpall > db.dump
+    -keyout cert.key: save the rsa key in cert.key
 
+    -nodes: don’t encrypt the private key
 
-## Restore
-To restore the data to newer Posgtres version, use `psql` to execute the SQL dump captured earlier.
+    -x509: generate an actual cert (rather than a certificate request)
 
+    -out cert.epm: save the certificate as cert.pem
 
-    cat db.dump | sudo docker exec -i nextcloud-db-1 psql -U postgres
+    -batch: don’t ask for the various SSL cert metadata fields
 
 
 # Nextcloud Maintanence

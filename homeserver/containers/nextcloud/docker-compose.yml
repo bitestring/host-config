@@ -1,42 +1,21 @@
 # https://github.com/nextcloud/docker/tree/master/.examples/docker-compose/with-nginx-proxy/postgres/apache
-volumes:
-  nextcloud:
-  nextcloud-postgres-db:
-
 services:
-  db:
-    image: postgres:16
-    restart: unless-stopped
-    volumes:
-      - nextcloud-postgres-db:/var/lib/postgresql/data:Z
-    environment:
-      - POSTGRES_DB=nextcloud_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres # REPLACE Password
-
   nextcloud:
     image: nextcloud:latest
     restart: unless-stopped
     volumes:
-      - nextcloud:/var/www/html:z
+      - ./volumes/data:/var/www/html:z
     environment:
-      - POSTGRES_HOST=nextcloud-db-1
-      - POSTGRES_DB=nextcloud_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres # REPLACE Password
       - OVERWRITEPROTOCOL=https
       - OVERWRITEHOST=sweethome-server.lan # REPLACE HOST
-    depends_on:
-      - db
 
   cron:
     image: nextcloud:latest
     restart: unless-stopped
     volumes:
-      - nextcloud:/var/www/html:z
+      - ./volumes/data:/var/www/html:z
     entrypoint: /cron.sh
     depends_on:
-      - db
       - nextcloud
 
   proxy:
@@ -44,8 +23,8 @@ services:
     restart: always
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:z
-      - ./nginx/sweethome-server.lan.crt:/etc/nginx/sweethome-server.lan.crt:z
-      - ./nginx/sweethome-server.lan.key:/etc/nginx/sweethome-server.lan.key:z
+      - ./nginx/cert.pem:/etc/nginx/cert.pem:z
+      - ./nginx/cert.key:/etc/nginx/cert.key:z
     ports:
       - 443:443
     depends_on:
