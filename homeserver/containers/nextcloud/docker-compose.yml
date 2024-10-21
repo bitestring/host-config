@@ -7,7 +7,7 @@ services:
       - ./volumes/data:/var/www/html:z
     environment:
       - OVERWRITEPROTOCOL=https
-      - OVERWRITEHOST=sweethome-server # REPLACE HOST
+      - OVERWRITEHOST=sweethome-server:7443 # REPLACE HOST
 
   cron:
     image: nextcloud:latest
@@ -26,6 +26,6 @@ services:
       - ./nginx/cert.pem:/etc/nginx/cert.pem:z
       - ./nginx/cert.key:/etc/nginx/cert.key:z
     ports:
-      - 443:443
+      - 7443:443
     depends_on:
       - nextcloud
