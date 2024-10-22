@@ -1,3 +1,5 @@
 .direnv/
 volumes
 .env
+cert.key
+cert.pem
