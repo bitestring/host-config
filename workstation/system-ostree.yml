@@ -49,10 +49,12 @@
           - smartmontools
           - firewall-config
           - fuse-sshfs
-          - syncthing
           - fail2ban
           - fail2ban-firewalld
           - tor
+          - tailscale
+          - nextcloud-client
+          - syncthing
           - openssl
           - wireshark
           - android-tools
