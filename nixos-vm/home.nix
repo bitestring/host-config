@@ -65,6 +65,7 @@
         package = pkgs.vscodium;
         extensions = [
           vsx.open-vsx.ms-vscode.makefile-tools
+          vsx.open-vsx.llvm-vs-code-extensions.vscode-clangd
           vsx.open-vsx.ms-python.python
           vsx.open-vsx.redhat.vscode-xml
           vsx.open-vsx.redhat.vscode-yaml
