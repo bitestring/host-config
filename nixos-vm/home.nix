@@ -106,6 +106,9 @@
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nixd";
           "haskell.manageHLS" = "PATH";
+          "[yaml]" = {
+            "editor.defaultFormatter" = "redhat.vscode-yaml";
+          };
         };
       };
   };
