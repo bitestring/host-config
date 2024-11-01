@@ -18,14 +18,12 @@
           - libva-utils
 
           # cockpit
-          - pcp
           - cockpit
           - cockpit-system
           - cockpit-ostree
           - cockpit-podman
           - cockpit-machines
           - cockpit-selinux
-          - cockpit-pcp
           - cockpit-networkmanager
           - cockpit-storaged
           - cockpit-sosreport
@@ -58,11 +56,10 @@
           - openssl
           - wireshark
           - android-tools
-          - gnome-console
           - gnome-tweaks
           - gnome-shell-extension-system-monitor
           - gnome-shell-extension-drive-menu
-          - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.7/veracrypt-1.26.7-CentOS-8-x86_64.rpm
+          - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.14/veracrypt-1.26.14-Fedora-40-x86_64.rpm
         state: present
 
     # Fedora Atomic variants does not issue TRIM to SSDs automatically if LVM + LUKS is used. Bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539.
