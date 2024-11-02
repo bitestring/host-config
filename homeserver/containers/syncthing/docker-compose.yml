@@ -8,6 +8,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+      - PCAP=cap_chown,cap_fowner+ep
     volumes:
       - ./volumes/config:/var/syncthing/config
       - ${HOST_DIR}:${MOUNT_POINT}
