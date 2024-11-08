@@ -5,6 +5,13 @@
 dtparam=eth_led0=4
 dtparam=eth_led1=4
 
+# disable bluetooth & wifi
+dtoverlay=disable-bt
+dtoverlay=disable-wifi
+
 # Run as fast as firmware / board allows
 # Disable this to reduce power consumption
 # arm_boost=1
+
+# enable serial console
+# enable_uart=1
