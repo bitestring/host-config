@@ -123,6 +123,7 @@
     - name: Configure firewall
       block:
         - name: "Change eth0 interface zone to home"
+          become: true
           community.general.nmcli:
             type: wifi
             ifname: wlo1
