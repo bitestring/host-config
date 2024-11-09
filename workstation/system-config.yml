@@ -152,6 +152,7 @@
             - cockpit
             - ssh
             - syncthing
+            - kdeconnect
 
         - name: Allow services on zone "libvirt"
           become: true
