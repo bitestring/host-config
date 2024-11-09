@@ -54,6 +54,7 @@
           - nextcloud-client
           - syncthing
           - openssl
+          - nmap
           - wireshark
           - android-tools
           - gnome-tweaks
