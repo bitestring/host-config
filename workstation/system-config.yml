@@ -198,4 +198,3 @@
         - fail2ban
         - tailscaled
         - syncthing@{{ ansible_user_id }}
-        - tor
