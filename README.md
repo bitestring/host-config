@@ -2,6 +2,10 @@ Ansible Playbooks, Nix Flakes and other scripts to provision my personal worksta
 
 # Ansible Guide
 
+Install Ansible:
+
+    $ pip install --user ansible
+
 ## Install Ansible Collections:
 
     $ ansible-galaxy collection install -r requirements.yml
