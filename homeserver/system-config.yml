@@ -10,37 +10,72 @@
       ansible.builtin.debug:
         msg: Playing system-config.yml as user {{ username }}
 
-    - name: Add fail2ban config to jail sshd
+    - name: Configure NetworkManager to not manage tailscale0 interface since it interefers with firewall zone
       become: true
       ansible.builtin.copy:
-        dest: /etc/fail2ban/jail.d/sshd.local
+        dest: /etc/NetworkManager/conf.d/unmanage-tailscale.conf
         content: |
-          [sshd]
-          enabled = true
+          [keyfile]
+          unmanaged-devices=interface-name:tailscale0
+
         mode: u=r,g=r,o=r
         owner: root
 
+    - name: Configure fail2ban
+      block:
+        - name: Customize firewall actions to restrict all protocols and ports upon intrusion
+          become: true
+          ansible.builtin.copy:
+            dest: /etc/fail2ban/action.d/firewallcmd-rich-rules.local
+            content: |
+              [Definition]
+              rich-suffix = <rich-blocktype>
+              fwcmd_rich_rule = rule family='<family>' source address='<ip>' %(rich-suffix)s
+              actionban = zones="<zones>"; for z in $(echo $zones | tr ", " " "); do firewall-cmd --zone=$z --add-rich-rule="%(fwcmd_rich_rule)s"; done
+              actionunban = zones="<zones>"; for z in $(echo $zones | tr ", " " "); do firewall-cmd --zone=$z --remove-rich-rule="%(fwcmd_rich_rule)s"; done
+
+            mode: u=r,g=r,o=r
+            owner: root
+
+        - name: Customize default settings and enable jails
+          become: true
+          ansible.builtin.copy:
+            dest: /etc/fail2ban/jail.d/default.local
+            content: |
+              [DEFAULT]
+              zones = public,home,docker
+              banaction = firewallcmd-rich-rules[zones="%(zones)s"]
+              banaction_allports = firewallcmd-rich-rules[zones="%(zones)s", actiontype=<allports>]
+              port = 0-65535
+              bantime = 24h
+
+              [pam-generic]
+              enabled = true
+
+              [sshd]
+              enabled = true
+
+            mode: u=r,g=r,o=r
+            owner: root
+
     - name: Configure firewall
       block:
-        - name: Changing default zone
-          become: true
-          shell: |
-            firewall-cmd --set-default-zone=public
-            firewall-cmd --runtime-to-permanent
+        - name: "Change eth0 interface zone to home"
+          community.general.nmcli:
+            type: ethernet
+            conn_name: eth0
+            zone: home
+            state: present
 
-        - name: Configure firewall to disable services on zone "public"
+        - name: "Change tailscale0 interface zone to home"
           become: true
           ansible.posix.firewalld:
-            zone: public
-            service: "{{ item }}"
+            zone: home
+            interface: tailscale0
             permanent: true
-            immediate: true
-            state: disabled
-          with_items:
-            - ssh
-            - mdns
+            state: enabled
 
-        - name: Configure firewall to allow common services on zone "home"
+        - name: Allow services on zone "home"
           become: true
           ansible.posix.firewalld:
             zone: home
@@ -52,9 +87,28 @@
             - mdns
             - cockpit
             - ssh
-            - samba
             - syncthing
             - syncthing-gui
+
+        - name: Block services on zone "public"
+          become: true
+          ansible.posix.firewalld:
+            zone: public
+            service: "{{ item }}"
+            permanent: true
+            immediate: true
+            state: disabled
+          with_items:
+            - mdns
+            - ssh
+            - cockpit
+            - mdns
+
+        - name: Change default zone
+          become: true
+          shell: |
+            firewall-cmd --set-default-zone=public
+            firewall-cmd --runtime-to-permanent
 
     - name: Start systemd services
       become: true
@@ -63,8 +117,8 @@
         enabled: true
         state: started
       with_items:
-        - tuned
-        - powertop
-        - cockpit.socket
-        - sshd.socket
+        - fstrim.timer
         - fail2ban
+        - cockpit.socket
+        - sshd
+        - tailscaled
