@@ -2,7 +2,7 @@
 
 Reference: https://github.com/nextcloud/docker/tree/master/.examples/docker-compose/with-nginx-proxy/postgres/apache
 
-## Step 1: Generate self-signed SSL certificate
+## Step 1: Generate self-signed TLS certificate
 
 https://www.linode.com/docs/guides/create-a-self-signed-tls-certificate/
 
