@@ -9,7 +9,7 @@ services:
       - restricted
     environment:
       - OVERWRITEPROTOCOL=https
-      - OVERWRITEHOST=sweethome-server:7443 # REPLACE HOST
+      - OVERWRITEHOST=${HOST}:${PORT} # from .env file
 
   cron:
     image: nextcloud:latest
@@ -33,7 +33,7 @@ services:
       - restricted
       - unrestricted
     ports:
-      - 7443:443
+      - ${PORT}:443
     depends_on:
       - nextcloud
 
