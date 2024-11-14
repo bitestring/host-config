@@ -123,3 +123,9 @@
         - cockpit.socket
         - sshd
         - tailscaled
+
+    - name: Change default shell to fish
+      become: true
+      ansible.builtin.user:
+        name: "{{ username }}"
+        shell: /usr/bin/fish
