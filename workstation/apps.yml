@@ -72,3 +72,4 @@
         - org.gnome.seahorse.Application
         - org.fedoraproject.MediaWriter
         - org.raspberrypi.rpi-imager
+        - io.podman_desktop.PodmanDesktop
