@@ -195,7 +195,10 @@
   # };
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    startWhenNeeded = true;
+  };
 
   # List services that you want to enable:
   services.fstrim.enable = true;
