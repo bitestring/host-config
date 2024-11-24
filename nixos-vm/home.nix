@@ -94,6 +94,7 @@
           "terminal.integrated.fontSize" = 18;
           "window.titleBarStyle" = "custom";
           "window.autoDetectColorScheme" = true;
+          "window.restoreWindows" = "none";
           "vsicons.dontShowNewVersionMessage" = true;
           "diffEditor.experimental.showMoves" = true;
           "diffEditor.ignoreTrimWhitespace" = false;
