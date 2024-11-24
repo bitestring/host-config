@@ -219,6 +219,7 @@
     user = user.name;
     dataDir = "/home/${user.name}/Syncthing-Shared";
     configDir = "/home/${user.name}/.config/syncthing";
+    openDefaultPorts = true;
   };
   services.cockpit.enable = true;
 
@@ -229,11 +230,9 @@
     enable = true;
     interfaces."enp1s0" = {
       allowedTCPPorts = [
-        22000 # Syncthing
+        # 22 # SSH
       ];
       allowedUDPPorts = [
-        22000 # Syncthing
-        21027 # Syncthing
       ];
     };
   };
