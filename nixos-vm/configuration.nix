@@ -160,6 +160,7 @@
     docker-compose
     bindfs
     sysprof
+    killall
     gnome-tweaks
     gnome-software
   ];
