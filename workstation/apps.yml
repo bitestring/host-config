@@ -44,6 +44,7 @@
         - ch.protonmail.protonmail-bridge
         - im.riot.Riot
         - org.signal.Signal
+        - chat.simplex.simplex
 
         # Knowledge
         - com.calibre_ebook.calibre
