@@ -42,7 +42,6 @@
         # Mail & Messaging
         - org.mozilla.Thunderbird
         - ch.protonmail.protonmail-bridge
-        - im.riot.Riot
         - org.signal.Signal
         - chat.simplex.simplex
 
