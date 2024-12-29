@@ -23,7 +23,6 @@
     # gnome extensions
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
-    gnomeExtensions.pano
 
     # fonts
     fira-code
