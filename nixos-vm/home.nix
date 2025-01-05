@@ -37,6 +37,7 @@
 
     # apps
     distrobox
+    file
   ];
 
   programs = {

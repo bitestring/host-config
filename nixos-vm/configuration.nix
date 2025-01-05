@@ -22,6 +22,9 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Set QEMU emulation for cross compilation
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" "x86_64-windows" ];
+
   # Filesystem
   fileSystems =
     let
