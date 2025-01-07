@@ -23,6 +23,7 @@
     # gnome extensions
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.caffeine
 
     # fonts
     fira-code
