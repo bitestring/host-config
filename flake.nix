@@ -5,7 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -25,6 +26,7 @@
 
     in
     {
+      formatter.${system} = pkgs.nixfmt-rfc-style;
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = dependencies;
       };

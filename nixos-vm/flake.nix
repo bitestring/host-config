@@ -2,7 +2,10 @@
   description = "My NixOS Flake";
 
   nixConfig = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     substituters = [
       "https://cache.nixos.org/"
     ];
@@ -22,7 +25,13 @@
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
       host = {
         name = "nixos-vm";
@@ -39,7 +48,7 @@
       };
     in
     {
-      formatter.${pkgs.system} = nixpkgs.legacyPackages.${pkgs.system}.nixpkgs-fmt;
+      formatter.${pkgs.system} = pkgs.nixfmt-rfc-style;
       nixosConfigurations = {
         ${host.name} = nixpkgs.lib.nixosSystem {
           inherit pkgs;

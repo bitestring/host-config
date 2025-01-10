@@ -2,16 +2,25 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, host, user, ... }:
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  inputs,
+  host,
+  user,
+  ...
+}:
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Enable Nix experimental features
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Bootloader
   boot.loader = {
@@ -23,7 +32,10 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Set QEMU emulation for cross compilation
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" "x86_64-windows" ];
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "x86_64-windows"
+  ];
 
   # Filesystem
   fileSystems =
@@ -31,7 +43,11 @@
       mkRoSymBind = path: {
         device = path;
         fsType = "fuse.bindfs";
-        options = [ "ro" "resolve-symlinks" "x-gvfs-hide" ];
+        options = [
+          "ro"
+          "resolve-symlinks"
+          "x-gvfs-hide"
+        ];
       };
       aggregatedIcons = pkgs.buildEnv {
         name = "system-icons";
@@ -47,7 +63,10 @@
       };
     in
     {
-      "/".options = [ "compress=zstd" "relatime" ];
+      "/".options = [
+        "compress=zstd"
+        "relatime"
+      ];
 
       # Create an FHS mount to support flatpak host icons/fonts
       "/usr/share/icons" = mkRoSymBind "${aggregatedIcons}/share/icons";
@@ -88,7 +107,6 @@
     LC_TELEPHONE = "en_IN.UTF-8";
     LC_TIME = "en_IN.UTF-8";
   };
-
 
   # Fonts
   fonts = {
@@ -147,7 +165,10 @@
   users.users.${user.name} = {
     isNormalUser = true;
     description = user.description;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.fish;
   };
 
@@ -233,7 +254,6 @@
     openDefaultPorts = true;
   };
   services.cockpit.enable = true;
-
 
   # Firewall config
   networking.nftables.enable = true;
