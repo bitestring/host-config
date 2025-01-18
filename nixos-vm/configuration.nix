@@ -137,8 +137,6 @@
 
   # Turn off all power management and auto suspend features
   powerManagement.enable = false;
-  services.logind.lidSwitch = "ignore";
-  services.logind.extraConfig = "IdleAction=ignore";
   services.xserver.displayManager.gdm.autoSuspend = false;
 
   # Enable CUPS to print documents.
