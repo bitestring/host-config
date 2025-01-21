@@ -172,6 +172,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "kvm"
     ];
     shell = pkgs.fish;
   };
