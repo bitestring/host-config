@@ -248,8 +248,8 @@
   services.flatpak.enable = true;
   services.sysprof.enable = true;
   services.tor = {
-    enable = true;
-    client.enable = true;
+    enable = false;
+    client.enable = false;
   };
   services.syncthing = {
     enable = true;
