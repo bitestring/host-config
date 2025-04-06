@@ -109,9 +109,44 @@
             firewall-cmd --set-default-zone=public
             firewall-cmd --runtime-to-permanent
 
+    - name: Create podman-auto-update.timer override directory
+      become: true
+      ansible.builtin.file:
+        path: /etc/systemd/system/podman-auto-update.timer.d
+        state: directory
+        mode: '0755'
+
+    - name: Configure podman-auto-update.timer to run weekly
+      become: true
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/podman-auto-update.timer.d/override.conf
+        content: |
+          [Timer]
+          OnCalendar=
+          OnCalendar=Sat, 03:00
+
+        mode: u=rw,g=r,o=r
+        owner: root
+
+    - name: Create user podman-auto-update.timer override directory
+      ansible.builtin.file:
+        path: ~/.config/systemd/user/podman-auto-update.timer.d
+        state: directory
+        mode: '0755'
+
+    - name: Configure user podman-auto-update.timer to run weekly
+      ansible.builtin.copy:
+        dest: ~/.config/systemd/user/podman-auto-update.timer.d/override.conf
+        content: |
+          [Timer]
+          OnCalendar=
+          OnCalendar=Sat, 03:00
+
+        mode: u=rw,g=r,o=r
+
     - name: Start systemd services
       become: true
-      ansible.builtin.systemd:
+      ansible.builtin.systemd_service:
         name: "{{ item }}"
         enabled: true
         state: started
@@ -121,6 +156,15 @@
         - cockpit.socket
         - sshd
         - tailscaled
+        - podman-auto-update.timer
+
+    - name: Start user systemd services
+      ansible.builtin.systemd_service:
+        name: "{{ item }}"
+        enabled: true
+        state: started
+        scope: user
+      with_items:
         - podman-auto-update.timer
 
     - name: Change default shell to fish
