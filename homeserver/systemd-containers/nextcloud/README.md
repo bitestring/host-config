@@ -27,6 +27,8 @@ nano .env
 ```
 OVERWRITEPROTOCOL=https
 OVERWRITEHOST=server-hostname:7443
+NEXTCLOUD_TRUSTED_DOMAINS=localhost
+OVERWRITECLIURL=https://localhost
 ```
 
 ## Step 4: Launch Nextcloud
