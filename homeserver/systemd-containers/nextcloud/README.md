@@ -32,7 +32,7 @@ OVERWRITEHOST=server-hostname:7443
 ## Step 4: Launch Nextcloud
 
 ```
-make up
+make start
 ```
 
 # Nextcloud Maintanence
@@ -41,4 +41,10 @@ Sometimes Nextcloud maintanence jobs need to be executed manually. For example, 
 
 ```
 make maintenance
+```
+
+# Reindex all files
+
+```
+make scan
 ```
