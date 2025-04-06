@@ -88,8 +88,6 @@
             - mdns
             - cockpit
             - ssh
-            - syncthing
-            - syncthing-gui
 
         - name: Block services on zone "public"
           become: true
@@ -123,6 +121,7 @@
         - cockpit.socket
         - sshd
         - tailscaled
+        - podman-auto-update.timer
 
     - name: Change default shell to fish
       become: true
