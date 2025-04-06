@@ -50,3 +50,9 @@ make maintenance
 ```
 make scan
 ```
+
+# Change ownership of files after migration
+
+```
+sudo chown --from=CURRENT_OWNER:CURRENT_GROUP -R NEW_OWNER:NEW_GROUP  *
+```
