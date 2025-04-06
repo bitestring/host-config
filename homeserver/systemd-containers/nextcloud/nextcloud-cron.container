@@ -1,0 +1,15 @@
+# nextcloud-cron.container
+[Unit]
+Description=nextcloud
+Requires=nextcloud.service
+After=nextcloud.service
+
+[Container]
+Image=docker.io/nextcloud:latest
+AutoUpdate=registry
+Pod=nextcloud.pod
+Exec=/cron.sh
+Volume=./volumes/data:/var/www/html:z
+
+[Service]
+Restart=always

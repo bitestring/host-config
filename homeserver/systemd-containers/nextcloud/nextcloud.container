@@ -1,0 +1,14 @@
+# nextcloud.container
+[Unit]
+Description=nextcloud
+Wants=nextcloud-cron.service nextcloud-proxy.service
+
+[Container]
+Image=docker.io/nextcloud:latest
+AutoUpdate=registry
+Pod=nextcloud.pod
+EnvironmentFile=.env
+Volume=./volumes/data:/var/www/html:z
+
+[Service]
+Restart=always

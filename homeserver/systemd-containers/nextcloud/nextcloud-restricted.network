@@ -1,0 +1,6 @@
+# nextcloud-restricted.network
+[Unit]
+Description=nextcloud
+
+[Network]
+Internal=true

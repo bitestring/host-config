@@ -1,0 +1,8 @@
+# nextcloud.pod
+[Pod]
+PodName=nextcloud-pod
+Network=nextcloud-restricted.network
+PublishPort=7443:443
+
+[Install]
+WantedBy=default.target
