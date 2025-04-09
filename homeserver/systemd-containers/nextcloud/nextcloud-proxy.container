@@ -8,9 +8,9 @@ After=nextcloud.service
 Image=docker.io/caddy:latest
 AutoUpdate=registry
 Pod=nextcloud.pod
-Volume=./caddy/Caddyfile:/etc/caddy/Caddyfile
-Volume=./caddy/cert.pem:/etc/ssl/certs/cert.pem
-Volume=./caddy/cert.key:/etc/ssl/private/cert.key
+Volume=./caddy/Caddyfile:/etc/caddy/Caddyfile:z
+Volume=./caddy/cert.pem:/etc/ssl/certs/cert.pem:z
+Volume=./caddy/cert.key:/etc/ssl/private/cert.key:z
 
 [Service]
 Restart=always
