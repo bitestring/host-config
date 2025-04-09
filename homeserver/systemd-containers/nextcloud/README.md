@@ -11,7 +11,7 @@ https://www.linode.com/docs/guides/create-a-self-signed-tls-certificate/
 ## Step 2: Create a volume to store data
 
 ```
-mkdir --parents ./volumes/data/
+mkdir --parents ./volumes/nextcloud/data/
 ```
 
 ## Step 3: Create .env file

@@ -9,7 +9,7 @@ Image=docker.io/nextcloud:latest
 AutoUpdate=registry
 Pod=nextcloud.pod
 Exec=/cron.sh
-Volume=./volumes/data:/var/www/html:z
+Volume=./volumes/nextcloud/data:/var/www/html:z
 
 [Service]
 Restart=always
