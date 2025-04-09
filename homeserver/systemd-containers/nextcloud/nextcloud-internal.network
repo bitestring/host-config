@@ -1,4 +1,4 @@
-# nextcloud-restricted.network
+# nextcloud-internal.network
 [Unit]
 Description=nextcloud
 

@@ -1,7 +1,10 @@
 # nextcloud.pod
+[Unit]
+Description=nextcloud
+
 [Pod]
 PodName=nextcloud-pod
-Network=nextcloud-restricted.network
+Network=nextcloud-internal.network
 PublishPort=7443:443
 
 [Install]

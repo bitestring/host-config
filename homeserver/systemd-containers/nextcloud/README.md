@@ -19,16 +19,7 @@ mkdir --parents ./volumes/data/
 Create a .env file which provides hostname and port on which Nextcloud is exposed.
 
 ```
-nano .env
-```
-
-**Example .env file:**
-
-```
-OVERWRITEPROTOCOL=https
-OVERWRITEHOST=server-hostname:7443
-NEXTCLOUD_TRUSTED_DOMAINS=localhost
-OVERWRITECLIURL=https://localhost
+cp .env.template .env
 ```
 
 ## Step 4: Launch Nextcloud

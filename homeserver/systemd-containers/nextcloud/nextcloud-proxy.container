@@ -5,13 +5,12 @@ Requires=nextcloud.service
 After=nextcloud.service
 
 [Container]
-Image=docker.io/nginx:latest
+Image=docker.io/caddy:latest
 AutoUpdate=registry
 Pod=nextcloud.pod
-Volume=./nginx/nginx.conf:/etc/nginx/nginx.conf:z
-Volume=./nginx/cert.pem:/etc/nginx/cert.pem:z
-Volume=./nginx/cert.key:/etc/nginx/cert.key:z
+Volume=./caddy/Caddyfile:/etc/caddy/Caddyfile
+Volume=./caddy/cert.pem:/etc/ssl/certs/cert.pem
+Volume=./caddy/cert.key:/etc/ssl/private/cert.key
 
 [Service]
 Restart=always
-
