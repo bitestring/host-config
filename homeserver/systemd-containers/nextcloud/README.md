@@ -6,12 +6,12 @@ Reference: https://github.com/nextcloud/docker/tree/master/.examples/docker-comp
 
 https://www.linode.com/docs/guides/create-a-self-signed-tls-certificate/
 
-    openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out ./nginx/cert.pem -keyout ./nginx/cert.key
+    openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out ./caddy/cert.pem -keyout ./caddy/cert.key
 
 ## Step 2: Create a volume to store data
 
 ```
-mkdir --parents ./volumes/nextcloud/data/
+mkdir --parents ~/data/volumes/nextcloud/nextcloud/data/
 ```
 
 ## Step 3: Create .env file
