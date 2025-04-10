@@ -8,7 +8,7 @@ Image=docker.io/nextcloud:latest
 AutoUpdate=registry
 Pod=nextcloud.pod
 EnvironmentFile=.env
-Volume=./volumes/nextcloud/data:/var/www/html:z
+Volume=%h/data/volumes/nextcloud/nextcloud/data:/var/www/html:z
 
 [Service]
 Restart=always
