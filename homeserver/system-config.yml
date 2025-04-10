@@ -169,6 +169,10 @@
           with_items:
             - podman-auto-update.timer
 
+        - name: Enable linger to auto start user services
+          shell: |
+            loginctl enable-linger
+
     - name: Change default shell to fish
       become: true
       ansible.builtin.user:
