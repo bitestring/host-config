@@ -1,17 +1,17 @@
 {
-  auto_https off
+	auto_https off
 }
 
 :443 {
-    reverse_proxy nextcloud-pod:80
+	reverse_proxy nextcloud-pod:80
 
-    header {
-        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-    }
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	}
 
-    request_body {
+	request_body {
 		max_size 4GB
 	}
 
-    tls /etc/ssl/certs/cert.pem /etc/ssl/private/cert.key
+	tls /etc/ssl/certs/cert.pem /etc/ssl/private/cert.key
 }
