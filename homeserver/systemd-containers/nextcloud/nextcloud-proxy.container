@@ -5,7 +5,7 @@ Requires=nextcloud.service
 After=nextcloud.service
 
 [Container]
-Image=docker.io/caddy:latest
+Image=docker.io/library/caddy:latest
 AutoUpdate=registry
 Pod=nextcloud.pod
 Volume=./caddy/Caddyfile:/etc/caddy/Caddyfile:Z

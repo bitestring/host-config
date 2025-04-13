@@ -4,7 +4,7 @@ Description=nextcloud
 Wants=nextcloud-cron.service nextcloud-proxy.service
 
 [Container]
-Image=docker.io/nextcloud:latest
+Image=docker.io/library/nextcloud:latest
 AutoUpdate=registry
 Pod=nextcloud.pod
 EnvironmentFile=.env
