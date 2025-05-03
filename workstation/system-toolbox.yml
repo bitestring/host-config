@@ -28,6 +28,7 @@
           - clamav
           - ffmpeg
           - ImageMagick
+          - qpdf
         state: present
 
     - name: Install multimedia codecs
