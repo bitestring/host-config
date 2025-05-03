@@ -27,6 +27,7 @@
         remote: flathub
       with_items:
         # Essentials
+        - com.nextcloud.desktopclient.nextcloud
         - org.keepassxc.KeePassXC
         - org.videolan.VLC
 
@@ -67,9 +68,11 @@
         - org.kde.okular
         - org.gnucash.GnuCash
 
-        # Utilities
+        # System Utilities
         - com.github.tchx84.Flatseal
         - org.gnome.seahorse.Application
         - org.fedoraproject.MediaWriter
         - org.raspberrypi.rpi-imager
         - io.podman_desktop.PodmanDesktop
+        - org.virt_manager.virt-manager
+        - org.virt_manager.virt_manager.Extension.Qemu # For QEMU user session

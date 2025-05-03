@@ -10,29 +10,21 @@
       ansible.builtin.debug:
         msg: Playing system-ostree.yml as user {{ username }}
 
-    - name: Add Docker CE repository
-      become: true
-      ansible.builtin.get_url:
-        url: https://download.docker.com/linux/fedora/docker-ce.repo
-        dest: /etc/yum.repos.d/docker-ce.repo
-        mode: u=r,g=r,o=r
-        owner: root
-
     - name: Overlay core packages
+      become: true
       community.general.rpm_ostree_pkg:
         name:
           # cockpit
-          - pcp
           - cockpit
           - cockpit-system
           - cockpit-ostree
           - cockpit-podman
           - cockpit-machines
           - cockpit-selinux
-          - cockpit-pcp
           - cockpit-networkmanager
           - cockpit-storaged
           - cockpit-sosreport
+          - cockpit-files
 
           # essentials
           - fish
@@ -45,16 +37,13 @@
           - pass
           - make
           - tailscale
-
-          # containers
-          # Docker - https://docs.docker.com/engine/install/fedora/
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-          - docker-buildx-plugin
-          - docker-compose-plugin
         state: present
 
-    # Fedora Atomic variants does not issue TRIM to SSDs automatically if LVM + LUKS is used. Bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539.
-    - name: Enable TRIM on LVM + LUKS - Workaround for bug https://bugzilla.redhat.com/show_bug.cgi?id=1801539
-      ansible.builtin.command: rpm-ostree kargs --append-if-missing=rd.luks.options=discard
+    # Fedora Atomic variants does not issue TRIM to SSDs automatically if LVM + LUKS is used
+    #    https://bugzilla.redhat.com/show_bug.cgi?id=1801539
+    # Fedora Atomic variants does not support BTRFS mount options like compression due to a bug
+    #    https://gitlab.com/fedora/ostree/sig/-/issues/72
+    #    https://discussion.fedoraproject.org/t/root-mount-options-are-ignored-in-fedora-atomic-desktops-42/148562
+    - name: Update kernel args
+      become: true
+      ansible.builtin.command: rpm-ostree kargs --append-if-missing=rd.luks.options=discard --delete=rootflags=subvol=root --append-if-missing=rootflags=subvol=root,compress=zstd,ro
