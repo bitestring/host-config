@@ -36,7 +36,6 @@
     fira-code-symbols
     hasklig
     source-code-pro
-    cantarell-fonts
 
     # essential libraries and tools
     nixd # Nix language server
