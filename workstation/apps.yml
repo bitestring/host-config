@@ -71,12 +71,13 @@
         # System Utilities
         - com.github.tchx84.Flatseal
         - org.gnome.seahorse.Application
+        - org.gnome.Extensions
         - org.fedoraproject.MediaWriter
         - org.raspberrypi.rpi-imager
         - io.podman_desktop.PodmanDesktop
         - org.virt_manager.virt-manager
         - org.virt_manager.virt_manager.Extension.Qemu # For QEMU user session
-        - org.gnome.Extensions
+        - com.vscodium.codium
 
     - name: Override LibreWolf config
       ansible.builtin.copy:
