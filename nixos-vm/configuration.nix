@@ -129,6 +129,10 @@
     # Enable the GNOME Desktop Environment.
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
+    displayManager.autoLogin = {
+      enable = true;
+      user = "${user.name}";
+    };
 
     # Configure keymap in X11
     xkb = {
@@ -136,6 +140,11 @@
       variant = "";
     };
   };
+
+  # Temporary workaround for GNOME auto login
+  # https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
   # Turn off all power management and auto suspend features
   powerManagement.enable = false;
