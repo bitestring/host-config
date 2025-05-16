@@ -1,0 +1,104 @@
+- name: Playbook for installing basic system packages on Fedora Workstation
+  hosts: localhost
+  become: false
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      ansible.builtin.debug:
+        msg:
+          - User - {{ username }}
+          - Distribution - {{ ansible_distribution }}
+          - Distribution Version - {{ ansible_distribution_major_version }}
+
+    - name: Install python3-libdnf5
+      become: true
+      ansible.builtin.command: dnf install -y python3-libdnf5
+
+    - name: Configure DNF and repositories
+      block:
+        - name: Install DNF essentials
+          become: true
+          ansible.builtin.dnf:
+            name:
+              - gpg
+              - distribution-gpg-keys
+              - 'dnf-command(config-manager)'
+
+        - name: Import RPMFusion GPG key
+          become: true
+          ansible.builtin.rpm_key:
+            state: present
+            key: "{{ item }}"
+          with_items:
+            - /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_distribution_major_version }}
+            - /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_distribution_major_version }}
+
+        - name: Install RPMFusion repository
+          become: true
+          ansible.builtin.dnf:
+            name:
+              - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm
+              - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
+
+        - name: Enable fedora-cisco-openh264 repository
+          become: true
+          ansible.builtin.command: dnf config-manager setopt fedora-cisco-openh264.enabled=1
+
+        - name: Install RPMFusion appstream data
+          become: true
+          ansible.builtin.dnf:
+            name:
+              - rpmfusion-\*-appstream-data
+
+    - name: Install basic packages
+      become: true
+      ansible.builtin.dnf:
+        name:
+          # drivers & firmware
+          - intel-media-driver
+          - libva-utils
+
+          # cockpit
+          - cockpit
+          - cockpit-system
+          - cockpit-packagekit
+          - cockpit-podman
+          - cockpit-machines
+          - cockpit-selinux
+          - cockpit-networkmanager
+          - cockpit-storaged
+          - cockpit-files
+
+          # vitualization
+          - qemu
+          - qemu-kvm
+          - libvirt
+          - libvirt-nss
+          - libvirt-daemon-kvm
+          - libvirt-daemon-config-network
+          - libvirt-dbus
+
+            # essentials
+          - fish
+          - lm_sensors
+          - powertop
+          - smartmontools
+          - firewall-config
+          - fuse-sshfs
+          - fail2ban
+          - fail2ban-firewalld
+          - tor
+          - tailscale
+          - syncthing
+          - openssl
+          - nmap
+          - wireshark
+          - android-tools
+          - gnome-tweaks
+          - gnome-shell-extension-system-monitor
+          - gnome-shell-extension-drive-menu
+          - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.20/veracrypt-1.26.20-Fedora-40-x86_64.rpm
+        state: present

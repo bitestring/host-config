@@ -17,7 +17,7 @@
       become: true
       community.general.rpm_ostree_pkg:
         name:
-          # drivers
+          # drivers & firmware
           - intel-media-driver
           - libva-utils
 
