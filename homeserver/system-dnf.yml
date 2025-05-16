@@ -1,0 +1,65 @@
+- name: Playbook for installing basic system packages in a RHEL compatible server like AlmaLinux on Raspberry Pi
+  hosts: localhost
+  become: false
+
+  vars:
+    username: "{{ ansible_user_id }}"
+
+  tasks:
+    - name: Echo init message
+      ansible.builtin.debug:
+        msg:
+          - User - {{ username }}
+          - Distribution - {{ ansible_distribution }}
+          - Distribution Version - {{ ansible_distribution_major_version }}
+
+    - name: Enable crb
+      become: true
+      community.general.dnf_config_manager:
+        name: crb
+        state: enabled
+
+    - name: Add Tailscale repo
+      become: true
+      ansible.builtin.get_url:
+        url: https://pkgs.tailscale.com/stable/rhel/{{ ansible_distribution_major_version }}/tailscale.repo
+        dest: /etc/yum.repos.d/tailscale.repo
+        mode: u=r,g=r,o=r
+
+    - name: Install EPEL release package
+      become: true
+      ansible.builtin.dnf:
+        name: epel-release
+        state: present
+
+    - name: Install basic packages
+      become: true
+      ansible.builtin.dnf:
+        name:
+          # drivers & firmware
+          - rpi-eeprom
+
+          # cockpit
+          - cockpit
+          - cockpit-system
+          - cockpit-ostree
+          - cockpit-podman
+          - cockpit-machines
+          - cockpit-selinux
+          - cockpit-networkmanager
+          - cockpit-storaged
+          - cockpit-sosreport
+          - cockpit-files
+
+          # essentials
+          - fish
+          - lm_sensors
+          - tuned
+          - smartmontools
+          - fail2ban
+          - fail2ban-firewalld
+          - pass
+          - make
+          - tailscale
+
+        state: present

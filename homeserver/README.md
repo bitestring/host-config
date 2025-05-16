@@ -1,38 +1,39 @@
-# Personal workstation setup - Fedora IoT or any Atomic variant
+# Homeserver setup
 
-Ansible playbooks for configuring a fresh Fedora IoT or any Atomic based server
+Ansible playbooks for configuring a stock RHEL compatible server (Tested on AlmaLinux)
 
-## Step 1 - Update operating system:
+# Install basic packages
 
-    $ rpm-ostree upgrade
+### Step 1 - Update operating system:
 
-and reboot.
+```
+sudo dnf offline-upgrade download
+sudo dnf offline-upgrade reboot
+```
 
-## Step 2 - Install pip:
+### Step 2 - Install pip:
 
-    $ rpm-ostree install pip
+    $ sudo dnf install pip
 
-and reboot.
-
-## Step 3 - Install Ansible:
+### Step 3 - Install Ansible:
 
     $ pip install --user ansible
 
-## Step 4 - Install Ansible Collections:
+### Step 4 - Install Ansible Collections:
 
 Navigate to the directory where you've cloned this repository and execute following command to install Ansible Collections from `requirements.yml`.
 
     $ ansible-galaxy collection install -r requirements.yml
 
-## Step 5 - Install system packages:
+### Step 5 - Install system packages:
 
-Execute the `system-*.yml` playbook to install core system tools like Docker, Cockpit etc.
+Execute the `system-dnf.yml` playbook to install core system tools like drivers, shells, virt-manager etc.
 
-    $ ansible-playbook system-ostree.yml
+    $ ansible-playbook --ask-become-pass system-dnf.yml
 
 and reboot.
 
-## Step 6 - Configure system and services:
+# System configuration
 
 > Note: Before running this playbook you should have rebooted the system to ensure all installed services and users are available.
 
@@ -40,8 +41,7 @@ This playbook applies custom configurations, enables systemd services and other 
 
     $ ansible-playbook --ask-become-pass system-config.yml
 
-## Step 7 - Apply custom config.txt settings:
+# Apply custom config.txt settings for Raspberry Pi:
 
 Refer `RPi-custom-config.txt` to tweak certain settings.
 
-Now enjoy Fedora!
