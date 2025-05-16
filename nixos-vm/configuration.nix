@@ -148,6 +148,11 @@
 
   # Turn off all power management and auto suspend features
   powerManagement.enable = false;
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+    HandleSuspendKey=ignore
+    HandleHibernateKey=ignore
+  ''; # https://nixos.wiki/wiki/Logind
   services.xserver.displayManager.gdm.autoSuspend = false;
 
   # Enable CUPS to print documents.
