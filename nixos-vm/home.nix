@@ -71,6 +71,7 @@
         package = pkgs.vscodium;
         profiles.default = {
           extensions = [
+            vsx.open-vsx.ms-azuretools.vscode-docker # Todo: replace with the new generic Container Tools extension
             vsx.open-vsx.ms-vscode.makefile-tools
             vsx.open-vsx.llvm-vs-code-extensions.vscode-clangd
             vsx.open-vsx.ms-python.python
