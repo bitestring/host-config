@@ -18,6 +18,8 @@ and reboot.
 
 and reboot.
 
+Reference: https://rpmfusion.org/Configuration
+
 ### Step 3 - Install Ansible:
 
     $ pip install --user ansible
@@ -38,7 +40,7 @@ and reboot.
 
 ### Step 6 - Install system packages:
 
-Execute the `system-ostree.yml` playbook to install core system tools like drivers, shells, virt-manager etc.
+Execute the `system-ostree.yml` playbook to install core system tools like drivers, monitoring tools, hypervisor etc.
 
     $ ansible-playbook --ask-become-pass system-ostree.yml
 
@@ -71,7 +73,7 @@ Navigate to the directory where you've cloned this repository and execute follow
 
 ### Step 5 - Install system packages:
 
-Execute the `system-dnf.yml` playbook to install core system tools like drivers, shells, virt-manager etc.
+Execute the `system-dnf.yml` playbook to install core system tools like drivers, monitoring tools, hypervisor etc.
 
     $ ansible-playbook --ask-become-pass system-dnf.yml
 

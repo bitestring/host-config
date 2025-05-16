@@ -27,7 +27,7 @@ Navigate to the directory where you've cloned this repository and execute follow
 
 ### Step 5 - Install system packages:
 
-Execute the `system-dnf.yml` playbook to install core system tools like drivers, shells, virt-manager etc.
+Execute the `system-dnf.yml` playbook to install core system tools like drivers, monitoring tools etc.
 
     $ ansible-playbook --ask-become-pass system-dnf.yml
 
@@ -43,5 +43,5 @@ This playbook applies custom configurations, enables systemd services and other 
 
 # Apply custom config.txt settings for Raspberry Pi:
 
-Refer `RPi-custom-config.txt` to tweak certain settings.
+Tweak changes to `/boot/config.txt`. Refer `RPi-custom-config.txt` for reference.
 
