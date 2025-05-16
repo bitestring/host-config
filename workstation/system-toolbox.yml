@@ -1,5 +1,5 @@
 # This playbook is supposed to be played inside a Toolbox or Distrobox container
-- name: Play for installing extra tools inside a Toolbox
+- name: Playbook for installing extra tools inside a Toolbox
   hosts: localhost
   become: false
 
@@ -9,15 +9,37 @@
   tasks:
     - name: Echo init message
       ansible.builtin.debug:
-        msg: Playing system-toolbox.yml as user {{ username }}
+        msg:
+          - User - {{ username }}
+          - Distribution - {{ ansible_distribution }}
+          - Distribution Version - {{ ansible_distribution_major_version }}
 
-    - name: Install RPMFusion repository
+    - name: Add RPMFusion repository
       become: true
-      ansible.builtin.shell: dnf install -y "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+      block:
+        - name: Install GPG and keys
+          ansible.builtin.dnf:
+            name:
+              - gpg
+              - distribution-gpg-keys
 
-    - name: Enable AppStream metadata for RPMFusion
-      become: true
-      ansible.builtin.command: dnf groupupdate core -y
+        - name: Import RPMFusion GPG key
+          become: true
+          ansible.builtin.rpm_key:
+            state: present
+            key: "{{ item }}"
+          with_items:
+            - /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_distribution_major_version }}
+            - /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_distribution_major_version }}
+
+        - name: Install RPMFusion repository
+          ansible.builtin.dnf:
+            name:
+              - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm
+              - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
+
+        - name: Enable fedora-cisco-openh264 repository
+          ansible.builtin.command: dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
     - name: Install essential packages
       become: true

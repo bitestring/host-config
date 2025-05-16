@@ -1,4 +1,4 @@
-- name: Play for installing developer tools
+- name: Playbook for installing developer tools
   hosts: localhost
   become: false
 

@@ -1,4 +1,4 @@
-- name: Play for layering basic system packages
+- name: Playbook for installing basic system packages on Fedora Atomic desktops
   hosts: localhost
   become: false
 
@@ -8,9 +8,12 @@
   tasks:
     - name: Echo init message
       ansible.builtin.debug:
-        msg: Playing system-ostree.yml as user {{ username }}
+        msg:
+          - User - {{ username }}
+          - Distribution - {{ ansible_distribution }}
+          - Distribution Version - {{ ansible_distribution_major_version }}
 
-    - name: Overlay core packages
+    - name: Overlay basic packages
       become: true
       community.general.rpm_ostree_pkg:
         name:
@@ -27,7 +30,6 @@
           - cockpit-selinux
           - cockpit-networkmanager
           - cockpit-storaged
-          - cockpit-sosreport
           - cockpit-files
 
           # vitualization

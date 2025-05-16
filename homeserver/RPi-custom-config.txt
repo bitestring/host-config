@@ -1,10 +1,13 @@
 #/boot/firmware/config.txt
+#/boot/config.txt
 
+[pi5]
 # Turn off Ethernet LEDs
 # Reference: https://forums.raspberrypi.com/viewtopic.php?t=361697
 dtparam=eth_led0=4
 dtparam=eth_led1=4
 
+[all]
 # disable bluetooth & wifi
 dtoverlay=disable-bt
 dtoverlay=disable-wifi

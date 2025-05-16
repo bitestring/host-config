@@ -1,4 +1,4 @@
-- name: Play for configuring the host once basic packages are installed
+- name: Playbook for configuring the host once basic packages are installed
   hosts: localhost
   become: false
 
@@ -8,9 +8,12 @@
   tasks:
     - name: Echo init message
       ansible.builtin.debug:
-        msg: Playing system-config.yml as user {{ username }}
+        msg:
+          - User - {{ username }}
+          - Distribution - {{ ansible_distribution }}
+          - Distribution Version - {{ ansible_distribution_major_version }}
 
-    - name: Add polkit rule to allow virt-manager to manage virtual machines
+    - name: Add polkit rule to allow user to manage virtual machines
       become: true
       ansible.builtin.copy:
         dest: /etc/polkit-1/rules.d/80-libvirt-manage.rules
@@ -182,7 +185,7 @@
 
         - name: Change default zone
           become: true
-          shell: |
+          ansible.builtin.shell: |
             firewall-cmd --set-default-zone=public
             firewall-cmd --runtime-to-permanent
 
@@ -201,8 +204,10 @@
         - tailscaled
         - syncthing@{{ ansible_user_id }}
 
-    - name: Change default shell to fish
+    - name: Configuring user, groups and shell
       become: true
       ansible.builtin.user:
         name: "{{ username }}"
+        groups: libvirt
+        append: true
         shell: /usr/bin/fish

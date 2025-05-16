@@ -1,4 +1,4 @@
-- name: Play for configuring the host once basic packages are installed
+- name: Playbook for configuring the host once basic packages are installed
   hosts: localhost
   become: false
 
@@ -8,7 +8,10 @@
   tasks:
     - name: Echo init message
       ansible.builtin.debug:
-        msg: Playing system-config.yml as user {{ username }}
+        msg:
+          - User - {{ username }}
+          - Distribution - {{ ansible_distribution }}
+          - Distribution Version - {{ ansible_distribution_major_version }}
 
     - name: Configure NetworkManager to not manage tailscale0 interface since it interefers with firewall zone
       become: true
@@ -105,7 +108,7 @@
 
         - name: Change default zone
           become: true
-          shell: |
+          ansible.builtin.shell: |
             firewall-cmd --set-default-zone=public
             firewall-cmd --runtime-to-permanent
 
@@ -170,10 +173,10 @@
             - podman-auto-update.timer
 
         - name: Enable linger to auto start user services
-          shell: |
+          ansible.builtin.shell: |
             loginctl enable-linger
 
-    - name: Change default shell to fish
+    - name: Configuring user, groups and shell
       become: true
       ansible.builtin.user:
         name: "{{ username }}"

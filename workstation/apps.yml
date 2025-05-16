@@ -1,4 +1,4 @@
-- name: Play for installing flatpak apps on host
+- name: Playbook for installing flatpak apps on host
   hosts: localhost
   become: false
 
@@ -8,7 +8,10 @@
   tasks:
     - name: Echo init message
       ansible.builtin.debug:
-        msg: "Playing apps.yml as user {{ username }}"
+        msg:
+          - User - {{ username }}
+          - Distribution - {{ ansible_distribution }}
+          - Distribution Version - {{ ansible_distribution_major_version }}
 
     - name: Add Flathub flatpak repository remote
       community.general.flatpak_remote:
