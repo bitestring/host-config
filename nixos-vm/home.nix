@@ -124,6 +124,12 @@
     # suspend power button action in GNOME
     "org/gnome/settings-daemon/plugins/power" = {
         "power-button-action" = "nothing";
+        "power-saver-profile-on-low-battery" = false;
+        "idle-dim" = false;
+        "sleep-inactive-ac-timeout" = 0;
+        "sleep-inactive-ac-type" = "nothing";
+        "sleep-inactive-battery-timeout" = 0;
+        "sleep-inactive-battery-type" = "nothing";
     };
   };
 }
