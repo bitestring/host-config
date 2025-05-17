@@ -212,13 +212,13 @@
   ];
 
   virtualisation = {
-    # https://nixos.wiki/wiki/Docker
+    # https://wiki.nixos.org/wiki/Docker
     docker = {
       enable = true;
       storageDriver = "btrfs";
       enableOnBoot = false;
     };
-    # https://nixos.wiki/wiki/Podman
+    # https://wiki.nixos.org/wiki/Podman
     podman = {
       enable = true;
       # Create a `docker` alias for podman, to use it as a drop-in replacement
