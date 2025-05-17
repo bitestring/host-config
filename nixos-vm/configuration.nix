@@ -197,7 +197,8 @@
 
   # Enable GNOME Keyring
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.gdm.enableGnomeKeyring = true;
+  # Auto-unlock keyring on login
+  # security.pam.services.login.enableGnomeKeyring = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
