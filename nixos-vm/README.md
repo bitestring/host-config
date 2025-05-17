@@ -36,3 +36,11 @@ NixOS configuration for development.
 
     $ nix shell nixpkgs#{pkg1,pkg2}
 
+
+# Flatpak apps do not have correct fonts
+
+Create a symbolic link to the system fonts directory inside home directory
+
+    $ ln -s /usr/local/share/fonts/ ~/.local/share/fonts
+
+Reference: https://wiki.nixos.org/wiki/Fonts
