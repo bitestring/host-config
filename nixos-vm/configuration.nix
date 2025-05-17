@@ -111,7 +111,12 @@
   };
 
   # Fonts
-  fonts.fontDir.enable = true;
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      adwaita-fonts
+    ];
+  };
 
   services.xserver = {
     # Enable the X11 windowing system.

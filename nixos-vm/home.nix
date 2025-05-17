@@ -32,6 +32,7 @@
     gnomeExtensions.blur-my-shell
 
     # fonts
+    adwaita-fonts
     fira-code
     fira-code-symbols
     hasklig
