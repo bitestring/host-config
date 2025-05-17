@@ -8,6 +8,8 @@ https://www.linode.com/docs/guides/create-a-self-signed-tls-certificate/
 
     openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out ./caddy/cert.pem -keyout ./caddy/cert.key
 
+Make sure to enter your server domain name during the `Common Name (e.g. server FQDN or YOUR name) []` prompt.
+
 ## Step 2: Create a volume to store data
 
 ```
