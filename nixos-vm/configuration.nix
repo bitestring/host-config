@@ -111,16 +111,7 @@
   };
 
   # Fonts
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      fira-code
-      fira-code-symbols
-      hasklig
-      source-code-pro
-      cantarell-fonts
-    ];
-  };
+  fonts.fontDir.enable = true;
 
   services.xserver = {
     # Enable the X11 windowing system.
@@ -128,11 +119,8 @@
 
     # Enable the GNOME Desktop Environment.
     desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
-    displayManager.autoLogin = {
-      enable = true;
-      user = "${user.name}";
-    };
+    # Use lightdm for now, since GDM does not give fuck about power settings in VM
+    # displayManager.gdm.enable = true;
 
     # Configure keymap in X11
     xkb = {
@@ -141,10 +129,13 @@
     };
   };
 
-  # Temporary workaround for GNOME auto login
-  # https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+  # Enable automatic login for the user.
+  # services.displayManager.autoLogin.user = user.name;
+
+  # Enable GNOME Keyring
+  services.gnome.gnome-keyring.enable = true;
+  # Auto-unlock keyring on login
+  security.pam.services.login.enableGnomeKeyring = true;
 
   # Turn off all power management and auto suspend features
   powerManagement.enable = false;
@@ -153,7 +144,7 @@
     HandleSuspendKey=ignore
     HandleHibernateKey=ignore
   ''; # https://nixos.wiki/wiki/Logind
-  services.xserver.displayManager.gdm.autoSuspend = false;
+  # services.xserver.displayManager.gdm.autoSuspend = false;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -191,14 +182,6 @@
     ];
     shell = pkgs.fish;
   };
-
-  # Enable automatic login for the user.
-  # services.displayManager.autoLogin.user = user.name;
-
-  # Enable GNOME Keyring
-  services.gnome.gnome-keyring.enable = true;
-  # Auto-unlock keyring on login
-  # security.pam.services.login.enableGnomeKeyring = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

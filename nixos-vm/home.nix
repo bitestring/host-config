@@ -123,7 +123,7 @@
   dconf.settings = {
     # suspend power button action in GNOME
     "org/gnome/settings-daemon/plugins/power" = {
-        "power-button-action" = "nothing";
+      "power-button-action" = "nothing";
     };
   };
 }
