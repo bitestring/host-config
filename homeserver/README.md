@@ -1,6 +1,6 @@
 # Homeserver setup
 
-Ansible playbooks for configuring a stock RHEL compatible server (Tested on AlmaLinux)
+Playbook for installing basic system packages on a RHEL-compatible server, such as AlmaLinux, on a Raspberry Pi (tested on AlmaLinux).
 
 # Install basic packages
 

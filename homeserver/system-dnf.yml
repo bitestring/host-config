@@ -1,4 +1,4 @@
-- name: Playbook for installing basic system packages in a RHEL compatible server like AlmaLinux on Raspberry Pi
+- name: Playbook for installing basic system packages on a RHEL-compatible server, such as AlmaLinux, on a Raspberry Pi
   hosts: localhost
   become: false
 
