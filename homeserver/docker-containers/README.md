@@ -1,0 +1,1 @@
+This directory contains deprecated Docker Compose manifests for reference purposes. For a secure server configuration, use Podman-based rootless systemd containers from the homeserver/systemd-containers directory.
