@@ -270,6 +270,9 @@
   };
   services.cockpit.enable = true;
 
+  # Write systemd journald logs to RAM instead of disk
+  services.journald.storage = "volatile";
+
   # Firewall config
   networking.nftables.enable = true;
   networking.firewall = {
