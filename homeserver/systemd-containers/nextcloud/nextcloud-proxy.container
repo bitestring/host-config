@@ -11,6 +11,7 @@ Pod=nextcloud.pod
 Volume=./caddy/Caddyfile:/etc/caddy/Caddyfile:Z
 Volume=./caddy/cert.pem:/etc/ssl/certs/cert.pem:Z
 Volume=./caddy/cert.key:/etc/ssl/private/cert.key:Z
+LogDriver=none
 
 [Service]
 Restart=always

@@ -9,6 +9,7 @@ AutoUpdate=registry
 Pod=nextcloud.pod
 EnvironmentFile=.env
 Volume=%h/data/volumes/nextcloud/nextcloud/data:/var/www/html:z
+LogDriver=none
 
 [Service]
 Restart=always
