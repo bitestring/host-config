@@ -43,5 +43,5 @@ This playbook applies custom configurations, enables systemd services and other 
 
 # Apply custom config.txt settings for Raspberry Pi:
 
-Tweak changes to `/boot/config.txt`. Refer `RPi-custom-config.txt` for reference.
+Manually tweak changes to `/boot/config.txt`. Refer `./pi-custom-config.txt` for reference.
 
