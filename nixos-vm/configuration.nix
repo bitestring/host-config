@@ -71,6 +71,16 @@
       # Create an FHS mount to support flatpak host icons/fonts
       "/usr/share/icons" = mkRoSymBind "${aggregatedIcons}/share/icons";
       "/usr/local/share/fonts" = mkRoSymBind "${aggregatedFonts}/share/fonts";
+
+      # Mount virtiofs shared by host
+      "/home/${user.name}/data/vm-shared" = {
+        device = "vm-shared";
+        fsType = "virtiofs";
+        options = [
+          "defaults"
+          "nofail"
+        ];
+      };
     };
 
   # Swap
@@ -261,13 +271,15 @@
     enable = false;
     client.enable = false;
   };
-  services.syncthing = {
-    enable = true;
-    user = user.name;
-    dataDir = "/home/${user.name}/Syncthing-Shared";
-    configDir = "/home/${user.name}/.config/syncthing";
-    openDefaultPorts = true;
-  };
+
+  # services.syncthing = {
+  #   enable = true;
+  #   user = user.name;
+  #   dataDir = "/home/${user.name}/Syncthing-Shared";
+  #   configDir = "/home/${user.name}/.config/syncthing";
+  #   openDefaultPorts = true;
+  # };
+
   services.cockpit.enable = true;
 
   # Write systemd journald logs to RAM instead of disk
