@@ -213,7 +213,7 @@
         - libvirt-guests
         - fail2ban
         - tailscaled
-        - syncthing@{{ ansible_user_id }}
+        - syncthing@{{ username }}
 
     - name: Configuring user, groups and shell
       become: true
