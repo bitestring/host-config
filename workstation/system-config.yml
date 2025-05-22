@@ -24,6 +24,7 @@
         mode: u=r,g=r,o=r
         owner: root
 
+    # Currently required for Atomic variants. Adding user to libvirt group does not work on Atomic variants yet.
     - name: Add polkit rule to allow user to manage virtual machines
       become: true
       ansible.builtin.copy:
