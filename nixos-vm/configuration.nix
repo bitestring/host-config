@@ -266,6 +266,10 @@
   # Write systemd journald logs to RAM instead of disk
   services.journald.storage = "volatile";
 
+  # Security
+  # Enable AppArmor
+  security.apparmor.enable = true;
+
   # Firewall config
   networking.nftables.enable = true;
   networking.firewall = {
@@ -277,13 +281,6 @@
       allowedUDPPorts = [
       ];
     };
-  };
-
-  # Security
-  security = {
-    # Enable AppArmor
-    apparmor.enable = true;
-    apparmor.killUnconfinedConfinables = true;
   };
 
   # Auto system upgrade
