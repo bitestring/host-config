@@ -47,5 +47,5 @@ make scan
 # Change ownership of files after migration
 
 ```
-sudo chown --from=CURRENT_OWNER:CURRENT_GROUP -R NEW_OWNER:NEW_GROUP  *
+sudo chown --recursive --from=CURRENT_OWNER:CURRENT_GROUP NEW_OWNER:NEW_GROUP  *
 ```
