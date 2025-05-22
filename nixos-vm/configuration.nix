@@ -195,6 +195,13 @@
     shell = pkgs.fish;
   };
 
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -213,43 +220,34 @@
     gnome-software
   ];
 
+  # Virtualization and Containers
   virtualisation = {
     # https://wiki.nixos.org/wiki/Docker
     docker = {
       enable = true;
-      storageDriver = "btrfs";
       enableOnBoot = false;
+      storageDriver = "btrfs";
     };
     # https://wiki.nixos.org/wiki/Podman
     podman = {
       enable = true;
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = false;
       # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings = {
-        dns_enabled = true;
-      };
+      defaultNetwork.settings.dns_enabled = true;
     };
   };
 
+  # Virtualization guest drivers & agents
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # Enable the OpenSSH daemon.
+  # List services that you want to enable:
+  services.cockpit.enable = true;
   services.openssh = {
     enable = true;
     startWhenNeeded = true;
+    openFirewall = true;
   };
 
-  # List services that you want to enable:
   services.fstrim.enable = true;
   services.btrfs.autoScrub = {
     enable = true;
@@ -257,22 +255,13 @@
       "/"
     ];
   };
+
   services.flatpak.enable = true;
   services.sysprof.enable = true;
   services.tor = {
     enable = false;
     client.enable = false;
   };
-
-  # services.syncthing = {
-  #   enable = true;
-  #   user = user.name;
-  #   dataDir = "/home/${user.name}/Syncthing-Shared";
-  #   configDir = "/home/${user.name}/.config/syncthing";
-  #   openDefaultPorts = true;
-  # };
-
-  services.cockpit.enable = true;
 
   # Write systemd journald logs to RAM instead of disk
   services.journald.storage = "volatile";
@@ -326,7 +315,7 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 14d";
+    options = "--delete-older-than 30d";
   };
 
   # This value determines the NixOS release from which the default
