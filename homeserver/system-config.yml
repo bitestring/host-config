@@ -170,7 +170,7 @@
             - fstrim.timer
             - fail2ban
             - cockpit.socket
-            - sshd
+            - sshd.socket
             - tailscaled
             - podman-auto-update.timer
 
