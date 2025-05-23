@@ -192,6 +192,7 @@
       "networkmanager"
       "wheel"
     ];
+    linger = true; # Keep running systemd user services even if logged out
     shell = pkgs.fish;
   };
 
@@ -212,27 +213,34 @@
     curl
     git
     gnumake
-    docker-compose
     bindfs
     sysprof
     killall
+    docker-compose
     gnome-tweaks
     gnome-software
   ];
 
   # Virtualization and Containers
   virtualisation = {
-    # https://wiki.nixos.org/wiki/Docker
-    docker = {
-      enable = true;
-      enableOnBoot = false;
-      storageDriver = "btrfs";
-    };
     # https://wiki.nixos.org/wiki/Podman
     podman = {
       enable = true;
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
+    };
+
+    # https://wiki.nixos.org/wiki/Docker
+    docker = {
+      enable = false; # Don't run Docker as rootful system daemon
+      enableOnBoot = false;
+      storageDriver = "btrfs";
+
+      # Use the rootless mode - run Docker daemon as non-root user
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
     };
   };
 
