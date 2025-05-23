@@ -71,7 +71,7 @@
         package = pkgs.vscodium;
         profiles.default = {
           extensions = [
-            vsx.open-vsx.ms-azuretools.vscode-docker # Todo: replace with the new generic Container Tools extension
+            vsx.open-vsx.ms-azuretools.vscode-containers
             vsx.open-vsx.ms-vscode.makefile-tools
             vsx.open-vsx.llvm-vs-code-extensions.vscode-clangd
             vsx.open-vsx.ms-python.python
@@ -106,6 +106,7 @@
             "vsicons.dontShowNewVersionMessage" = true;
             "diffEditor.experimental.showMoves" = true;
             "diffEditor.ignoreTrimWhitespace" = false;
+            "containers.containerClient" = "com.microsoft.visualstudio.containers.podman";
             "xml.codeLens.enabled" = true;
             "xml.server.preferBinary" = true;
             "xml.server.binary.path" = "${pkgs.lemminx.outPath}/bin/lemminx";
