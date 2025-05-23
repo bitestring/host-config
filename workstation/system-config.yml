@@ -210,7 +210,9 @@
       with_items:
         - fstrim.timer
         - cockpit.socket
-        - sshd.socket
+        # Disable sshd.socket for now since it does not play nicely with fail2ban
+        # - sshd.socket
+        - sshd
         - libvirtd
         - libvirt-guests
         - fail2ban
