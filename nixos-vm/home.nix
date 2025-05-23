@@ -28,6 +28,7 @@
   # User packages
   home.packages = with pkgs; [
     # gnome extensions
+    gnomeExtensions.system-monitor
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
 
