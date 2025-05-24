@@ -223,6 +223,9 @@
 
   # Virtualization and Containers
   virtualisation = {
+    containers.enable = true;
+    oci-containers.backend = "podman";
+
     # https://wiki.nixos.org/wiki/Podman
     podman = {
       enable = true;
