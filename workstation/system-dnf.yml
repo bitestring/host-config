@@ -72,7 +72,7 @@
           - cockpit-storaged
           - cockpit-files
 
-          # vitualization
+          # virtualization
           - qemu
           - qemu-kvm
           - libvirt

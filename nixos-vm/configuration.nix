@@ -99,7 +99,7 @@
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
 
-  # Select internationalisation properties.
+  # Select internationalization properties.
   i18n = {
     supportedLocales = [
       "en_US.UTF-8/UTF-8"
