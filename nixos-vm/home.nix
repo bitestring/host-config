@@ -79,6 +79,7 @@
             vsx.open-vsx.redhat.vscode-yaml
             vsx.open-vsx.redhat.ansible
             vsx.open-vsx.vscode-icons-team.vscode-icons
+            vsx.open-vsx.streetsidesoftware.code-spell-checker
             vsx.open-vsx.editorconfig.editorconfig
             vsx.open-vsx.esbenp.prettier-vscode
             vsx.open-vsx.eamodio.gitlens
