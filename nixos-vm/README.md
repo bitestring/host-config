@@ -2,6 +2,8 @@
 
 NixOS configuration for development.
 
+Carefully select required configuration from existing `/etc/nixos` and then merge the changes to this directory. Then delete `/etc/nixos` and symlink this directory to `/etc/nixos`.
+
 # NixOS Makefile Guide
 
 ## Update Flakes and Rebuild
