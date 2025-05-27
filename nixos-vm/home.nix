@@ -117,6 +117,7 @@
             "nix.enableLanguageServer" = true;
             "nix.serverPath" = "nixd";
             "haskell.manageHLS" = "PATH";
+            "haskell.plugin.semanticTokens.globalOn" = true;
           };
         };
       };
