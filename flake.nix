@@ -11,6 +11,10 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       dependencies = with pkgs; [
+        # Nix deps
+        nixd
+        nixfmt-rfc-style
+
         # system deps
         glibcLocales
 
@@ -18,10 +22,6 @@
         ansible
         ansible-lint
         ansible-language-server
-
-        # Nix deps
-        nixd
-        nixfmt-rfc-style
       ];
 
     in
