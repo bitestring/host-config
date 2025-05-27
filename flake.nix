@@ -21,7 +21,7 @@
 
         # Nix deps
         nixd
-        nixpkgs-fmt
+        nixfmt-rfc-style
       ];
 
     in
