@@ -96,5 +96,8 @@
           // reduce frequency of session persistance to increase SSD life
           pref("browser.sessionstore.interval", 1500000);
 
+          // enable disk cache
+          pref("browser.cache.disk.enable", true);
+
         mode: u=r,g=r,o=r
         owner: "{{ username }}"
