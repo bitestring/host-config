@@ -13,6 +13,13 @@
           - Distribution - {{ ansible_distribution }}
           - Distribution Version - {{ ansible_distribution_major_version }}
 
+    - name: Add Tailscale repo
+      become: true
+      ansible.builtin.get_url:
+        url: https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+        dest: /etc/yum.repos.d/tailscale.repo
+        mode: u=r,g=r,o=r
+
     - name: Remove pinned RPM Fusion overlay package
       become: true
       ansible.builtin.command: rpm-ostree update --uninstall rpmfusion-free-release --uninstall rpmfusion-nonfree-release --install rpmfusion-free-release --install rpmfusion-nonfree-release

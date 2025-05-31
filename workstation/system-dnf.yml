@@ -25,7 +25,7 @@
             name:
               - gpg
               - distribution-gpg-keys
-              - 'dnf-command(config-manager)'
+              - "dnf-command(config-manager)"
 
         - name: Import RPMFusion GPG key
           become: true
@@ -52,6 +52,13 @@
           ansible.builtin.dnf:
             name:
               - rpmfusion-\*-appstream-data
+
+        - name: Add Tailscale repo
+          become: true
+          ansible.builtin.get_url:
+            url: https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+            dest: /etc/yum.repos.d/tailscale.repo
+            mode: u=r,g=r,o=r
 
     - name: Install basic packages
       become: true
