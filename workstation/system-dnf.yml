@@ -25,7 +25,6 @@
             name:
               - gpg
               - distribution-gpg-keys
-              - "dnf-command(config-manager)"
 
         - name: Import RPMFusion GPG key
           become: true
@@ -107,5 +106,12 @@
           - gnome-tweaks
           - gnome-shell-extension-system-monitor
           - gnome-shell-extension-drive-menu
-          - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.20/veracrypt-1.26.20-Fedora-40-x86_64.rpm
         state: present
+
+    - name: Install VeraCrypt
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.24/veracrypt-1.26.24-Fedora-40-x86_64.rpm
+        state: present
+        disable_gpg_check: true

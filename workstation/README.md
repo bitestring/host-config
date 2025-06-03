@@ -46,7 +46,7 @@ Execute the `system-ostree.yml` playbook to install core system tools like drive
 
 and reboot.
 
-## Fedora Workstation
+## Fedora Workstation or KDE Plasma
 
 Ansible playbooks for configuring a stock Fedora Workstation installation
 
@@ -57,9 +57,9 @@ sudo dnf offline-upgrade download
 sudo dnf offline-upgrade reboot
 ```
 
-### Step 2 - Install pip and RPMFusion:
+### Step 2 - Install dnf plugins and pip:
 
-    $ sudo dnf install pip
+    $ sudo dnf install "dnf-command(config-manager)" pip
 
 ### Step 3 - Install Ansible:
 

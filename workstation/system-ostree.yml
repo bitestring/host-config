@@ -13,7 +13,7 @@
           - Distribution - {{ ansible_distribution }}
           - Distribution Version - {{ ansible_distribution_major_version }}
 
-    - name: Overlay basic packages
+    - name: Install basic packages
       become: true
       community.general.rpm_ostree_pkg:
         name:
@@ -60,7 +60,13 @@
           - gnome-tweaks
           - gnome-shell-extension-system-monitor
           - gnome-shell-extension-drive-menu
-          - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.20/veracrypt-1.26.20-Fedora-40-x86_64.rpm
+        state: present
+
+    - name: Install VeraCrypt
+      become: true
+      community.general.rpm_ostree_pkg:
+        name:
+          - https://github.com/veracrypt/VeraCrypt/releases/download/VeraCrypt_1.26.24/veracrypt-1.26.24-Fedora-40-x86_64.rpm
         state: present
 
     # Fedora Atomic variants does not issue TRIM to SSDs automatically if LVM + LUKS is used

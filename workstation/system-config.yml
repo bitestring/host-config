@@ -13,16 +13,26 @@
           - Distribution - {{ ansible_distribution }}
           - Distribution Version - {{ ansible_distribution_major_version }}
 
-    - name: Set journald storage as volatile
+    - name: Configure journald
       become: true
-      ansible.builtin.copy:
-        dest: /etc/systemd/journald.conf.d/00-journal-storage.conf
-        content: |
-          [Journal]
-          Storage=volatile
+      block:
+        - name: Create journald.conf.d directory
+          ansible.builtin.file:
+            path: /etc/systemd/journald.conf.d
+            state: directory
+            owner: root
+            group: root
 
-        mode: u=r,g=r,o=r
-        owner: root
+        - name: Set journald storage as volatile
+          become: true
+          ansible.builtin.copy:
+            dest: /etc/systemd/journald.conf.d/00-journal-storage.conf
+            content: |
+              [Journal]
+              Storage=volatile
+
+            mode: u=r,g=r,o=r
+            owner: root
 
     # Currently required for Atomic variants. Adding user to libvirt group does not work on Atomic variants yet.
     - name: Add polkit rule to allow user to manage virtual machines
