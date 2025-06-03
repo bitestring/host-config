@@ -219,10 +219,9 @@
         - tailscaled
         - syncthing@{{ username }}
 
-    - name: Configuring user, groups and shell
+    - name: Configuring users and groups
       become: true
       ansible.builtin.user:
         name: "{{ username }}"
         groups: libvirt
         append: true
-        shell: /usr/bin/fish

@@ -188,9 +188,3 @@
         - name: Enable linger to auto start user services
           ansible.builtin.shell: |
             loginctl enable-linger
-
-    - name: Configuring user, groups and shell
-      become: true
-      ansible.builtin.user:
-        name: "{{ username }}"
-        shell: /usr/bin/fish
