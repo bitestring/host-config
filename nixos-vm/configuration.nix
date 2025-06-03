@@ -166,7 +166,6 @@
 
   # Shell
   programs.fish.enable = true;
-  environment.shells = with pkgs; [ fish ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${user.name} = {
