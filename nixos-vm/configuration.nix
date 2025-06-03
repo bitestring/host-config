@@ -155,7 +155,6 @@
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
-  services.xserver.displayManager.gdm.autoSuspend = false;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
