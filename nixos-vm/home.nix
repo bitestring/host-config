@@ -27,11 +27,6 @@
 
   # User packages
   home.packages = with pkgs; [
-    # gnome extensions
-    gnomeExtensions.system-monitor
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.blur-my-shell
-
     # fonts
     fira-code
     fira-code-symbols
@@ -121,12 +116,5 @@
           };
         };
       };
-  };
-
-  dconf.settings = {
-    # suspend power button action in GNOME
-    "org/gnome/settings-daemon/plugins/power" = {
-      "power-button-action" = "nothing";
-    };
   };
 }
