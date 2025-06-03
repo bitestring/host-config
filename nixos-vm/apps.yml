@@ -27,7 +27,16 @@
         flatpakrepo_url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
         method: user
 
-    - name: Install user applications
+    - name: Install apps from flathub-beta
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+        method: user
+        remote: flathub-beta
+      with_items:
+        - org.mozilla.firefox
+
+    - name: Install apps from flathub
       community.general.flatpak:
         name: "{{ item }}"
         state: present
@@ -35,9 +44,6 @@
         remote: flathub
       with_items:
         - com.github.tchx84.Flatseal
-        # Replace Firefox with LibreWolf since Mozilla is becoming hostile towards it's users
-        # - org.mozilla.firefox
-        - io.gitlab.librewolf-community
         - com.brave.Browser
         - im.riot.Riot
         - org.libreoffice.LibreOffice
