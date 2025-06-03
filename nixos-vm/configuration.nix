@@ -126,8 +126,7 @@
 
     # Enable the GNOME Desktop Environment.
     desktopManager.gnome.enable = true;
-    # Use lightdm for now, since GDM does not give fuck about power settings in VM
-    # displayManager.gdm.enable = true;
+    displayManager.gdm.enable = true;
 
     # Configure keymap in X11
     xkb = {
@@ -156,7 +155,7 @@
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
-  # services.xserver.displayManager.gdm.autoSuspend = false;
+  services.xserver.displayManager.gdm.autoSuspend = false;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
