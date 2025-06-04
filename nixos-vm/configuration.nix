@@ -70,7 +70,7 @@
 
       # Create an FHS mount to support flatpak host icons/fonts
       "/usr/share/icons" = mkRoSymBind "${aggregatedIcons}/share/icons";
-      "/usr/local/share/fonts" = mkRoSymBind "${aggregatedFonts}/share/fonts";
+      "/usr/share/fonts" = mkRoSymBind "${aggregatedFonts}/share/fonts";
 
       # Mount virtiofs shared by host
       "/home/${user.name}/data/vm-shared" = {
