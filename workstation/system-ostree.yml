@@ -44,22 +44,21 @@
             # essentials
           - fish
           - lm_sensors
-          - powertop
           - smartmontools
           - firewall-config
-          - fuse-sshfs
           - fail2ban
           - fail2ban-firewalld
           - tor
           - tailscale
           - syncthing
-          - openssl
           - nmap
           - wireshark
           - android-tools
           - gnome-tweaks
           - gnome-shell-extension-system-monitor
           - gnome-shell-extension-drive-menu
+          - gnome-shell-extension-dash-to-dock
+          - gnome-shell-extension-gsconnect
         state: present
 
     - name: Install VeraCrypt
