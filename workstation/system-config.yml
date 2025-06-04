@@ -180,17 +180,6 @@
             - syncthing
             - kdeconnect
 
-        - name: Allow services on zone "libvirt"
-          become: true
-          ansible.posix.firewalld:
-            zone: libvirt
-            service: "{{ item }}"
-            permanent: true
-            immediate: true
-            state: enabled
-          with_items:
-            - syncthing
-
         - name: Block services on zone "public"
           become: true
           ansible.posix.firewalld:
