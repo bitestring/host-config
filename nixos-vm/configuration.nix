@@ -52,7 +52,7 @@
       aggregatedIcons = pkgs.buildEnv {
         name = "system-icons";
         paths = with pkgs; [
-          libsForQt5.breeze-qt5
+          gnome-themes-extra
         ];
         pathsToLink = [ "/share/icons" ];
       };
@@ -69,9 +69,8 @@
       ];
 
       # Create an FHS mount to support flatpak host icons/fonts
-      # https://wiki.nixos.org/wiki/Fonts
       "/usr/share/icons" = mkRoSymBind "${aggregatedIcons}/share/icons";
-      "/usr/share/fonts" = mkRoSymBind "${aggregatedFonts}/share/fonts";
+      "/usr/local/share/fonts" = mkRoSymBind "${aggregatedFonts}/share/fonts";
 
       # Mount virtiofs shared by host
       "/home/${user.name}/data/vm-shared" = {
@@ -121,13 +120,17 @@
     };
   };
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # Enable the GNOME Desktop Environment.
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.user = user.name;
+
+  # Enable GNOME Keyring
+  services.gnome.gnome-keyring.enable = true;
+  # Auto-unlock keyring on login
+  security.pam.services.login.enableGnomeKeyring = true;
 
   # Turn off all power management and auto suspend features
   powerManagement.enable = false;
@@ -199,6 +202,8 @@
     sysprof
     killall
     docker-compose
+    gnome-tweaks
+    gnome-software
   ];
 
   # Virtualization and Containers
