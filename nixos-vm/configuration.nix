@@ -53,6 +53,7 @@
         name = "system-icons";
         paths = with pkgs; [
           gnome-themes-extra
+          hicolor-icon-theme
         ];
         pathsToLink = [ "/share/icons" ];
       };
