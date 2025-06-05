@@ -31,6 +31,7 @@
     gnomeExtensions.system-monitor
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.appindicator
 
     # fonts
     fira-code

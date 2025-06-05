@@ -57,6 +57,7 @@
           - gnome-tweaks
           - gnome-shell-extension-system-monitor
           - gnome-shell-extension-drive-menu
+          - gnome-shell-extension-appindicator
           - gnome-shell-extension-dash-to-dock
           - gnome-shell-extension-gsconnect
         state: present
