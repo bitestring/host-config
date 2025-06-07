@@ -207,3 +207,8 @@
 
         - name: Enable linger to auto start user services
           ansible.builtin.command: loginctl enable-linger
+
+    - name: Set timezone to Asia/Kolkata
+      become: true
+      community.general.timezone:
+        name: Asia/Kolkata
