@@ -1,5 +1,8 @@
 Ansible Playbooks, Nix Flakes and other scripts to provision my personal workstation and servers with apps and custom configuration.
 
+
+> Note: All the guides in the repository assume that the host has cloned this repo using `git` or other methods.
+
 # Ansible Guide
 
 Install Ansible:
@@ -10,11 +13,9 @@ Install Ansible:
 
     $ ansible-galaxy collection install -r requirements.yml
 
-
 ## Run Playbook
 
     $ ansible-playbook --ask-become-pass <Playbook.yml>
-
 
 # License
 
