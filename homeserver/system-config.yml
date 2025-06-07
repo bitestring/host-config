@@ -57,7 +57,7 @@
             dest: /etc/fail2ban/jail.d/default.local
             content: |
               [DEFAULT]
-              zones = public,home,docker
+              zones = public,home
               banaction = firewallcmd-rich-rules[zones="%(zones)s"]
               banaction_allports = firewallcmd-rich-rules[zones="%(zones)s", actiontype=<allports>]
               port = 0-65535
