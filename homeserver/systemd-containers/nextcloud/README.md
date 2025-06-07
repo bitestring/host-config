@@ -30,19 +30,20 @@ cp .env.template .env
 make start
 ```
 
-## Step 5: Open Firewall
+## Step 5: Open firewall
 
 To access Nextcloud in your network, open the configured port on firewall.
 
-*Example using firewall-cmd:*
+_Example using firewall-cmd:_
 
 ```
 sudo firewall-cmd --zone=home --add-port=7443/tcp --permanent
+sudo firewall-cmd --reload
 ```
 
-# Nextcloud Maintanence
+# Nextcloud maintenance
 
-Sometimes Nextcloud maintanence jobs need to be executed manually. For example, to create indexes. Use following command to achieve the same.
+Occasionally Nextcloud maintenance jobs need to be executed manually. For example, to create indexes. Use following command to achieve the same.
 
 ```
 make maintenance
@@ -52,10 +53,4 @@ make maintenance
 
 ```
 make scan
-```
-
-# Change ownership of files after migration
-
-```
-sudo chown --recursive --from=CURRENT_OWNER:CURRENT_GROUP NEW_OWNER:NEW_GROUP  *
 ```

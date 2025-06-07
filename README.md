@@ -13,9 +13,15 @@ Install Ansible:
 
     $ ansible-galaxy collection install -r requirements.yml
 
-## Run Playbook
+## Run a Playbook
 
     $ ansible-playbook --ask-become-pass <Playbook.yml>
+
+
+# Manual Configurations
+
+Some manual configurations and tweaks have been documented in [MANUAL_CONFIG.md](./MANUAL_CONFIG.md).
+
 
 # License
 
