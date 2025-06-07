@@ -1,4 +1,3 @@
-
 # Manual configurations
 
 > Commands described here for Fedora/RHEL based hosts
@@ -72,3 +71,67 @@ UUID=cc4bb288-530b-4688-bcab-7ba12a22cce9 /boot                   ext4    defaul
 UUID=ed2ff779-ebbb-4fb0-816b-4e6035eedbae /                       btrfs   subvol=root,compress=zstd:3,x-systemd.device-timeout=0 0 0
 UUID=ed2ff779-ebbb-4fb0-816b-4e6035eedbae /home                   btrfs   subvol=home,compress=zstd:3,x-systemd.device-timeout=0 0 0
 ```
+
+Verify mount options
+
+```
+$ mount | grep btrfs
+
+/dev/mapper/luks-d266ce37-25ec-4abf-bfbd-993d2d40666a on / type btrfs (rw,relatime,seclabel,compress=zstd:3,ssd,discard=async,space_cache=v2,subvolid=262,subvol=/root)
+/dev/mapper/luks-d266ce37-25ec-4abf-bfbd-993d2d40666a on /home type btrfs (rw,relatime,seclabel,compress=zstd:3,ssd,discard=async,space_cache=v2,subvolid=257,subvol=/home)
+```
+
+### Test BTRFS compression
+
+To check if BTRFS compression is working, use `compsize` on a directory to get compression ratio data.
+
+```
+$ sudo compsize ~/
+
+Processed 681218 files, 655020 regular extents (952350 refs), 334108 inline, 1268900 fragments.
+Type       Perc     Disk Usage   Uncompressed Referenced
+TOTAL       94%      149G         158G         105G
+none       100%      144G         144G          80G
+zstd        37%      5.1G          13G          24G
+prealloc   100%      193M         193M         193M
+
+```
+
+## Review firewall config
+
+Manually review the firewall configuration to ensure it is secure.
+
+Review if network interfaces are correctly attached to appropriate zones. Block all services and ports on **public** zone and allow only required services and ports on **home** zone.
+
+On **firewalld**, current configuration can be shown with
+
+```
+$ sudo firewall-cmd --list-all-zones
+```
+
+```
+$ sudo firewall-cmd --list-services --zone=public
+```
+
+```
+$ sudo firewall-cmd --list-ports --zone=public
+```
+
+```
+$ sudo firewall-cmd --get-default-zone
+```
+
+### Test firewall config
+
+To verify if firewall is correctly configured, manually do a port scan on target host using `nmap`.
+
+For example,
+
+```
+$ sudo nmap -sS sweethome-server
+$ sudo nmap -sS sweethome-server.lan
+$ sudo nmap -sS 192.168.1.100
+$ sudo nmap -sS -6 <Public_IP_V6_Addr>
+```
+
+should list open ports.

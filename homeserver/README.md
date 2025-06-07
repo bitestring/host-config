@@ -44,29 +44,3 @@ This playbook applies custom configurations, enables systemd services and other 
 # Apply custom config.txt settings for Raspberry Pi:
 
 Manually tweak changes to `/boot/config.txt`. Refer `./pi-custom-config.txt` for reference.
-
-# Other manual configuration
-
-## Review Firewall config
-
-Manually review the firewall configuration to ensure it is secure.
-
-Review if network interfaces are correctly attached to appropriate zones. Block all services and ports on **public** zone and allow only required services and ports on **home** zone.
-
-On **firewalld**, current configuration can be shown with
-
-```
-$ sudo firewall-cmd --list-all-zones
-```
-
-```
-$ sudo firewall-cmd --list-services --zone=public
-```
-
-```
-$ sudo firewall-cmd --list-ports --zone=public
-```
-
-```
-$ sudo firewall-cmd --get-default-zone
-```
