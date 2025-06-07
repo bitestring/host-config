@@ -141,7 +141,7 @@
 
         - name: Change default firewalld zone
           become: true
-          ansible.builtin.command: firewall-cmd --set-default-zone=public --permanent
+          ansible.builtin.command: firewall-cmd --set-default-zone=public
 
     - name: Configure systemd services
       block:
