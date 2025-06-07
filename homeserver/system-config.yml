@@ -13,16 +13,27 @@
           - Distribution - {{ ansible_distribution }}
           - Distribution Version - {{ ansible_distribution_major_version }}
 
-    - name: Set journald storage as volatile
-      become: true
-      ansible.builtin.copy:
-        dest: /etc/systemd/journald.conf.d/00-journal-storage.conf
-        content: |
-          [Journal]
-          Storage=volatile
+    - name: Configure journald
+      block:
+        - name: Create journald.conf.d directory
+          become: true
+          ansible.builtin.file:
+            path: /etc/systemd/journald.conf.d
+            state: directory
+            mode: u=rwX,g=rX,o=rX
+            owner: root
+            group: root
 
-        mode: u=r,g=r,o=r
-        owner: root
+        - name: Set journald storage as volatile
+          become: true
+          ansible.builtin.copy:
+            dest: /etc/systemd/journald.conf.d/00-journal-storage.conf
+            content: |
+              [Journal]
+              Storage=volatile
+
+            mode: u=r,g=r,o=r
+            owner: root
 
     - name: Configure NetworkManager to not manage tailscale0 interface since it interefers with firewall zone
       become: true

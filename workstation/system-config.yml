@@ -14,12 +14,13 @@
           - Distribution Version - {{ ansible_distribution_major_version }}
 
     - name: Configure journald
-      become: true
       block:
         - name: Create journald.conf.d directory
+          become: true
           ansible.builtin.file:
             path: /etc/systemd/journald.conf.d
             state: directory
+            mode: u=rwX,g=rX,o=rX
             owner: root
             group: root
 
