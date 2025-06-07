@@ -33,7 +33,7 @@ Reference: https://opensource.com/article/19/2/how-does-rootless-podman-work
 
 ## Change ownership of files after migration
 
-If user ID mapping is changed due to OS reinstallation, then compute the new UID and change ownership using `chown` as follows
+If user ID mapping is changed due to OS reinstallation, then compute the new host UID for the files created by the container and change ownership using `chown` as follows
 
 ```
 sudo chown --recursive --from=CURRENT_OWNER:CURRENT_GROUP NEW_OWNER:NEW_GROUP  *

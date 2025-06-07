@@ -49,11 +49,11 @@ Manually tweak changes to `/boot/config.txt`. Refer `./pi-custom-config.txt` for
 
 ## Review Firewall config
 
-Manually review firewall configuration to ensure it is secure.
+Manually review the firewall configuration to ensure it is secure.
 
 Review if network interfaces are correctly attached to appropriate zones. Block all services and ports on **public** zone and allow only required services and ports on **home** zone.
 
-On **firewalld** current configuration can be shown with
+On **firewalld**, current configuration can be shown with
 
 ```
 $ sudo firewall-cmd --list-all-zones
