@@ -160,8 +160,8 @@
             - mdns
             - cockpit
             - ssh
-            - syncthing
             - kdeconnect
+            # - syncthing
 
         - name: "Change wlo1 interface zone to home"
           become: true
@@ -216,7 +216,7 @@
         - libvirt-guests
         - fail2ban
         - tailscaled
-        - syncthing@{{ username }}
+        # - syncthing@{{ username }}
 
     - name: Configuring users and groups
       become: true
