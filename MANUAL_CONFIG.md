@@ -99,6 +99,8 @@ prealloc   100%      193M         193M         193M
 
 ## Review firewall config
 
+https://firewalld.org/
+
 Manually review the firewall configuration to ensure it is secure.
 
 Review if network interfaces are correctly attached to appropriate zones. Block all services and ports on **public** zone and allow only required services and ports on **home** zone.
@@ -135,3 +137,35 @@ $ sudo nmap -sS -6 <Public_IP_V6_Addr>
 ```
 
 should list open ports.
+
+## Review Fail2Ban
+
+https://github.com/fail2ban/fail2ban
+
+Fail2Ban scans log files like /var/log/auth.log and bans IP addresses conducting too many failed login attempts.
+
+Check the jail status
+
+```
+$ sudo fail2ban-client status
+
+Status
+|- Number of jail:	2
+`- Jail list:	pam-generic, sshd
+```
+
+### Test Fail2Ban config
+
+To check if Fail2Ban works, login into Cockpit or SSH with incorrect credentials. After a few attempts, your IP address will be blocked from accessing the target host.
+
+Banned IP addresses can be checked using
+
+```
+$ sudo fail2ban-client banned
+```
+
+To unban after the test, run
+
+```
+$ sudo fail2ban-client unban <IP_Addr>
+```
