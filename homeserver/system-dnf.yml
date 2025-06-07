@@ -59,6 +59,8 @@
 
           # essentials
           - fish
+          - btrfs-progs
+          - bind-utils
           - lm_sensors
           - tuned
           - smartmontools
