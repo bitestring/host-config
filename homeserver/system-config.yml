@@ -85,11 +85,11 @@
 
     - name: Configure firewall
       block:
-        - name: "Change eth0 interface zone to home"
+        - name: "Change end0 interface zone to home"
           become: true
           community.general.nmcli:
             type: ethernet
-            conn_name: eth0
+            conn_name: end0
             zone: home
             state: present
 
