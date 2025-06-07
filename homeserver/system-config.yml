@@ -206,5 +206,4 @@
             - podman-auto-update.timer
 
         - name: Enable linger to auto start user services
-          ansible.builtin.shell: |
-            loginctl enable-linger
+          ansible.builtin.command: loginctl enable-linger
