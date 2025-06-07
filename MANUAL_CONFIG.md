@@ -169,3 +169,37 @@ To unban after the test, run
 ```
 $ sudo fail2ban-client unban <IP_Addr>
 ```
+
+## Tailscale and rp_filter rules
+
+If you are using Tailscale exit-nodes feature, check if `tailscale` complains about strict `rp_filter` rules
+
+```
+$ sudo tailscale status
+
+...
+
+# Health check:
+#     - Exit node misconfiguration: The following issues on your machine will likely make usage of exit nodes impossible: [interface "tailscale0" has strict reverse-path filtering enabled], please set rp_filter=2 instead of rp_filter=1; see https://github.com/tailscale/tailscale/issues/3310
+```
+
+If there's health check warning about _rp_filter_, create a override config to loosen the strict default configuration
+
+Create a file
+
+`/etc/sysctl.d/90-override.conf`
+
+with the following contents
+
+```
+net.ipv4.conf.tailscale0.rp_filter = 2
+net.ipv4.conf.virbr0.rp_filter = 2
+```
+
+Change the interface names as per `tailscale status` report. Reboot the host to apply the new config.
+
+You can check the current config by querying `sysctl`
+
+```
+$ sudo sysctl -a | grep rp_filter
+```
