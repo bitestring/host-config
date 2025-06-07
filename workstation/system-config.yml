@@ -98,17 +98,6 @@
         mode: u=r,g=r,o=r
         owner: root
 
-    - name: Configure NetworkManager to not manage tailscale0 interface since it interefers with firewall zone
-      become: true
-      ansible.builtin.copy:
-        dest: /etc/NetworkManager/conf.d/unmanage-tailscale.conf
-        content: |
-          [keyfile]
-          unmanaged-devices=interface-name:tailscale0
-
-        mode: u=r,g=r,o=r
-        owner: root
-
     - name: Configure fail2ban
       block:
         - name: Customize firewall actions to restrict all protocols and ports upon intrusion
@@ -148,23 +137,16 @@
 
     - name: Configure firewall
       block:
-        - name: "Change wlo1 interface zone to home"
+        - name: Configure NetworkManager to not manage tailscale0 interface since it interferes with firewall zone
           become: true
-          community.general.nmcli:
-            type: wifi
-            ifname: wlo1
-            conn_name: sweethome-ap
-            ssid: sweethome-ap
-            zone: home
-            state: present
+          ansible.builtin.copy:
+            dest: /etc/NetworkManager/conf.d/unmanage-tailscale.conf
+            content: |
+              [keyfile]
+              unmanaged-devices=interface-name:tailscale0
 
-        - name: "Change tailscale0 interface zone to home"
-          become: true
-          ansible.posix.firewalld:
-            zone: home
-            interface: tailscale0
-            permanent: true
-            state: enabled
+            mode: u=r,g=r,o=r
+            owner: root
 
         - name: Allow services on zone "home"
           become: true
@@ -181,6 +163,25 @@
             - syncthing
             - kdeconnect
 
+        - name: "Change wlo1 interface zone to home"
+          become: true
+          community.general.nmcli:
+            type: wifi
+            ifname: wlo1
+            conn_name: sweethome-ap
+            ssid: sweethome-ap
+            zone: home
+            state: present
+
+        - name: "Change tailscale0 interface zone to home"
+          become: true
+          ansible.posix.firewalld:
+            zone: home
+            interface: tailscale0
+            permanent: true
+            immediate: true
+            state: enabled
+
         - name: Block services on zone "public"
           become: true
           ansible.posix.firewalld:
@@ -195,11 +196,9 @@
             - cockpit
             - mdns
 
-        - name: Change default zone
+        - name: Change default firewalld zone
           become: true
-          ansible.builtin.shell: |
-            firewall-cmd --set-default-zone=public
-            firewall-cmd --runtime-to-permanent
+          ansible.builtin.command: firewall-cmd --set-default-zone=public --permanent
 
     - name: Start systemd services
       become: true
