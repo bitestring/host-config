@@ -18,6 +18,7 @@
       ansible.builtin.dnf:
         name:
           - "dnf-command(config-manager)"
+        state: present
 
     - name: Enable crb
       become: true
