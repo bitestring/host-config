@@ -203,3 +203,15 @@ You can check the current config by querying `sysctl`
 ```
 $ sudo sysctl -a | grep rp_filter
 ```
+
+## sudo does not ask for password
+
+If `sudo` command does not ask for user's password, the user might have been configured with _NOPASSWD_ option during system installation.
+
+Review any config under `/etc/sudoers.d/` for following line
+
+```
+<username> ALL=(ALL) NOPASSWD:ALL
+```
+
+and comment it. This is important for a secure configuration of the host.
