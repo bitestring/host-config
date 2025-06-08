@@ -67,7 +67,6 @@
           - smartmontools
           - fail2ban
           - fail2ban-firewalld
-          - pass
           - make
           - rsync
           - tailscale
