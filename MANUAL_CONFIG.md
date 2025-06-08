@@ -215,3 +215,21 @@ Review any config under `/etc/sudoers.d/` for following line
 ```
 
 and comment it. This is important for a secure configuration of the host.
+
+## Replace disk based swap with ZRAM
+
+https://www.privacyguides.org/en/os/linux-overview/#swap
+
+Disable swap file or partition on `/etc/fstab`.
+
+For example,
+
+```
+$ cat /etc/fstab
+
+UUID=bfa456ee-2843-4930-b93f-ce49976479cf  / ext4    defaults,noatime 0 0
+UUID=6401-5E60  /boot vfat    defaults,noatime 0 0
+#/swapfile      none    swap    defaults        0       0
+```
+
+Use `zram` if available on your distribution.
