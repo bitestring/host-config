@@ -50,7 +50,7 @@
           - fail2ban-firewalld
           - tor
           - tailscale
-          - syncthing
+          # - syncthing
           - nmap
           - wireshark
           - android-tools
