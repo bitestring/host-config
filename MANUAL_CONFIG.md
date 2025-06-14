@@ -233,3 +233,7 @@ UUID=6401-5E60  /boot vfat    defaults,noatime 0 0
 ```
 
 Use `zram` if available on your distribution.
+
+## Automatic Updates
+
+Enable automatic updates if available, to keep the system updated. Cockpit provides automatic update settings under **Software updates -> Settings** option.
