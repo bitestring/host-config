@@ -98,10 +98,10 @@
             "workbench.settings.enableNaturalLanguageSearch" = false;
             "workbench.colorTheme" = "Default Light Modern";
             "workbench.iconTheme" = "vscode-icons";
-            "editor.fontSize" = 18;
+            "editor.fontSize" = 16;
             "editor.fontFamily" = "Fira Code";
             "editor.fontLigatures" = true;
-            "terminal.integrated.fontSize" = 18;
+            "terminal.integrated.fontSize" = 16;
             "window.titleBarStyle" = "custom";
             "window.autoDetectColorScheme" = true;
             "window.restoreWindows" = "none";
