@@ -190,18 +190,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
-    nixd
-    nixfmt-rfc-style
-    wl-clipboard
-    wget
+    # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    # wget
     curl
     git
     gnumake
     bindfs
     sysprof
-    killall
     docker-compose
     gnome-tweaks
     gnome-software

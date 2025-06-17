@@ -39,12 +39,13 @@
     hasklig
     source-code-pro
 
-    # essential libraries and tools
+    # essential packages
     nixd # Nix language server
+    nixfmt-rfc-style
     lemminx # XML language server - Required by RedHat XML extension for VSCode
-
-    # apps
+    killall
     file
+    wl-clipboard
   ];
 
   programs = {
