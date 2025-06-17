@@ -73,6 +73,7 @@
         profiles.default = {
           extensions = [
             vsx.open-vsx.ms-azuretools.vscode-containers
+            vsx.open-vsx.ms-kubernetes-tools.vscode-kubernetes-tools
             vsx.open-vsx.ms-vscode.makefile-tools
             vsx.open-vsx.llvm-vs-code-extensions.vscode-clangd
             vsx.open-vsx.ms-python.python
