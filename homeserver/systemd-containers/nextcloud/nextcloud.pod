@@ -1,11 +1,8 @@
-# nextcloud.pod
 [Unit]
-Description=nextcloud
+Description=nextcloud.pod
 
 [Pod]
-PodName=nextcloud-pod
-Network=nextcloud-internal.network
-PublishPort=7443:443
+Network=none
 
 [Install]
 WantedBy=multi-user.target default.target

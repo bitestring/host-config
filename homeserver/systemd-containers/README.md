@@ -1,12 +1,8 @@
-This directory contains Podman based rootless systemd containers
+> This directory contains Podman based rootless systemd containers.
 
 ## Activating the containers
 
-Symlink this directory to `~/.config/containers/systemd`.
-
-    $ ln -s <ABSOLUTE_PATH_TO_CURRENT_DIR> ~/.config/containers/systemd
-
-Once symlinked, all Podman resources declared in this directory are automatically started by systemd according to the resource's configuration.
+Each service has instructions to activate them in their respective README.md file.
 
 ## User ID mapping
 

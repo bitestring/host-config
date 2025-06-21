@@ -1,8 +1,7 @@
-# nextcloud-proxy.container
 [Unit]
-Description=nextcloud
-Requires=nextcloud.service
-After=nextcloud.service
+Description=nextcloud-proxy.container
+Requires=nextcloud.service nextcloud-proxy.socket
+After=nextcloud.service nextcloud-proxy.socket
 
 [Container]
 Image=docker.io/library/caddy:latest

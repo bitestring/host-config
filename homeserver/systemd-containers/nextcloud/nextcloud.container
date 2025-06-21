@@ -1,6 +1,5 @@
-# nextcloud.container
 [Unit]
-Description=nextcloud
+Description=nextcloud.container
 Wants=nextcloud-cron.service nextcloud-proxy.service
 
 [Container]
