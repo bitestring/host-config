@@ -121,3 +121,9 @@ ansible-playbook apps.yml
 ```
 
 Now enjoy Fedora!
+
+# References
+
+https://fedoraproject.org/
+
+https://rpmfusion.org/

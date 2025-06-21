@@ -53,3 +53,9 @@ nix shell nixpkgs#pkg1
 ```
 nix shell nixpkgs#{pkg1,pkg2}
 ```
+
+# References
+
+https://nixos.org/
+
+https://wiki.nixos.org/
