@@ -7,8 +7,8 @@ install:
 
 .PHONY: uninstall
 uninstall:
-	rm ~/.config/containers/systemd/nextcloud
-	rm ~/.config/systemd/user/nextcloud-proxy.socket
+	rm --force ~/.config/containers/systemd/nextcloud
+	rm --force ~/.config/systemd/user/nextcloud-proxy.socket
 
 .PHONY: start
 start:
