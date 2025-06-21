@@ -46,7 +46,7 @@ make start
 
 To access Nextcloud in your network, open the configured port on firewall.
 
-_Example using firewall-cmd:_
+Example using `firewall-cmd`:
 
 ```
 sudo firewall-cmd --zone=home --add-port={7443/tcp,7443/udp} --permanent
