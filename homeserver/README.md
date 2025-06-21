@@ -57,3 +57,9 @@ ansible-playbook --ask-become-pass system-config.yml
 # Apply custom config.txt settings for Raspberry Pi:
 
 Manually tweak changes to `/boot/config.txt`. Refer `./pi-custom-config.txt` for reference.
+
+# References
+
+https://almalinux.org/
+
+https://podman.io/

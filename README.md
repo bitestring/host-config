@@ -29,3 +29,7 @@ Some manual configurations and tweaks have been documented in [MANUAL_CONFIG.md]
 # License
 
 The source code is licensed under the [GNU Affero General Public License Version 3](https://www.gnu.org/licenses/agpl-3.0.txt). A copy of the GNU AGPL V3.0 can be found in this repository under the filename [LICENSE](./LICENSE).
+
+# References
+
+https://docs.ansible.com/ansible/latest/collections/index.html

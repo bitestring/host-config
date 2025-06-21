@@ -1,7 +1,5 @@
 # Nextcloud
 
-Reference: https://github.com/nextcloud/docker/tree/master/.examples/docker-compose/with-nginx-proxy/postgres/apache
-
 # Run Nextcloud
 
 ## Step 1: Generate self-signed TLS certificate
@@ -77,3 +75,7 @@ Remove Nextcloud units and sockets from user's systemd directories using
 make stop
 make uninstall
 ```
+
+# References
+
+https://github.com/nextcloud/docker/tree/master/.examples/docker-compose/with-nginx-proxy/postgres/apache
