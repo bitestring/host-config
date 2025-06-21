@@ -14,11 +14,9 @@ openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out ./caddy/ce
 
 Make sure to enter your server domain name during the `Common Name (e.g. server FQDN or YOUR name) []` prompt.
 
-## Step 2: Create a volume to store data
+## Step 2: Confirm data volume location
 
-```
-mkdir --parents ~/data/volumes/nextcloud/nextcloud/data/
-```
+Nextcloud container assumes data is stored in `~/data/volumes/nextcloud/nextcloud/data/`. If data already exists at this location, it would be automatically used. Otherwise this directory will be created as part of `make install` step.
 
 ## Step 3: Create .env file
 

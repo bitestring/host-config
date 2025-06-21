@@ -1,14 +1,17 @@
 .PHONY: install
 install:
+	mkdir --parents ~/data/volumes/nextcloud/nextcloud/data/
 	mkdir --parents ~/.config/systemd/user/
 	ln --symbolic --force --verbose "$(CURDIR)/nextcloud-proxy.socket" ~/.config/systemd/user/
 	mkdir --parents ~/.config/containers/systemd/
 	ln --symbolic --force --verbose "$(CURDIR)" ~/.config/containers/systemd/
+	systemctl --user daemon-reload
 
 .PHONY: uninstall
 uninstall:
 	rm --force ~/.config/containers/systemd/nextcloud
 	rm --force ~/.config/systemd/user/nextcloud-proxy.socket
+	systemctl --user daemon-reload
 
 .PHONY: start
 start:

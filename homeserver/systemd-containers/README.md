@@ -4,6 +4,14 @@
 
 Each service has instructions to activate them in their respective README.md file.
 
+## Data Volumes
+
+It is assumed that the data would be stored at user's home directory and follows following scheme
+
+`$HOME/data/volumes/<POD>/<CONTAINER>/<data|config|...>`
+
+> Note: Mount your disk at `$HOME/data/` to ensure all user data is persisted.
+
 ## User ID mapping
 
 > Note: `root` user inside the container is always mapped to host user who started the container (Ex. `1000`).
