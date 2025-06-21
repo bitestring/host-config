@@ -6,7 +6,9 @@ Reference: https://github.com/nextcloud/docker/tree/master/.examples/docker-comp
 
 https://www.linode.com/docs/guides/create-a-self-signed-tls-certificate/
 
-    openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out ./nginx/cert.pem -keyout ./nginx/cert.key
+```
+openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out ./nginx/cert.pem -keyout ./nginx/cert.key
+```
 
 ## Step 2: Create a volume to store data
 
@@ -39,4 +41,6 @@ make up
 
 Sometimes Nextcloud maintanence jobs need to be executed manually. For example, to create indexes. Use following command to achieve the same.
 
-    make maintenance
+```
+make maintenance
+```

@@ -1,6 +1,5 @@
 # Syncthing
 
-
 ## Step 1: Create a volume to store Syncthing config files
 
 ```
@@ -16,6 +15,7 @@ nano .env
 ```
 
 **Example .env file:**
+
 ```
 HOST_DIR=<EXAMPLE>
 MOUNT_POINT=/mnt/<EXAMPLE>

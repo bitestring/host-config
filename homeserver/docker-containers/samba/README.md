@@ -23,6 +23,7 @@ nano .env
 ```
 
 **Example .env file:**
+
 ```
 HOST_DIR=<EXAMPLE>
 MOUNT_POINT=/mnt/<EXAMPLE>
@@ -78,11 +79,9 @@ nano ./volumes/config/smb.conf
 make up
 ```
 
-
 # Mounting Samba Share
 
 To auto-mount a Samba share on the local network, add the following entry to `/etc/fstab`
-
 
 ```
 //<HOSTNAME>.lan/<SHARENAME> /mnt/samba/<SHARENAME> cifs nofail,_netdev,x-systemd.automount,uid=<USERNAME>,gid=<USERNAME>,credentials=/home/<USERNAME>/.smbcred 0 0
@@ -102,6 +101,9 @@ Make sure the file is readable only by `root`
 
 ```
 sudo chown root:root ~/.smbcred
+```
+
+```
 sudo chmod u=rw,g=,o= ~/.smbcred
 ```
 
@@ -109,5 +111,8 @@ Now reload systemd daemon and mount
 
 ```
 sudo systemctl daemon-reload
+```
+
+```
 sudo mount -a -t cifs
 ```

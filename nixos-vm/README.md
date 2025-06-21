@@ -8,32 +8,48 @@ Carefully select required configuration from existing `/etc/nixos` and then merg
 
 ## Update Flakes and Rebuild
 
-    $ make update
+```
+make update
+```
 
 ## Build the new configuration for next boot
 
-    $ make boot
+```
+make boot
+```
 
 ## Build and activate the new configuration
 
-    $ make switch
+```
+make switch
+```
 
 ## Run Garbage Collection
 
-    $ make gc
+```
+make gc
+```
 
 ## Repair Nix Store
 
-    $ make repair
+```
+make repair
+```
 
 ## List all system generations
 
-    $ make ls
+```
+make ls
+```
 
 # NixOS Ephemeral Shells
 
 **Examples**
 
-    $ nix shell nixpkgs#pkg1
+```
+nix shell nixpkgs#pkg1
+```
 
-    $ nix shell nixpkgs#{pkg1,pkg2}
+```
+nix shell nixpkgs#{pkg1,pkg2}
+```

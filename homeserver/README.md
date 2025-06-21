@@ -8,28 +8,39 @@ Playbook for installing basic system packages on a RHEL-compatible server, such 
 
 ```
 sudo dnf offline-upgrade download
+```
+
+```
 sudo dnf offline-upgrade reboot
 ```
 
 ### Step 2 - Install pip:
 
-    $ sudo dnf install pip
+```
+sudo dnf install pip
+```
 
 ### Step 3 - Install Ansible:
 
-    $ pip install --user ansible
+```
+pip install --user ansible
+```
 
 ### Step 4 - Install Ansible Collections:
 
 Navigate to the directory where you've cloned this repository and execute following command to install Ansible Collections from `requirements.yml`.
 
-    $ ansible-galaxy collection install -r requirements.yml
+```
+ansible-galaxy collection install -r requirements.yml
+```
 
 ### Step 5 - Install system packages:
 
 Execute the `system-dnf.yml` playbook to install core system tools like drivers, monitoring tools etc.
 
-    $ ansible-playbook --ask-become-pass system-dnf.yml
+```
+ansible-playbook --ask-become-pass system-dnf.yml
+```
 
 and reboot.
 
@@ -39,7 +50,9 @@ and reboot.
 
 This playbook applies custom configurations, enables systemd services and other customizations.
 
-    $ ansible-playbook --ask-become-pass system-config.yml
+```
+ansible-playbook --ask-become-pass system-config.yml
+```
 
 # Apply custom config.txt settings for Raspberry Pi:
 

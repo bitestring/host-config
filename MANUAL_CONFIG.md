@@ -7,7 +7,7 @@
 Ensure TRIM is enabled for SSDs in filesystems and LUKS/LVM layers. To confirm if TRIM already works, run
 
 ```
-$ sudo fstrim --all --verbose
+sudo fstrim --all --verbose
 
 /boot/efi: 579.5 MiB (607686656 bytes) trimmed on /dev/nvme0n1p1
 /boot: 591.4 MiB (620167168 bytes) trimmed on /dev/nvme0n1p2
@@ -17,19 +17,19 @@ $ sudo fstrim --all --verbose
 It should have trimmed all partitions. If not, TRIM might not be enabled at LUKS layer. To enable TRIM in LUKS, add **discard** option to LUKS partition.
 
 ```
-$ sudo cryptsetup --allow-discards --persistent refresh <luks-partition-id>
+sudo cryptsetup --allow-discards --persistent refresh <luks-partition-id>
 ```
 
 For example
 
 ```
-$ sudo cryptsetup --allow-discards --persistent refresh luks-d266ce37-25ec-4abf-bfbd-993d2d40666a
+sudo cryptsetup --allow-discards --persistent refresh luks-d266ce37-25ec-4abf-bfbd-993d2d40666a
 ```
 
 This can be verified by checking `/etc/crypttab`
 
 ```
-$ sudo cat /etc/crypttab
+sudo cat /etc/crypttab
 
 luks-d266ce37-25ec-4abf-bfbd-993d2d40666a UUID=d266ce37-25ec-4abf-bfbd-993d2d40666a none discard
 ```
@@ -37,13 +37,13 @@ luks-d266ce37-25ec-4abf-bfbd-993d2d40666a UUID=d266ce37-25ec-4abf-bfbd-993d2d406
 Then regenerate **initramfs**.
 
 ```
-$ sudo dracut --regenerate-all --force
+sudo dracut --regenerate-all --force
 ```
 
 ### For Atomic variants
 
 ```
-$ rpm-ostree kargs --append-if-missing=rd.luks.options=discard
+rpm-ostree kargs --append-if-missing=rd.luks.options=discard
 ```
 
 Once TRIM is enabled, check the mount options
@@ -59,9 +59,7 @@ $ mount | grep discard
 
 Enable filesystem level compression to increase SSD life. Edit `/etc/fstab` to add following mount options to btrfs volumes
 
-```
-compress=zstd:3
-```
+`compress=zstd:3`
 
 For example, `/etc/fstab` should look like
 
@@ -108,19 +106,19 @@ Review if network interfaces are correctly attached to appropriate zones. Block 
 On **firewalld**, current configuration can be shown with
 
 ```
-$ sudo firewall-cmd --list-all-zones
+sudo firewall-cmd --list-all-zones
 ```
 
 ```
-$ sudo firewall-cmd --list-services --zone=public
+sudo firewall-cmd --list-services --zone=public
 ```
 
 ```
-$ sudo firewall-cmd --list-ports --zone=public
+sudo firewall-cmd --list-ports --zone=public
 ```
 
 ```
-$ sudo firewall-cmd --get-default-zone
+sudo firewall-cmd --get-default-zone
 ```
 
 ### Test firewall config
@@ -161,13 +159,13 @@ To check if Fail2Ban works, login into Cockpit or SSH with incorrect credentials
 Banned IP addresses can be checked using
 
 ```
-$ sudo fail2ban-client banned
+sudo fail2ban-client banned
 ```
 
 To unban after the test, run
 
 ```
-$ sudo fail2ban-client unban <IP_Addr>
+sudo fail2ban-client unban <IP_Addr>
 ```
 
 ## Tailscale and rp_filter rules
@@ -201,7 +199,7 @@ Change the interface names as per `tailscale status` report. Reboot the host to 
 You can check the current config by querying `sysctl`
 
 ```
-$ sudo sysctl -a | grep rp_filter
+sudo sysctl -a | grep rp_filter
 ```
 
 ## sudo does not ask for password

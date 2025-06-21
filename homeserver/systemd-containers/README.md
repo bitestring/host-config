@@ -19,9 +19,7 @@ sweethome:524288:65536
 
 then user `33` (www-data) inside a container would be mapped to
 
-```
-524288 + 33 - 1 = 524320
-```
+`524288 + 33 - 1 = 524320`
 
 on the host.
 
