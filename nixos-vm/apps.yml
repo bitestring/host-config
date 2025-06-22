@@ -49,5 +49,6 @@
         - org.libreoffice.LibreOffice
         - org.videolan.VLC
         - io.podman_desktop.PodmanDesktop
+        - org.gnu.emacs
         - io.dbeaver.DBeaverCommunity
         - com.usebruno.Bruno

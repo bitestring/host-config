@@ -60,10 +60,6 @@
       userName = user.name;
       userEmail = user.email;
     };
-    emacs = {
-      enable = true;
-      package = pkgs.emacs-gtk; # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
-    };
     vscode =
       let
         vsx = inputs.nix-vscode-extensions.extensions.${pkgs.system};
