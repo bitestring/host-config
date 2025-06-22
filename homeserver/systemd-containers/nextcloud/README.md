@@ -51,15 +51,21 @@ sudo firewall-cmd --reload
 
 # Check service health
 
-To check if all services and sockets are up and running, run
+To check if all Nextcloud services and sockets are up and running, run
+
+```
+make list
+```
+
+To check the detailed status and logs of each Nextcloud unit and socket, run
 
 ```
 make status
 ```
 
-# Test Nextcloud configuration
+# Check Nextcloud configuration
 
-To test if Nextcloud is correctly installed and configured, login to Nextcloud and check **_Administration settings -> Administration -> Overview_**. This page will report critical errors and warnings.
+To check if Nextcloud is correctly installed and configured, login to Nextcloud and check **_Administration settings -> Administration -> Overview_**. This page will report critical errors and warnings.
 
 # Nextcloud maintenance
 

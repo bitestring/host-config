@@ -26,11 +26,14 @@ start:
 
 .PHONY: stop
 stop:
-	systemctl --user stop "nextcloud*"
+	systemctl --user stop nextcloud-pod nextcloud-proxy.socket
+
+.PHONY: list
+list:
+	systemctl --user list-units --all "nextcloud*"
 
 .PHONY: status
 status:
-	systemctl --user list-units --all "nextcloud*"
 	systemctl --user status "nextcloud*"
 
 .PHONY: update
