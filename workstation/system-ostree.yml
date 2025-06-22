@@ -21,27 +21,7 @@
           - intel-media-driver
           - libva-utils
 
-          # cockpit
-          - cockpit
-          - cockpit-system
-          - cockpit-ostree
-          - cockpit-podman
-          - cockpit-machines
-          - cockpit-selinux
-          - cockpit-networkmanager
-          - cockpit-storaged
-          - cockpit-files
-
-          # virtualization
-          - qemu
-          - qemu-kvm
-          - libvirt
-          - libvirt-nss
-          - libvirt-daemon-kvm
-          - libvirt-daemon-config-network
-          - libvirt-dbus
-
-            # essentials
+          # essentials
           - fish
           - lm_sensors
           - smartmontools
@@ -61,6 +41,27 @@
           - gnome-shell-extension-dash-to-dock
           - gnome-shell-extension-caffeine
           - gnome-shell-extension-gsconnect
+
+          # virtualization & containers
+          - qemu
+          - qemu-kvm
+          - libvirt
+          - libvirt-nss
+          - libvirt-daemon-kvm
+          - libvirt-daemon-config-network
+          - libvirt-dbus
+
+          # cockpit
+          - cockpit
+          - cockpit-system
+          - cockpit-ostree
+          - cockpit-podman
+          - cockpit-machines
+          - cockpit-selinux
+          - cockpit-networkmanager
+          - cockpit-storaged
+          - cockpit-files
+
         state: present
 
     - name: Install VeraCrypt

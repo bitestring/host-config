@@ -1,6 +1,6 @@
 # Homeserver setup
 
-Playbook for installing basic system packages on a RHEL-compatible server, such as AlmaLinux, on a Raspberry Pi (tested on AlmaLinux).
+Playbook for installing basic system packages on a RHEL-compatible server, such as AlmaLinux, on a Raspberry Pi (tested on AlmaLinux 10).
 
 # Install basic packages
 

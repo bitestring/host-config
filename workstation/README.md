@@ -1,8 +1,6 @@
 # Personal workstation setup
 
-Ansible playbooks for configuring a stock Fedora Silverblue installation
-
-# Install basic packages
+Ansible playbooks for configuring a stock Fedora Silverblue or Workstation.
 
 ## Fedora Silverblue
 
@@ -58,9 +56,7 @@ ansible-playbook --ask-become-pass system-ostree.yml
 
 and reboot.
 
-## Fedora Workstation or KDE Plasma
-
-Ansible playbooks for configuring a stock Fedora Workstation installation
+## Fedora Workstation
 
 ### Step 1 - Update operating system:
 

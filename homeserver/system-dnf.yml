@@ -46,18 +46,6 @@
           # drivers & firmware
           - rpi-eeprom
 
-          # cockpit
-          - cockpit
-          - cockpit-system
-          - cockpit-ostree
-          - cockpit-podman
-          - cockpit-machines
-          - cockpit-selinux
-          - cockpit-networkmanager
-          - cockpit-storaged
-          - cockpit-sosreport
-          - cockpit-files
-
           # essentials
           - fish
           - btrfs-progs
@@ -71,5 +59,19 @@
           - make
           - rsync
           - tailscale
+
+          # virtualization & containers
+          - podman
+
+          # cockpit
+          - cockpit
+          - cockpit-system
+          - cockpit-podman
+          - cockpit-machines
+          - cockpit-selinux
+          - cockpit-networkmanager
+          - cockpit-storaged
+          - cockpit-sosreport
+          - cockpit-files
 
         state: present
