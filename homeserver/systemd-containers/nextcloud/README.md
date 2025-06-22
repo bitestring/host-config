@@ -49,6 +49,14 @@ sudo firewall-cmd --zone=home --add-port={7443/tcp,7443/udp} --permanent
 sudo firewall-cmd --reload
 ```
 
+# Check service health
+
+To check if all services and sockets are up and running, run
+
+```
+make status
+```
+
 # Test Nextcloud configuration
 
 To test if Nextcloud is correctly installed and configured, login to Nextcloud and check **_Administration settings -> Administration -> Overview_**. This page will report critical errors and warnings.
