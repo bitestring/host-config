@@ -48,6 +48,7 @@
         - im.riot.Riot
         - org.libreoffice.LibreOffice
         - org.videolan.VLC
+        - org.kde.ark
         - io.podman_desktop.PodmanDesktop
         - org.gnu.emacs
         - io.dbeaver.DBeaverCommunity
