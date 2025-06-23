@@ -128,13 +128,25 @@ To verify if firewall is correctly configured, manually do a port scan on target
 For example,
 
 ```
-$ sudo nmap -sS sweethome-server
-$ sudo nmap -sS sweethome-server.lan
-$ sudo nmap -sS 192.168.1.100
-$ sudo nmap -sS -6 <Public_IP_V6_Addr>
+$ sudo nmap -v -sS -sU sweethome-server
+$ sudo nmap -v -sS -sU sweethome-server.lan
+$ sudo nmap -v -sS -sU 192.168.1.100
+$ sudo nmap -v -sS -sU -6 <Public_IP_V6_Addr>
 ```
 
-should list open ports.
+should scan most popular ports and list open TCP/UDP ports.
+
+To scan a particular port range, run
+
+```
+sudo nmap -v -sS -sU -p 7000-8000 sweethome-server
+```
+
+**Flags**:
+
+`-sS` - scans TCP ports
+
+`-sU` - scans UDP ports
 
 ## Review Fail2Ban
 
