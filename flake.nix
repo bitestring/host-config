@@ -15,13 +15,16 @@
         nixd
         nixfmt-rfc-style
 
-        # system deps
+        # System deps
         glibcLocales
 
         # Python deps
         ansible
         ansible-lint
         ansible-language-server
+
+        # Other deps
+        caddy # for formatting Caddyfile
       ];
 
     in
