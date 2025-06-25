@@ -163,7 +163,7 @@
             - kdeconnect
             # - syncthing
 
-        - name: "Change wlo1 interface zone to home"
+        - name: "Change wlo1/sweethome-ap WiFi zone to home"
           become: true
           community.general.nmcli:
             type: wifi

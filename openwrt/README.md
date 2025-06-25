@@ -12,6 +12,10 @@ https://openwrt.org/docs/guide-user/services/ad-blocking
 
 https://openwrt.org/docs/guide-user/network/wifi/guestwifi/guestwifi_dumbap
 
+## Firewall
+
+https://openwrt.org/docs/guide-user/firewall/start
+
 ## Attended Sysupgrade
 
 https://openwrt.org/docs/guide-user/installation/attended.sysupgrade

@@ -121,6 +121,15 @@ sudo firewall-cmd --list-ports --zone=public
 sudo firewall-cmd --get-default-zone
 ```
 
+To harden further, allow only select IP address or subnet instead of trusting the whole interface
+
+```
+sudo firewall-cmd --zone=home --add-source=192.168.0.0/16
+sudo firewall-cmd --zone=home --add-source=fe80::/64
+sudo firewall-cmd --zone=home --remove-interface=end0
+sudo firewall-cmd --runtime-to-permanent
+```
+
 ### Test firewall config
 
 To verify if firewall is correctly configured, manually do a port scan on target host using `nmap`.
