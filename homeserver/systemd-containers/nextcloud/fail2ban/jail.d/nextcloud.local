@@ -1,0 +1,6 @@
+# /etc/fail2ban/jail.d/nextcloud.local
+[nextcloud]
+enabled = true
+port = 7443
+backend = systemd
+journalmatch = _SYSTEMD_USER_UNIT=nextcloud.service

@@ -61,6 +61,8 @@
               banaction = firewallcmd-rich-rules[zones="%(zones)s"]
               banaction_allports = firewallcmd-rich-rules[zones="%(zones)s", actiontype=<allports>]
               port = 0-65535
+              protocol = all
+              findtime = 24h
               bantime = 24h
 
               [pam-generic]

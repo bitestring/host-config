@@ -1,5 +1,10 @@
 # Nextcloud
 
+# Prerequisites
+
+-   [Podman](https://podman.io/)
+-   [Fail2Ban](https://github.com/fail2ban/fail2ban)
+
 # Run Nextcloud
 
 ## Step 1: Generate self-signed TLS certificate
@@ -66,6 +71,12 @@ make status
 # Check Nextcloud configuration
 
 To check if Nextcloud is correctly installed and configured, login to Nextcloud and check **_Administration settings -> Administration -> Overview_**. This page will report critical errors and warnings.
+
+# Check Fail2Ban configuration
+
+```
+sudo fail2ban-client status nextcloud
+```
 
 # Nextcloud maintenance
 

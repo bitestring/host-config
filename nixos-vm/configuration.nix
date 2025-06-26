@@ -255,6 +255,14 @@
     client.enable = false;
   };
 
+  services.fail2ban = {
+    enable = true;
+    package = pkgs.fail2ban;
+    packageFirewall = pkgs.nftables;
+    banaction = "nftables-multiport";
+    banaction-allports = "nftables-allport";
+  };
+
   # Write systemd journald logs to RAM instead of disk
   services.journald.storage = "volatile";
 

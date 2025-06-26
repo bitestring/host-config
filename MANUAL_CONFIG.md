@@ -175,7 +175,7 @@ Status
 
 ### Test Fail2Ban config
 
-To check if Fail2Ban works, login into Cockpit or SSH with incorrect credentials. After a few attempts, your IP address will be blocked from accessing the target host.
+To check if Fail2Ban works, login into Cockpit or SSH with incorrect credentials from another device. After a few attempts, your IP address will be blocked from accessing the target host.
 
 Banned IP addresses can be checked using
 
