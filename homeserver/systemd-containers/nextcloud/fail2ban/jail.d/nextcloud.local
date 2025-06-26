@@ -2,5 +2,6 @@
 [nextcloud]
 enabled = true
 port = 7443
+filter = nextcloud
 backend = systemd
 journalmatch = _SYSTEMD_USER_UNIT=nextcloud.service
