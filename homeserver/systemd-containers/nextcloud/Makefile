@@ -42,12 +42,12 @@ stop:
 
 .PHONY: list
 list:
-	systemctl --user list-units --all "nextcloud*"
+	-systemctl --user list-units --all "nextcloud*"
 
 .PHONY: status
 status:
-	systemctl --user status "nextcloud*"
-	sudo fail2ban-client status nextcloud
+	-systemctl --user status "nextcloud*"
+	-sudo fail2ban-client status nextcloud
 
 .PHONY: update
 update:
