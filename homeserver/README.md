@@ -4,7 +4,7 @@ Playbook for installing basic system packages on a RHEL-compatible server, such 
 
 # WARNING
 
-**DO NOT CONNECT THE SERVER TO AN UNTRUSTED NETWORK. MAKE SURE THE NETWORK IS PROTECTED BY AN TRUSTED EXTERNAL ROUTER/FIREWALL LIKE OPENWRT BEFORE TRAFFIC REACHES THE SERVER.**
+**DO NOT CONNECT THE SERVER TO AN UNTRUSTED NETWORK. MAKE SURE THE NETWORK IS PROTECTED BEHIND A TRUSTED EXTERNAL ROUTER/FIREWALL LIKE OPENWRT BEFORE TRAFFIC REACHES THE SERVER.**
 
 This homeserver setup assumes there's a trusted router like OpenWrt with proper firewall configuration protecting the home network. Connecting the server to an untrusted or outdated routers can put the data at risk.
 
