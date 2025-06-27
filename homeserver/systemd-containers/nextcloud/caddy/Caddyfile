@@ -26,16 +26,20 @@
 		protocols h3
 	}
 
-	reverse_proxy localhost:80
-
-	header {
-		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-	}
+	# Enable TLS encryption using the given certificate.
+	tls /etc/ssl/certs/cert.pem /etc/ssl/private/cert.key
 
 	request_body {
 		max_size 4GB
 	}
 
-	# Enable TLS encryption using the given certificate.
-	tls /etc/ssl/certs/cert.pem /etc/ssl/private/cert.key
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	}
+
+	# https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/reverse_proxy_configuration.html
+	redir /.well-known/carddav /remote.php/dav/ 301
+	redir /.well-known/caldav /remote.php/dav/ 301
+
+	reverse_proxy localhost:80
 }
