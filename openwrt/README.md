@@ -16,6 +16,10 @@ https://openwrt.org/docs/guide-user/network/wifi/guestwifi/guestwifi_dumbap
 
 https://openwrt.org/docs/guide-user/firewall/start
 
+## Security and Hardening
+
+https://openwrt.org/docs/guide-user/security/start
+
 ## Attended Sysupgrade
 
 https://openwrt.org/docs/guide-user/installation/attended.sysupgrade
