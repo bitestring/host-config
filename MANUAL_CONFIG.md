@@ -256,3 +256,7 @@ Use `zram` if available on your distribution.
 ## Automatic Updates
 
 Enable automatic updates if available, to keep the system updated. Cockpit provides automatic update settings under **Software updates -> Settings** option.
+
+## Monitoring
+
+Regularly check for logs, firewall configuration, fail2ban status etc. on the hosts and firewall/router to detect any intrusions or configuration drifts.
