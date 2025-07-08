@@ -165,16 +165,6 @@
             - kdeconnect
             # - syncthing
 
-        - name: "Change wlo1/sweethome-ap WiFi zone to home"
-          become: true
-          community.general.nmcli:
-            type: wifi
-            ifname: wlo1
-            conn_name: sweethome-ap
-            ssid: sweethome-ap
-            zone: home
-            state: present
-
         - name: "Change tailscale0 interface zone to home"
           become: true
           ansible.posix.firewalld:
