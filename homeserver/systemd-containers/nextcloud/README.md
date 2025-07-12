@@ -17,17 +17,17 @@ openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out ./caddy/ce
 
 Make sure to enter your server domain name during the `Common Name (e.g. server FQDN or YOUR name) []` prompt.
 
-## Step 2: Confirm data volume location
+## Step 2: Create .env file
 
-Nextcloud container assumes data is stored in `~/data/volumes/nextcloud/nextcloud/data/`. If data already exists at this location, it would be automatically used. Otherwise this directory will be created as part of `make install` step.
-
-## Step 3: Create .env file
-
-Create a .env file which provides hostname and port on which Nextcloud is exposed.
+Create a `.env` file which provides hostname and port on which Nextcloud is exposed.
 
 ```
 cp .env.template .env
 ```
+
+## Step 3: Confirm data volume location
+
+Nextcloud container assumes data is stored in `~/data/volumes/nextcloud/nextcloud/data/`. If data already exists at this location, it would be automatically used. Otherwise this directory will be created as part of `make install` step.
 
 ## Step 4: Install Nextcloud
 
@@ -37,7 +37,7 @@ Install Nextcloud units and sockets in user's systemd directories using
 make install
 ```
 
-## Step 5: Run Nextcloud
+## Step 5: Start Nextcloud
 
 ```
 make start
