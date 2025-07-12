@@ -1,0 +1,8 @@
+# /etc/fail2ban/jail.d/dokuwiki.local
+[dokuwiki]
+enabled = true
+port = 7001
+maxretry = 10
+filter = dokuwiki
+backend = systemd
+journalmatch = _SYSTEMD_USER_UNIT=dokuwiki-proxy.service

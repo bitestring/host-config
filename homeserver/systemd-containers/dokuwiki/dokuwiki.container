@@ -1,0 +1,12 @@
+[Unit]
+Description=dokuwiki.container
+Wants=dokuwiki-proxy.service
+
+[Container]
+Image=docker.io/dokuwiki/dokuwiki:stable
+AutoUpdate=registry
+Pod=dokuwiki.pod
+Volume=%h/data/volumes/dokuwiki/dokuwiki/data:/storage:Z
+
+[Service]
+Restart=always

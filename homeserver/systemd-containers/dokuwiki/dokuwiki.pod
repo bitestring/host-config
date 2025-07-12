@@ -1,0 +1,8 @@
+[Unit]
+Description=dokuwiki.pod
+
+[Pod]
+Network=none
+
+[Install]
+WantedBy=multi-user.target default.target
