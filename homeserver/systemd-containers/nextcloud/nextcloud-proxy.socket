@@ -6,8 +6,8 @@ Description=nextcloud-proxy.socket
 
 [Socket]
 BindIPv6Only=both
-ListenStream=[::]:7443
-ListenDatagram=[::]:7443
+ListenStream=[::]:7000
+ListenDatagram=[::]:7000
 
 [Install]
 WantedBy=sockets.target

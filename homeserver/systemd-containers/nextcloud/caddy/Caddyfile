@@ -11,7 +11,7 @@
 	}
 }
 
-:7443 {
+:7000 {
 	# Reference:
 	# https://caddy.community/t/beginner-friendly-security-oriented-setup-rootless-podman-running-pi-hole-and-unbound-using-reverse-proxy-via-caddy-with-socket/29988
 	# https://github.com/eriksjolund/podman-caddy-socket-activation/tree/main
