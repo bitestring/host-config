@@ -38,7 +38,7 @@
 
 	reverse_proxy localhost:8080
 
-    # For configuring fail2ban
+	# For configuring fail2ban
 	log {
 		format filter {
 			request>headers delete
