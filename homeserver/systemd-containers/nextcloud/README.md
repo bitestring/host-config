@@ -19,7 +19,7 @@ Make sure to enter your server domain name during the `Common Name (e.g. server 
 
 ## Step 2: Create .env file
 
-Create a `.env` file which provides hostname and port on which Nextcloud is exposed.
+Create a `.env` file based on `.env.template` and configure ports, domains, timezone etc.
 
 ```
 cp .env.template .env
