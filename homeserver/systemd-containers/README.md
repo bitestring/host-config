@@ -33,6 +33,16 @@ on the host.
 
 Reference: https://opensource.com/article/19/2/how-does-rootless-podman-work
 
+### Editing files from the host
+
+Since User ID is different for files created by the container in a volume, `podman unshare` can be used to edit them without requiring `sudo`.
+
+```
+$ podman unshare nano example.conf
+```
+
+This works because the subuid range belongs to the user on the host.
+
 ## Change ownership of files after migration
 
 If user ID mapping is changed due to OS reinstallation, then compute the new host UID for the files created by the container and change ownership using `chown` as follows
