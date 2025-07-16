@@ -1,0 +1,13 @@
+# Reference:
+# https://caddy.community/t/beginner-friendly-security-oriented-setup-rootless-podman-running-pi-hole-and-unbound-using-reverse-proxy-via-caddy-with-socket/29988
+# https://github.com/eriksjolund/podman-caddy-socket-activation/tree/main
+[Unit]
+Description=paperless-ngx-proxy.socket
+
+[Socket]
+BindIPv6Only=both
+ListenStream=[::]:7002
+ListenDatagram=[::]:7002
+
+[Install]
+WantedBy=sockets.target

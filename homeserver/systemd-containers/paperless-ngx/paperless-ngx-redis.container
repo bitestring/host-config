@@ -1,0 +1,11 @@
+[Unit]
+Description=paperless-ngx.container
+
+[Container]
+Image=docker.io/library/redis:8
+AutoUpdate=registry
+Pod=paperless-ngx.pod
+Volume=%h/data/volumes/paperless-ngx/paperless-ngx-redis/data:/data:Z
+
+[Service]
+Restart=always

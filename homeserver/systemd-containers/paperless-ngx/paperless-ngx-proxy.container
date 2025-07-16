@@ -1,0 +1,15 @@
+[Unit]
+Description=paperless-ngx-proxy.container
+Requires=paperless-ngx.service paperless-ngx-proxy.socket
+After=paperless-ngx.service paperless-ngx-proxy.socket
+
+[Container]
+Image=docker.io/library/caddy:latest
+AutoUpdate=registry
+Pod=paperless-ngx.pod
+Volume=./caddy/Caddyfile:/etc/caddy/Caddyfile:Z
+Volume=./caddy/cert.pem:/etc/ssl/certs/cert.pem:Z
+Volume=./caddy/cert.key:/etc/ssl/private/cert.key:Z
+
+[Service]
+Restart=always

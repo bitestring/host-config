@@ -1,0 +1,8 @@
+# /etc/fail2ban/jail.d/paperless-ngx.local
+# https://github.com/paperless-ngx/paperless-ngx/wiki/Using-Security-Tools-with-Paperless-ngx#fail2ban
+[paperless-ngx]
+enabled = true
+port = 7002
+filter = paperless-ngx
+backend = systemd
+journalmatch = _SYSTEMD_USER_UNIT=paperless-ngx.service

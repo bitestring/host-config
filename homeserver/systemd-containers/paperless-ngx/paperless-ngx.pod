@@ -1,0 +1,8 @@
+[Unit]
+Description=paperless-ngx.pod
+
+[Pod]
+Network=none
+
+[Install]
+WantedBy=multi-user.target default.target
