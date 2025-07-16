@@ -64,11 +64,6 @@ status:
 	-systemctl --user status "nextcloud*"
 	-sudo fail2ban-client status nextcloud
 
-.PHONY: update
-update:
-	@echo "Note: Podman auto-update updates all images and containers on the system!"
-	podman auto-update
-
 .PHONY: maintenance
 maintenance:
 	podman exec --user www-data --interactive --tty systemd-nextcloud php occ db:add-missing-indices

@@ -61,8 +61,3 @@ list:
 status:
 	-systemctl --user status "dokuwiki*"
 	-sudo fail2ban-client status dokuwiki
-
-.PHONY: update
-update:
-	@echo "Note: Podman auto-update updates all images and containers on the system!"
-	podman auto-update
