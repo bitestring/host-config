@@ -1,0 +1,40 @@
+# Format this file with "caddy fmt --overwrite"
+{
+	auto_https off
+
+	# https://caddyserver.com/docs/caddyfile/options#listener-wrappers
+	servers {
+		listener_wrappers {
+			http_redirect # Redirect to HTTPS if a HTTP request is made on the same port.
+			tls
+		}
+	}
+}
+
+:7003 {
+	# Reference:
+	# https://caddy.community/t/beginner-friendly-security-oriented-setup-rootless-podman-running-pi-hole-and-unbound-using-reverse-proxy-via-caddy-with-socket/29988
+
+	# HTTP 1 and HTTP 2 over TCP
+	bind fd/3 {
+		protocols h1 h2
+	}
+
+	# HTTP 3 over UDP
+	bind fdgram/4 {
+		protocols h3
+	}
+
+	# Enable TLS encryption using the given certificate.
+	tls /etc/ssl/certs/cert.pem /etc/ssl/private/cert.key
+
+	request_body {
+		max_size 8MB
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	}
+
+	reverse_proxy localhost:8080
+}

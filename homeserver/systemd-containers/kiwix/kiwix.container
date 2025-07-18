@@ -1,0 +1,13 @@
+[Unit]
+Description=kiwix.container
+Wants=kiwix-proxy.service
+
+[Container]
+Image=ghcr.io/kiwix/kiwix-serve:latest
+AutoUpdate=registry
+Pod=kiwix.pod
+Volume=%h/data/volumes/kiwix/kiwix/data:/data:Z
+Exec=*.zim
+
+[Service]
+Restart=always

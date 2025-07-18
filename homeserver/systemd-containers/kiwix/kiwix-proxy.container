@@ -1,0 +1,15 @@
+[Unit]
+Description=kiwix-proxy.container
+Requires=kiwix.service kiwix-proxy.socket
+After=kiwix.service kiwix-proxy.socket
+
+[Container]
+Image=docker.io/library/caddy:latest
+AutoUpdate=registry
+Pod=kiwix.pod
+Volume=./caddy/Caddyfile:/etc/caddy/Caddyfile:Z
+Volume=./caddy/cert.pem:/etc/ssl/certs/cert.pem:Z
+Volume=./caddy/cert.key:/etc/ssl/private/cert.key:Z
+
+[Service]
+Restart=always
