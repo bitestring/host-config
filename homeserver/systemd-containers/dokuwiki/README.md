@@ -1,5 +1,7 @@
 # DokuWiki
 
+[DokuWiki](https://www.dokuwiki.org/) is a simple to use and highly versatile Open Source wiki software that doesn't require a database.
+
 # Prerequisites
 
 -   [Podman](https://podman.io/)

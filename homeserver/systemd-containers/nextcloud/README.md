@@ -1,5 +1,7 @@
 # Nextcloud
 
+[Nextcloud](https://nextcloud.com/) is a suite of client-server software for creating and using file hosting services.
+
 # Prerequisites
 
 -   [Podman](https://podman.io/)
