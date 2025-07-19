@@ -6,26 +6,17 @@
 
 -   [Podman](https://podman.io/)
 -   [Fail2Ban](https://github.com/fail2ban/fail2ban)
+-   [OpenSSL](https://www.openssl.org/)
 
 # Run Kiwix
 
-## Step 1: Generate self-signed TLS certificate
-
-```
-openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -days 36500 -noenc -keyout ./caddy/cert.key -out ./caddy/cert.crt
-```
-
-Make sure to enter your server domain name during the `Common Name (e.g. server FQDN or YOUR name) []` prompt.
-
-**Reference:** https://stackoverflow.com/questions/10175812/how-can-i-generate-a-self-signed-ssl-certificate-using-openssl#comment57700926_10176685
-
-## Step 2: Confirm data volume location
+## Step 1: Confirm data volume location
 
 Kiwix container assumes data is stored in `~/data/volumes/kiwix/kiwix/data/`. If data already exists at this location, it would be automatically used. Otherwise this directory will be created as part of `make install` step.
 
-## Step 3: Install Kiwix
+## Step 2: Install Kiwix
 
-Install Kiwix units and sockets in user's systemd directories using
+To generate self-signed certificate, configure fail2ban and install systemd user units and sockets, run
 
 ```
 make install
@@ -62,13 +53,13 @@ sudo firewall-cmd --reload
 
 # Check service health
 
-To check if all Kiwix services and sockets are up and running, run
+To check if all services and sockets are up and running, run
 
 ```
 make list
 ```
 
-To check the detailed status and logs of each Kiwix unit and socket, run
+To check the detailed status and logs of each systemd unit and socket, run
 
 ```
 make status
@@ -88,13 +79,23 @@ fail2ban-regex systemd-journal[journalflags=1] kiwix -r --print-all-matched
 
 This would print matching logs, only if there are failed login attempts or logs match the filter.
 
+# Rotate TLS Certificate
+
+To generate a new self-signed TLS certificate, delete the existing certificate files from `./caddy` directory.
+
+```
+rm ./caddy/cert.key ./caddy/cert.crt
+make cert
+make stop && make start
+```
+
 # Add new .zim files
 
 New `.zim` files can be downloaded to the data directory as explained in [Step 4](#step-4-download-zim-files). However a restart of the Kiwix Pod is required for `kiwix-serve` to recognize new files.
 
-# Uninstall
+# Uninstall Kiwix
 
-Remove Kiwix units and sockets from user's systemd directories using
+To remove fail2ban configuration and systemd user units and sockets, run
 
 ```
 make stop

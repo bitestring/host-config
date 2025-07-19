@@ -1,7 +1,20 @@
+.PHONY: cert
+cert:
+ifneq ("$(wildcard ./caddy/cert.key)", "")
+	@echo "./caddy/cert.key file already exists. Not generating TLS certificate."
+else ifneq ("$(wildcard ./caddy/cert.crt)", "")
+	@echo "./caddy/cert.crt file already exists. Not generating TLS certificate."
+else
+	@echo "IMPORTANT: Make sure to enter your server domain name during the Common Name (e.g. server FQDN or YOUR name) [] prompt."
+	openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -days 36500 -noenc -keyout ./caddy/cert.key -out ./caddy/cert.crt
+endif
+
 .PHONY: prerequisite
 prerequisite:
 	@which podman || { echo "podman is not installed! Exiting..."; exit 1; }
 	@which fail2ban-client || { echo "fail2ban is not installed! Exiting..."; exit 1; }
+	@which openssl || { echo "openssl is not installed! Exiting..."; exit 1; }
+	$(MAKE) cert
 	@test -s ./caddy/cert.key || { echo "./caddy/cert.key file does not exist! Refer README.md for more info. Exiting..."; exit 1; }
 	@test -s ./caddy/cert.crt || { echo "./caddy/cert.crt file does not exist! Refer README.md for more info. Exiting..."; exit 1; }
 	@test -s ./.env || { echo ".env file does not exist! Refer README.md for more info. Exiting..."; exit 1; }
