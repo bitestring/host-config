@@ -24,6 +24,7 @@
         ansible-language-server
 
         # Other deps
+        openssl # for generating certificates
         caddy # for formatting Caddyfile
       ];
 
