@@ -82,6 +82,14 @@ make status
 sudo fail2ban-client status dokuwiki
 ```
 
+To check if the filter is working, try
+
+```
+fail2ban-regex systemd-journal[journalflags=1] dokuwiki -r --print-all-matched
+```
+
+This would print matching logs, only if there are failed login attempts or logs match the filter.
+
 # Uninstall
 
 Remove DokuWiki units and sockets from user's systemd directories using

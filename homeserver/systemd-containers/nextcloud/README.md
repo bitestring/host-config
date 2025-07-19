@@ -80,6 +80,14 @@ To check if Nextcloud is correctly installed and configured, login to Nextcloud 
 sudo fail2ban-client status nextcloud
 ```
 
+To check if the filter is working, try
+
+```
+fail2ban-regex systemd-journal[journalflags=1] nextcloud -r --print-all-matched
+```
+
+This would print matching logs, only if there are failed login attempts or logs match the filter.
+
 # Nextcloud maintenance
 
 Occasionally Nextcloud maintenance jobs need to be executed manually. For example, to create indexes. Use following command to achieve the same.

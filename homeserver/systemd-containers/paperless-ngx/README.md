@@ -76,6 +76,14 @@ make status
 sudo fail2ban-client status paperless-ngx
 ```
 
+To check if the filter is working, try
+
+```
+fail2ban-regex systemd-journal[journalflags=1] paperless-ngx -r --print-all-matched
+```
+
+This would print matching logs, only if there are failed login attempts or logs match the filter.
+
 # Uninstall
 
 Remove Paperless-ngx units and sockets from user's systemd directories using
