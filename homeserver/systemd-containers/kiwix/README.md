@@ -11,13 +11,13 @@
 
 ## Step 1: Generate self-signed TLS certificate
 
-https://www.linode.com/docs/guides/create-a-self-signed-tls-certificate/
-
 ```
-openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out ./caddy/cert.pem -keyout ./caddy/cert.key
+openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -days 36500 -noenc -keyout ./caddy/cert.key -out ./caddy/cert.crt
 ```
 
 Make sure to enter your server domain name during the `Common Name (e.g. server FQDN or YOUR name) []` prompt.
+
+**Reference:** https://stackoverflow.com/questions/10175812/how-can-i-generate-a-self-signed-ssl-certificate-using-openssl#comment57700926_10176685
 
 ## Step 2: Confirm data volume location
 

@@ -1,14 +1,16 @@
 # Nextcloud
 
-Reference: https://github.com/nextcloud/docker/tree/master/.examples/docker-compose/with-nginx-proxy/postgres/apache
+**Reference:**
+https://github.com/nextcloud/docker/tree/master/.examples/docker-compose/with-nginx-proxy/postgres/apache
 
 ## Step 1: Generate self-signed TLS certificate
 
-https://www.linode.com/docs/guides/create-a-self-signed-tls-certificate/
+```
+openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -days 36500 -noenc -keyout ./nginx/cert.key -out ./nginx/cert.crt
+```
 
-```
-openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out ./nginx/cert.pem -keyout ./nginx/cert.key
-```
+**Reference:**
+https://stackoverflow.com/questions/10175812/how-can-i-generate-a-self-signed-ssl-certificate-using-openssl#comment57700926_10176685
 
 ## Step 2: Create a volume to store data
 

@@ -2,5 +2,5 @@
 volumes
 .env
 cert.key
-cert.pem
+cert.crt
 .ansible

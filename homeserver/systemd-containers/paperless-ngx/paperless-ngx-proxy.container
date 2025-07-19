@@ -8,7 +8,7 @@ Image=docker.io/library/caddy:latest
 AutoUpdate=registry
 Pod=paperless-ngx.pod
 Volume=./caddy/Caddyfile:/etc/caddy/Caddyfile:Z
-Volume=./caddy/cert.pem:/etc/ssl/certs/cert.pem:Z
+Volume=./caddy/cert.crt:/etc/ssl/certs/cert.crt:Z
 Volume=./caddy/cert.key:/etc/ssl/private/cert.key:Z
 
 [Service]

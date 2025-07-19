@@ -3,7 +3,7 @@ prerequisite:
 	@which podman || { echo "podman is not installed! Exiting..."; exit 1; }
 	@which fail2ban-client || { echo "fail2ban is not installed! Exiting..."; exit 1; }
 	@test -s ./caddy/cert.key || { echo "./caddy/cert.key file does not exist! Refer README.md for more info. Exiting..."; exit 1; }
-	@test -s ./caddy/cert.pem || { echo "./caddy/cert.pem file does not exist! Refer README.md for more info. Exiting..."; exit 1; }
+	@test -s ./caddy/cert.crt || { echo "./caddy/cert.crt file does not exist! Refer README.md for more info. Exiting..."; exit 1; }
 
 .PHONY: install
 install:
