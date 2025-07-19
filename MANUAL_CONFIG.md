@@ -260,3 +260,13 @@ Enable automatic updates if available, to keep the system updated. Cockpit provi
 ## Monitoring
 
 Regularly check for logs, firewall configuration, fail2ban status etc. on the hosts and firewall/router to detect any intrusions or configuration drifts.
+
+## Rotate TLS Certificates often
+
+For HTTP services hosted on server, it is recommended to rotate TLS certificates often or at least every year to protect HTTP traffic from compromised keys. This is also an opportunity to review the ciphers and algorithms for the certificates.
+
+For example, to generate a self-signed TLS certificate using Elliptic Curve algorithm like NIST P-256 (prime256v1) using OpenSSL, run
+
+```
+openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -days 365 -noenc -keyout ./cert.key -out ./cert.crt
+```
