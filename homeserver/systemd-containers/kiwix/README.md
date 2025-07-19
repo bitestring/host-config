@@ -5,6 +5,7 @@
 # Prerequisites
 
 -   [Podman](https://podman.io/)
+-   [Fail2Ban](https://github.com/fail2ban/fail2ban)
 
 # Run Kiwix
 
@@ -72,6 +73,20 @@ To check the detailed status and logs of each Kiwix unit and socket, run
 ```
 make status
 ```
+
+# Check Fail2Ban configuration
+
+```
+sudo fail2ban-client status kiwix
+```
+
+To check if the filter is working, try
+
+```
+fail2ban-regex systemd-journal[journalflags=1] kiwix -r --print-all-matched
+```
+
+This would print matching logs, only if there are failed login attempts or logs match the filter.
 
 # Add new .zim files
 

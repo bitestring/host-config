@@ -37,4 +37,32 @@
 	}
 
 	reverse_proxy localhost:8080
+
+	# Use following reverse_proxy configuration to skip logging healthy status codes
+	# reverse_proxy localhost:8080 {
+	# 	# Skip logging 2xx and 3xx responses to declutter log_skip
+	# 	# https://caddy.community/t/how-to-filter-out-requests-with-status-200-from-log/31278
+	# 	@nolog_status_codes {
+	# 		status 2xx
+	# 		status 3xx
+	# 	}
+	# 	handle_response @nolog_status_codes {
+	# 		log_skip
+	# 		copy_response
+	# 	}
+	# }
+
+	# For configuring fail2ban
+	log {
+		format filter {
+			request>headers delete
+			request>tls delete
+			resp_headers delete
+			duration delete
+			bytes_read delete
+			size delete
+			duration delete
+			user_id delete
+		}
+	}
 }

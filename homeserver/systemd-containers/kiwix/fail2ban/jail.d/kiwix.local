@@ -1,0 +1,8 @@
+# /etc/fail2ban/jail.d/kiwix.local
+[kiwix]
+enabled = true
+port = 7003
+maxretry = 10
+filter = kiwix
+backend = systemd
+journalmatch = _SYSTEMD_USER_UNIT=kiwix-proxy.service

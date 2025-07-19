@@ -1,12 +1,19 @@
 .PHONY: prerequisite
 prerequisite:
 	@which podman || { echo "podman is not installed! Exiting..."; exit 1; }
+	@which fail2ban-client || { echo "fail2ban is not installed! Exiting..."; exit 1; }
 	@test -s ./caddy/cert.key || { echo "./caddy/cert.key file does not exist! Refer README.md for more info. Exiting..."; exit 1; }
 	@test -s ./caddy/cert.pem || { echo "./caddy/cert.pem file does not exist! Refer README.md for more info. Exiting..."; exit 1; }
 
 .PHONY: install
 install:
 	$(MAKE) prerequisite
+
+	# fail2ban
+	sudo mkdir --parents /etc/fail2ban/filter.d/
+	sudo cp ./fail2ban/filter.d/kiwix.conf /etc/fail2ban/filter.d/
+	sudo mkdir --parents /etc/fail2ban/jail.d/
+	sudo cp ./fail2ban/jail.d/kiwix.local /etc/fail2ban/jail.d/
 
 	# data
 	mkdir --parents ~/data/volumes/kiwix/kiwix/data/
@@ -18,16 +25,22 @@ install:
 	ln --symbolic --force --verbose "$(CURDIR)" ~/.config/containers/systemd/
 
 	# reload daemons
+	sudo fail2ban-client reload
 	systemctl --user daemon-reload
 
 .PHONY: uninstall
 uninstall:
+	# fail2ban
+	sudo rm --force /etc/fail2ban/filter.d/kiwix.conf
+	sudo rm --force /etc/fail2ban/jail.d/kiwix.local
+
 	# systemd
 	rm --force ~/.config/containers/systemd/kiwix
 	rm --force ~/.config/systemd/user/kiwix-proxy.socket
 
 	# reload daemons
 	systemctl --user daemon-reload
+	sudo fail2ban-client reload
 
 .PHONY: start
 start:
@@ -46,3 +59,4 @@ list:
 .PHONY: status
 status:
 	-systemctl --user status "kiwix*"
+	-sudo fail2ban-client status kiwix
