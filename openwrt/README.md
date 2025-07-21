@@ -8,6 +8,11 @@ https://firmware-selector.openwrt.org/
 
 Refer [packages.sh](./packages.sh) to install required packages on OpenWrt.
 
+## Guest WiFi
+
+https://openwrt.org/docs/guide-user/network/wifi/guestwifi/start
+https://openwrt.org/docs/guide-user/network/wifi/guestwifi/guestwifi_dumbap
+
 ## DNS Encryption (DNSCrypt, DoH, DoT)
 
 https://openwrt.org/docs/guide-user/services/dns/start
@@ -24,14 +29,21 @@ https://github.com/Quad9DNS/dnscrypt-settings
 
 https://openwrt.org/docs/guide-user/services/ad-blocking
 
+-   Enable Feeds
 -   Enable Reports
 -   Force DNS (Redirect any outbound requests to port 53 to OpenWrt Adblock)
 -   [Follow best practices for `adblock` package](https://github.com/openwrt/packages/blob/master/net/adblock/files/README.md)
+-   Set cron for auto refresh of the feeds
+-   Configure backup to include Adblock directories
 
-## Guest WiFi
+## IP blocking
 
-https://openwrt.org/docs/guide-user/network/wifi/guestwifi/start
-https://openwrt.org/docs/guide-user/network/wifi/guestwifi/guestwifi_dumbap
+https://openwrt.org/docs/guide-user/services/banip
+
+-   Enable Feeds
+-   [Follow best practices for `banIP` package] (https://github.com/openwrt/packages/blob/master/net/banip/files/README.md)
+-   Set cron for auto refresh of the feeds
+-   Configure backup to include banIP directories
 
 ## Firewall
 
