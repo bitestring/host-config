@@ -13,6 +13,14 @@ Refer [packages.sh](./packages.sh) to install required packages on OpenWrt.
 https://openwrt.org/docs/guide-user/network/wifi/guestwifi/start
 https://openwrt.org/docs/guide-user/network/wifi/guestwifi/guestwifi_dumbap
 
+Use separate VLANs to isolate untrusted devices.
+
+## USB Storage
+
+https://openwrt.org/docs/guide-user/storage/usb-drives-quickstart
+
+Store configs, logs and other static data in USB drive to lessen wear & tear on router flash storage.
+
 ## DNS Encryption (DNSCrypt, DoH, DoT)
 
 https://openwrt.org/docs/guide-user/services/dns/start
