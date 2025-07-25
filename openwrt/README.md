@@ -8,6 +8,10 @@ https://firmware-selector.openwrt.org/
 
 Refer [packages.sh](./packages.sh) to install required packages on OpenWrt.
 
+## zram-swap
+
+Install package `zram-swap` to activate compressed in-memory swap on routers with less memory.
+
 ## Guest WiFi
 
 https://openwrt.org/docs/guide-user/network/wifi/guestwifi/start
