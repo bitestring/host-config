@@ -1,6 +1,7 @@
 .PHONY: update
 update:
 	git stash
+	git checkout main
 	nix flake update
 	sudo nixos-rebuild boot --flake '.#'
 	git add flake.lock
