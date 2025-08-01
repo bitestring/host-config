@@ -1,0 +1,13 @@
+[Unit]
+Description=wazuh-central.pod
+
+[Pod]
+# wazuh-manager
+PublishPort=1514:1514
+PublishPort=1515:1515
+PublishPort=55000:55000
+# wazuh-dashboard
+PublishPort=9000:5601
+
+[Install]
+WantedBy=multi-user.target default.target
