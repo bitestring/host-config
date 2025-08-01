@@ -1,0 +1,24 @@
+[Unit]
+Description=wazuh-dashboard.container
+Requires=wazuh-indexer.service
+
+[Container]
+ContainerName=wazuh.dashboard
+Image=docker.io/wazuh/wazuh-dashboard:4.13.0-rc2
+AutoUpdate=registry
+Pod=wazuh-central.pod
+Volume=./config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard.pem:z
+Volume=./config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard-key.pem:z
+Volume=./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-dashboard/certs/root-ca.pem:z
+Volume=./config/wazuh_dashboard/opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml:Z
+Volume=./config/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-dashboard/wazuh-dashboard-config:/usr/share/wazuh-dashboard/data/wazuh/config:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-dashboard/wazuh-dashboard-custom:/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom:Z
+Environment=WAZUH_API_URL=https://wazuh.manager
+EnvironmentFile=.env
+
+[Service]
+Restart=always
+# Create volumes before starting
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-dashboard/wazuh-dashboard-config
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-dashboard/wazuh-dashboard-custom

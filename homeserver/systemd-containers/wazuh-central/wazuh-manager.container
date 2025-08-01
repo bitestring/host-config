@@ -1,0 +1,45 @@
+[Unit]
+Description=wazuh-manager.container
+Wants=wazuh-indexer.service wazuh-dashboard.service
+
+[Container]
+ContainerName=wazuh.manager
+Image=docker.io/wazuh/wazuh-manager:4.13.0-rc2
+AutoUpdate=registry
+Pod=wazuh-central.pod
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/wazuh_api_configuration:/var/ossec/api/configuration:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/wazuh_etc:/var/ossec/etc:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/wazuh_logs:/var/ossec/logs:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/wazuh_queue:/var/ossec/queue:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/wazuh_var_multigroups:/var/ossec/var/multigroups:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/wazuh_integrations:/var/ossec/integrations:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/wazuh_active_response:/var/ossec/active-response/bin:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/wazuh_agentless:/var/ossec/agentless:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/wazuh_wodles:/var/ossec/wodles:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/filebeat_etc:/etc/filebeat:Z
+Volume=%h/data/volumes/wazuh-central/wazuh-manager/filebeat_var:/var/lib/filebeat:Z
+Volume=./config/wazuh_indexer_ssl_certs/root-ca-manager.pem:/etc/ssl/root-ca.pem:z
+Volume=./config/wazuh_indexer_ssl_certs/wazuh.manager.pem:/etc/ssl/filebeat.pem:z
+Volume=./config/wazuh_indexer_ssl_certs/wazuh.manager-key.pem:/etc/ssl/filebeat.key:z
+Volume=./config/wazuh_cluster/wazuh_manager.conf:/wazuh-config-mount/etc/ossec.conf:Z
+Environment=INDEXER_URL=https://wazuh.indexer:9200
+Environment=FILEBEAT_SSL_VERIFICATION_MODE=full
+Environment=SSL_CERTIFICATE_AUTHORITIES=/etc/ssl/root-ca.pem
+Environment=SSL_CERTIFICATE=/etc/ssl/filebeat.pem
+Environment=SSL_KEY=/etc/ssl/filebeat.key
+EnvironmentFile=.env
+
+[Service]
+Restart=always
+# Create volumes before starting
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/wazuh_api_configuration
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/wazuh_etc
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/wazuh_logs
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/wazuh_queue
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/wazuh_var_multigroups
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/wazuh_integrations
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/wazuh_active_response
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/wazuh_agentless
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/wazuh_wodles
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/filebeat_etc
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-manager/filebeat_var

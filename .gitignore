@@ -1,6 +1,7 @@
 .direnv
 volumes
 .env
-cert.key
-cert.crt
+*.pem
+*.key
+*.crt
 .ansible

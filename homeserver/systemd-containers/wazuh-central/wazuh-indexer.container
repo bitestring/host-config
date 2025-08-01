@@ -1,0 +1,24 @@
+[Unit]
+Description=wazuh-indexer.container
+Wants=wazuh-dashboard.service
+
+[Container]
+ContainerName=wazuh.indexer
+Image=docker.io/wazuh/wazuh-indexer:4.13.0-rc2
+AutoUpdate=registry
+Pod=wazuh-central.pod
+UserNS=keep-id
+Volume=%h/data/volumes/wazuh-central/wazuh-indexer/wazuh-indexer-data:/var/lib/wazuh-indexer:Z
+Volume=./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem:z
+Volume=./config/wazuh_indexer_ssl_certs/wazuh.indexer-key.pem:/usr/share/wazuh-indexer/certs/wazuh.indexer.key:z
+Volume=./config/wazuh_indexer_ssl_certs/wazuh.indexer.pem:/usr/share/wazuh-indexer/certs/wazuh.indexer.pem:z
+Volume=./config/wazuh_indexer_ssl_certs/admin.pem:/usr/share/wazuh-indexer/certs/admin.pem:z
+Volume=./config/wazuh_indexer_ssl_certs/admin-key.pem:/usr/share/wazuh-indexer/certs/admin-key.pem:z
+Volume=./config/wazuh_indexer/wazuh.indexer.yml:/usr/share/wazuh-indexer/opensearch.yml:Z
+Volume=./config/wazuh_indexer/internal_users.yml:/usr/share/wazuh-indexer/opensearch-security/internal_users.yml:Z
+Environment=OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g
+
+[Service]
+Restart=always
+# Create volumes before starting
+ExecStartPre=/nix/store/psy9v2asypgl9ylg8cnzkixc7fv0snj0-coreutils-9.7/bin/mkdir -p %h/data/volumes/wazuh-central/wazuh-indexer/wazuh-indexer-data
